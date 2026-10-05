@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/Forsigh/waze-patches/compare/v1.0.0...v1.1.0) (2026-10-05)
+
+### ✨ New Features
+
+* add 8 Waze config patches; fix Boolean vs Long getter typing ([6013230](https://github.com/Forsigh/waze-patches/commit/6013230bbfe1b12d509d8ca9263a84ecefaa4609))
+
 ## 1.0.0 (2026-10-05)
 
 ### 🐛 Bug Fixes
