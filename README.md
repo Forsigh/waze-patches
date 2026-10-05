@@ -8,15 +8,28 @@ config getter (`com.waze.config.ConfigValues`).
 
 ### Implemented patches
 
+Every patch hooks Waze's typed config getters (`com.waze.config.ConfigValues`): Boolean keys use the
+Boolean getter (`com/waze/config/b`), Long keys the Long getter (`com/waze/config/c`). Hooking the
+read path means the override survives Waze re-syncing config from the server.
+
 - **Remove ads** — forces Waze's advertising config values off.
 - **Extended police & hazard alert distances** — widens the pre-alert distances.
+- **Enable police & enforcement alerts** — turns on the police/enforcement alert system.
+- **Speedometer always on** — keeps the speedometer visible at any speed (minimum speed → 0).
+- **Speed limit sign always shown** — forces the speed-limit sign and its override on.
+- **Radar sound at any speed** — plays speed-camera sound alerts even below the limit.
+- **Show all cameras & road hazards** — speed/red-light cameras and speed bumps, with notifications.
+- **Average-speed camera alerts** — average-speed cameras plus recommended-speed guidance.
+- **Speed-limit decrease warnings** — warns when the speed limit drops.
+- **Brief voice guidance** — enables brief voice guidance.
+- **Lane guidance** — enables lane guidance.
 
 ### Planned (not yet implemented)
 
 - Bigger speed-limit box and speedometer (resource patch on `res/layout/speedometer.xml`).
 
-> ⚠️ Best-effort. Which forced config key actually changes behaviour is unverified until a patched
-> APK is tested on a device. Entries read through a non-numeric accessor are not affected.
+> ⚠️ Best-effort. Every injected config key is verified to exist and to match its getter's type, but
+> whether forcing it changes behaviour is unverified until a patched APK is tested on a device.
 
 ### How to use these patches
 

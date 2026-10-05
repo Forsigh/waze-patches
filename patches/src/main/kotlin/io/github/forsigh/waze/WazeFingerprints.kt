@@ -4,23 +4,37 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.methodCall
 
 /**
- * Waze numeric config value getter: com.waze.config.c.a()Ljava/lang/Long;
+ * Waze configuration values are typed wrappers. Every `CONFIG_VALUE_*` field in
+ * `com.waze.config.ConfigValues` is one of:
  *
- * Reads the numeric value of a config entry: the receiver is a `com.waze.config.c` ConfigValue
- * object, which is compared against the named constants in `com.waze.config.ConfigValues`.
- * Patching this single accessor lets a patch force the returned value of any numeric config key.
+ *   - `com/waze/config/c` -> Long    getter `a()Ljava/lang/Long;`    delegates to `h.a(c)J`
+ *   - `com/waze/config/b` -> Boolean getter `a()Ljava/lang/Boolean;` delegates to `h.k(b)Z`
+ *   - `com/waze/config/d` -> String  getter `a()Ljava/lang/String;`  delegates to `h.c(d)String`
  *
- * The pattern is the one confirmed working in dowjames' Waze patch (github.com/dowjames/morphe-patches).
- * The names `c` and `h` are obfuscated and may change between app targets.
+ * Forcing a value means patching the matching typed getter: when the receiver config value is
+ * one of ours, return our constant instead of the stored value. Hooking the READ path (rather
+ * than writing a preference) means the override survives Waze re-syncing config from the server.
+ *
+ * The key's declared type in ConfigValues.smali MUST match the getter used, or the injected
+ * smali is invalid. Verified against Waze 5.24.4.900 (1030731).
  */
-object NumericConfigGetterFingerprint : Fingerprint(
+
+/** `com.waze.config.c.a()` - Long config getter. */
+object LongConfigGetterFingerprint : Fingerprint(
     definingClass = "Lcom/waze/config/c;",
     name = "a",
     returnType = "Ljava/lang/Long;",
     filters = listOf(
-        methodCall(
-            definingClass = "Lcom/waze/config/h;",
-            name = "a",
-        ),
+        methodCall(definingClass = "Lcom/waze/config/h;", name = "a", returnType = "J"),
+    ),
+)
+
+/** `com.waze.config.b.a()` - Boolean config getter. */
+object BooleanConfigGetterFingerprint : Fingerprint(
+    definingClass = "Lcom/waze/config/b;",
+    name = "a",
+    returnType = "Ljava/lang/Boolean;",
+    filters = listOf(
+        methodCall(definingClass = "Lcom/waze/config/h;", name = "k", returnType = "Z"),
     ),
 )
