@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/Forsigh/waze-patches/compare/v1.1.0...v1.1.1) (2026-10-05)
+
+### 🐛 Bug Fixes
+
+* grant issues and pull-requests write so the semantic-release success step stops failing ([0cf3977](https://github.com/Forsigh/waze-patches/commit/0cf39777d2117a8e91478db94fa904054afe9ecf))
+
 ## [1.1.0](https://github.com/Forsigh/waze-patches/compare/v1.0.0...v1.1.0) (2026-10-05)
 
 ### ✨ New Features
