@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/Forsigh/waze-patches/compare/v1.2.0...v1.2.1) (2026-10-05)
+
+### 🐛 Bug Fixes
+
+* drop spoof install source patch (inert for Waze; AA visibility is install-time) ([a85a81e](https://github.com/Forsigh/waze-patches/commit/a85a81e03d90db9499d6a77e59ea6bfc04e9f71c))
+
 ## [1.2.0](https://github.com/Forsigh/waze-patches/compare/v1.1.1...v1.2.0) (2026-10-05)
 
 ### ✨ New Features

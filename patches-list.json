@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "patches": [
     {
       "name": "Average-speed camera alerts",
@@ -375,27 +375,6 @@
         }
       ],
       "options": []
-    },
-    {
-      "name": "Spoof install source",
-      "description": "Spoofs the app's own package-installer checks to report the configured package name (default Google Play). Universal. Does not change Android Auto visibility.",
-      "default": false,
-      "category": null,
-      "dependencies": [],
-      "compatiblePackages": null,
-      "options": [
-        {
-          "key": "packageName",
-          "title": "Installer package name",
-          "description": "The package name to report as the installation source.",
-          "required": false,
-          "type": "kotlin.String",
-          "default": "com.android.vending",
-          "values": {
-            "com.android.vending": "com.android.vending"
-          }
-        }
-      ]
     }
   ]
 }

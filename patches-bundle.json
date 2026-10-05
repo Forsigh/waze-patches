@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-05T01:31:34",
-  "description": "## [1.2.0](https://github.com/Forsigh/waze-patches/compare/v1.1.1...v1.2.0) (2026-10-05)\n\n### ✨ New Features\n\n* add universal spoof install source patch ([c184c9e](https://github.com/Forsigh/waze-patches/commit/c184c9e13889ce4a01a322a3a4abca10b633abaa))",
-  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.2.0/patches-1.2.0.mpp",
+  "created_at": "2026-10-05T01:38:59",
+  "description": "## [1.2.1](https://github.com/Forsigh/waze-patches/compare/v1.2.0...v1.2.1) (2026-10-05)\n\n### 🐛 Bug Fixes\n\n* drop spoof install source patch (inert for Waze; AA visibility is install-time) ([a85a81e](https://github.com/Forsigh/waze-patches/commit/a85a81e03d90db9499d6a77e59ea6bfc04e9f71c))",
+  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.2.1/patches-1.2.1.mpp",
   "signature_download_url": "",
-  "version": "1.2.0"
+  "version": "1.2.1"
 }
