@@ -23,6 +23,20 @@ read path means the override survives Waze re-syncing config from the server.
 - **Speed-limit decrease warnings** — warns when the speed limit drops.
 - **Brief voice guidance** — enables brief voice guidance.
 - **Lane guidance** — enables lane guidance.
+- **Spoof install source** *(universal, off by default)* — makes an app's own installer checks
+  report Google Play. Ported from [xob0t](https://github.com/xob0t/morphe-patches) (GPLv3).
+
+### Android Auto visibility is not patchable
+
+Making a re-signed Waze show up in Android Auto is an **installer** problem, not an app problem:
+Android Auto reads the system's `installerPackageName` record, which is written when the APK is
+installed, so no bytecode patch inside Waze can change it (Waze itself never reads its install
+source — the only `getInstallerPackageName` calls in the APK are inside Firebase Crashlytics).
+Fix it at install time instead, in this order:
+
+1. In Morphe Manager, install with a **Play Store installer variant** (built-in; no patch needed).
+2. Otherwise use **KingInstaller** (Shizuku, else root) or aaayd's *Android Auto setup* patch.
+   Golden rule from KingInstaller: the app's **"Installed by"** must be the Play Store.
 
 ### Planned (not yet implemented)
 
