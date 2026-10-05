@@ -53,7 +53,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.1](https://github.com/Forsigh/waze-patches/releases/tag/v1.1.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;11 patches total
+> **[v1.2.0](https://github.com/Forsigh/waze-patches/releases/tag/v1.2.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;12 patches total
 <details open>
 <summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;11 patches</summary>
 <br>
@@ -76,6 +76,16 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Forces the speed-limit sign on and enables the manual overrides. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Enables warnings when the speed limit drops, with an extended pre-alert distance. |  |
 | [Speedometer always on](#speedometer-always-on) | Keeps the speedometer visible at any speed, including while stopped. |  |
+
+</details>
+
+<details open>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Spoof install source](#spoof-install-source) | Spoofs the app's own package-installer checks to report the configured package name (default Google Play). Universal. Does not change Android Auto visibility. | • Installer package name |
 
 </details>
 

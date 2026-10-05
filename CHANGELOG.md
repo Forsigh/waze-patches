@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/Forsigh/waze-patches/compare/v1.1.1...v1.2.0) (2026-10-05)
+
+### ✨ New Features
+
+* add universal spoof install source patch ([c184c9e](https://github.com/Forsigh/waze-patches/commit/c184c9e13889ce4a01a322a3a4abca10b633abaa))
+
 ## [1.1.1](https://github.com/Forsigh/waze-patches/compare/v1.1.0...v1.1.1) (2026-10-05)
 
 ### 🐛 Bug Fixes
