@@ -23,20 +23,29 @@ read path means the override survives Waze re-syncing config from the server.
 - **Speed-limit decrease warnings** — warns when the speed limit drops.
 - **Brief voice guidance** — enables brief voice guidance.
 - **Lane guidance** — enables lane guidance.
-- **Spoof install source** *(universal, off by default)* — makes an app's own installer checks
-  report Google Play. Ported from [xob0t](https://github.com/xob0t/morphe-patches) (GPLv3).
 
-### Android Auto visibility is not patchable
+### Installing, and Android Auto visibility
 
-Making a re-signed Waze show up in Android Auto is an **installer** problem, not an app problem:
-Android Auto reads the system's `installerPackageName` record, which is written when the APK is
-installed, so no bytecode patch inside Waze can change it (Waze itself never reads its install
-source — the only `getInstallerPackageName` calls in the APK are inside Firebase Crashlytics).
-Fix it at install time instead, in this order:
+Installing the patched APK needs no special tool — any installer works. You only have to uninstall
+the Play Store Waze first, because the patched build is signed with a different key
+(`INSTALL_FAILED_UPDATE_INCOMPATIBLE` otherwise). KingInstaller does not bypass that either.
 
-1. In Morphe Manager, install with a **Play Store installer variant** (built-in; no patch needed).
-2. Otherwise use **KingInstaller** (Shizuku, else root) or aaayd's *Android Auto setup* patch.
-   Golden rule from KingInstaller: the app's **"Installed by"** must be the Play Store.
+**Android Auto visibility** is the part that historically needed KingInstaller, and it is not
+patchable. Android Auto reads the system's `installerPackageName` record, which the installer writes
+at install time, so no bytecode patch inside Waze can reach it — Waze's only
+`getInstallerPackageName` call sites are in Firebase Crashlytics, and it never uses
+`InstallSourceInfo` at all.
+
+Set it at install time instead. In Morphe Manager, enable **Install as Play Store** for the install
+method you use (*Play Store install* / *Root Play Store install* / *Shizuku Play Store install*) —
+it records Google Play Store as the install source, the same mechanism KingInstaller's non-root path
+uses. Morphe's own warning applies: it helps Android Auto recognize the app but is not guaranteed on
+every app or device, and the Play Store may later offer an update that overwrites the patched APK
+(turn updates off for Waze).
+
+Fallback only, if your device's installer ignores it: **KingInstaller** (Shizuku, else root;
+Xiaomi/HyperOS effectively needs root). Its rule of thumb: the app's "Installed by" must be the
+Play Store.
 
 ### Planned (not yet implemented)
 
@@ -102,4 +111,4 @@ See the [Morphe documentation](https://github.com/MorpheApp/morphe-documentation
 
 ## 📜 License
 
-UserXYZ Patches are licensed under the [GNU General Public License v3.0](LICENSE)
+Forsigh Waze Patches are licensed under the [GNU General Public License v3.0](LICENSE).
