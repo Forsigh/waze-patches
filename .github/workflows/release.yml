@@ -45,7 +45,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Attest
-        if: steps.release.outputs.new_release_published == 'true'
+        # Build provenance attestations are not available for user-owned private repositories.
+        # Skipped while private; runs automatically once the repository is public.
+        if: steps.release.outputs.new_release_published == 'true' && github.event.repository.visibility == 'public'
         uses: actions/attest-build-provenance@v4
         with:
           subject-name: 'Morphe Patches ${{ steps.release.outputs.new_release_git_tag }}'
