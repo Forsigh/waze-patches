@@ -62,9 +62,9 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.0](https://github.com/Forsigh/waze-patches/releases/tag/v1.3.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;12 patches total
+> **[v1.4.0](https://github.com/Forsigh/waze-patches/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;13 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;12 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;13 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -79,6 +79,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Brief voice guidance](#brief-voice-guidance) | Enables Waze's brief voice-guidance mode. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on Waze's police/enforcement alert system. |  |
 | [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Increases the pre-alert distances for police enforcement, accidents and heavy traffic. |  |
+| [Forsigh Settings](#forsigh-settings) | Merges the Forsigh Settings extension and gives it a Context at startup, so the other patches can be controlled by a runtime setting instead of only at patch time. |  |
 | [Lane guidance](#lane-guidance) | Enables lane guidance, including continue-straight hints. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays speed-camera sound alerts even when not above the limit. |  |
 | [Remove ads](#remove-ads) | Forces Waze's advertising config values off. |  |

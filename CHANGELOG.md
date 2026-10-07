@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/Forsigh/waze-patches/compare/v1.3.0...v1.4.0) (2026-10-07)
+
+### ✨ New Features
+
+* Forsigh Settings extension groundwork ([1614651](https://github.com/Forsigh/waze-patches/commit/16146515a8a2e3465ee0269413acfaa67595cd92))
+
 ## [1.3.0](https://github.com/Forsigh/waze-patches/compare/v1.2.2...v1.3.0) (2026-10-07)
 
 ### ✨ New Features
