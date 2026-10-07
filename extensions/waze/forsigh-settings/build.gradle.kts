@@ -19,5 +19,7 @@ android {
 }
 
 dependencies {
-    // Android API stubs come from the android block above; nothing else is needed yet.
+    // Waze's settings classes, compile-only: the extension is compiled against these signatures but
+    // they are never packaged, so at runtime the bytecode binds to Waze's own classes.
+    compileOnly(project(":stubs"))
 }

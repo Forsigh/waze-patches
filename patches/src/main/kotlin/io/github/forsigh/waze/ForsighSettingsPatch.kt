@@ -2,10 +2,19 @@ package io.github.forsigh.waze
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 
-/** Fully qualified extension entry point, merged into the APK from the .mpe below. */
+/** Static holder the injected startup hook calls into (merged from the .mpe below). */
 private const val EXTENSION_CLASS = "Lio/github/forsigh/waze/extension/settings/ForsighSettings;"
+
+/** The settings row that opens the Forsigh Settings menu. */
+private const val EXTENSION_ENTRY = "Lio/github/forsigh/waze/extension/settings/ForsighSettingsEntry;"
+
+/** The settings screen fills its section list by appending each section to a `List`. */
+private const val LIST_ADD = "Ljava/util/List;->add(Ljava/lang/Object;)Z"
 
 /**
  * Forsigh Settings.
@@ -32,6 +41,26 @@ val forsighSettingsPatch = bytecodePatch(
         ApplicationOnCreateFingerprint.method.addInstructions(
             0,
             "invoke-static {p0}, $EXTENSION_CLASS->init(Landroid/content/Context;)V",
+        )
+
+        // Add the "Forsigh Settings" row to the settings screen's section list.
+        val method = SettingsSectionListFingerprint.method
+        val instructions = (method.implementation ?: error("gp.<init> has no implementation"))
+            .instructions.toList()
+
+        // The list register is reused for several different sections, so anchor on the LAST append -
+        // everything before it is a different list being filled.
+        val lastAdd = instructions.indexOfLast { instruction ->
+            instruction.opcode == Opcode.INVOKE_INTERFACE &&
+                (instruction as? ReferenceInstruction)?.reference?.toString() == LIST_ADD
+        }
+        check(lastAdd >= 0) { "Could not find the settings section list append in gp.<init>" }
+
+        // {vA, vB} - for INVOKE_INTERFACE the first register is the receiver, i.e. the list itself.
+        val listRegister = (instructions[lastAdd] as FiveRegisterInstruction).registerC
+        method.addInstructions(
+            lastAdd + 1,
+            "invoke-static {v$listRegister}, $EXTENSION_ENTRY->appendTo(Ljava/util/List;)V",
         )
     }
 }

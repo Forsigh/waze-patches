@@ -62,3 +62,24 @@ object ApplicationOnCreateFingerprint : Fingerprint(
     parameters = listOf(),
     returnType = "V",
 )
+
+/**
+ * `com.waze.settings.gp.<init>()` - the settings ViewModel, which is where the settings screen's
+ * top-level section list is assembled: it creates an ArrayList and appends each section to it.
+ *
+ * Identified by its call to `gj.l()`, one of the five section builders it collects. The patch appends
+ * our own row to that list after its last append, which is what makes the entry show up as a normal
+ * settings row.
+ */
+object SettingsSectionListFingerprint : Fingerprint(
+    definingClass = "Lcom/waze/settings/gp;",
+    name = "<init>",
+    returnType = "V",
+    filters = listOf(
+        methodCall(
+            definingClass = "Lcom/waze/settings/gj;",
+            name = "l",
+            returnType = "Lcom/waze/settings/tree/f;",
+        ),
+    ),
+)

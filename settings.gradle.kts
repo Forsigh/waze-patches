@@ -29,3 +29,7 @@ settings {
         proguardFiles(rootProject.projectDir.resolve("extensions/proguard-rules.pro").toString())
     }
 }
+
+// Compile-time stubs of the Waze classes the extension calls into. Never packaged - the real
+// classes are already in the APK, and shipping these would duplicate com.waze.* in the merged dex.
+include(":stubs")
