@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/Forsigh/waze-patches/compare/v1.2.2...v1.3.0) (2026-10-07)
+
+### ✨ New Features
+
+* auto zoom - pin CONFIG_VALUE_ROUTING_AUTO_ZOOM to no/yes/speed ([ca0cef6](https://github.com/Forsigh/waze-patches/commit/ca0cef62bf16198d398690f0427caa8ea7acbda1))
+
 ## [1.2.2](https://github.com/Forsigh/waze-patches/compare/v1.2.1...v1.2.2) (2026-10-07)
 
 ### 🐛 Bug Fixes

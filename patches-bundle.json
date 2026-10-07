@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-07T19:31:48",
-  "description": "## [1.2.2](https://github.com/Forsigh/waze-patches/compare/v1.2.1...v1.2.2) (2026-10-07)\n\n### 🐛 Bug Fixes\n\n* declare the production target (5.24.90.901), not the beta MOD's versionName ([9784954](https://github.com/Forsigh/waze-patches/commit/9784954c2d3e261eb36b95314395be8c1efc9114))",
-  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.2.2/patches-1.2.2.mpp",
+  "created_at": "2026-10-07T19:58:24",
+  "description": "## [1.3.0](https://github.com/Forsigh/waze-patches/compare/v1.2.2...v1.3.0) (2026-10-07)\n\n### ✨ New Features\n\n* auto zoom - pin CONFIG_VALUE_ROUTING_AUTO_ZOOM to no/yes/speed ([ca0cef6](https://github.com/Forsigh/waze-patches/commit/ca0cef62bf16198d398690f0427caa8ea7acbda1))",
+  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.3.0/patches-1.3.0.mpp",
   "signature_download_url": "",
-  "version": "1.2.2"
+  "version": "1.3.0"
 }
