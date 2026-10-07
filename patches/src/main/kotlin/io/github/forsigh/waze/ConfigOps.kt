@@ -44,3 +44,18 @@ internal fun forceLong(prefix: String, vararg entries: Pair<String, Long>): Stri
     }
     append(":${prefix}_le\n")
 }
+
+/** smali block force-returning a String for each key. Injected into the String getter. */
+internal fun forceString(prefix: String, vararg entries: Pair<String, String>): String = buildString {
+    entries.forEachIndexed { i, (key, _) ->
+        append("sget-object v0, Lcom/waze/config/ConfigValues;->$key:Lcom/waze/config/d;\n")
+        append("if-eq p0, v0, :${prefix}_s$i\n")
+    }
+    append("goto :${prefix}_se\n")
+    entries.forEachIndexed { i, (_, v) ->
+        append(":${prefix}_s$i\n")
+        append("const-string v0, \"$v\"\n")
+        append("return-object v0\n")
+    }
+    append(":${prefix}_se\n")
+}

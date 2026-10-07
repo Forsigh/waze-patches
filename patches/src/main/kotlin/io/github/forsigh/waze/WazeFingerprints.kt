@@ -38,3 +38,13 @@ object BooleanConfigGetterFingerprint : Fingerprint(
         methodCall(definingClass = "Lcom/waze/config/h;", name = "k", returnType = "Z"),
     ),
 )
+
+/** `com.waze.config.d.a()` - String config getter. */
+object StringConfigGetterFingerprint : Fingerprint(
+    definingClass = "Lcom/waze/config/d;",
+    name = "a",
+    returnType = "Ljava/lang/String;",
+    filters = listOf(
+        methodCall(definingClass = "Lcom/waze/config/h;", name = "c", returnType = "Ljava/lang/String;"),
+    ),
+)
