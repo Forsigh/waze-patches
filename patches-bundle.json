@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-05T01:38:59",
-  "description": "## [1.2.1](https://github.com/Forsigh/waze-patches/compare/v1.2.0...v1.2.1) (2026-10-05)\n\n### 🐛 Bug Fixes\n\n* drop spoof install source patch (inert for Waze; AA visibility is install-time) ([a85a81e](https://github.com/Forsigh/waze-patches/commit/a85a81e03d90db9499d6a77e59ea6bfc04e9f71c))",
-  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.2.1/patches-1.2.1.mpp",
+  "created_at": "2026-10-07T19:31:48",
+  "description": "## [1.2.2](https://github.com/Forsigh/waze-patches/compare/v1.2.1...v1.2.2) (2026-10-07)\n\n### 🐛 Bug Fixes\n\n* declare the production target (5.24.90.901), not the beta MOD's versionName ([9784954](https://github.com/Forsigh/waze-patches/commit/9784954c2d3e261eb36b95314395be8c1efc9114))",
+  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.2.2/patches-1.2.2.mpp",
   "signature_download_url": "",
-  "version": "1.2.1"
+  "version": "1.2.2"
 }

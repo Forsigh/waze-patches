@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/Forsigh/waze-patches/compare/v1.2.1...v1.2.2) (2026-10-07)
+
+### 🐛 Bug Fixes
+
+* declare the production target (5.24.90.901), not the beta MOD's versionName ([9784954](https://github.com/Forsigh/waze-patches/commit/9784954c2d3e261eb36b95314395be8c1efc9114))
+
 ## [1.2.1](https://github.com/Forsigh/waze-patches/compare/v1.2.0...v1.2.1) (2026-10-05)
 
 ### 🐛 Bug Fixes

@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "patches": [
     {
       "name": "Average-speed camera alerts",
@@ -18,7 +18,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -52,7 +52,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -86,7 +86,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -120,7 +120,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -154,7 +154,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -188,7 +188,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -222,7 +222,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -256,7 +256,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -290,7 +290,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -324,7 +324,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -358,7 +358,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": "5.24.4.900",
+              "version": "5.24.90.901",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
