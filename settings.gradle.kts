@@ -19,3 +19,13 @@ pluginManagement {
 plugins {
     id("app.morphe.patches") version "1.3.4"
 }
+
+settings {
+    extensions {
+        defaultNamespace = "io.github.forsigh.waze.extension"
+
+        // Must resolve to an absolute path, otherwise extensions in subfolders
+        // fail to find the proguard config.
+        proguardFiles(rootProject.projectDir.resolve("extensions/proguard-rules.pro").toString())
+    }
+}

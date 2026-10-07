@@ -48,3 +48,17 @@ object StringConfigGetterFingerprint : Fingerprint(
         methodCall(definingClass = "Lcom/waze/config/h;", name = "c", returnType = "Ljava/lang/String;"),
     ),
 )
+
+/**
+ * `com.waze.mobile.WazeMobileApplication.onCreate()` - the earliest point in Waze's own startup.
+ *
+ * Used to hand a Context to the extension: the config getters every patch hooks are static and
+ * contextless, so a SharedPreferences-backed setting cannot be read without one being captured here.
+ * `p0` is the Application itself, which *is* a Context, so no register juggling is needed.
+ */
+object ApplicationOnCreateFingerprint : Fingerprint(
+    definingClass = "Lcom/waze/mobile/WazeMobileApplication;",
+    name = "onCreate",
+    parameters = listOf(),
+    returnType = "V",
+)
