@@ -13,13 +13,10 @@ val briefVoiceGuidancePatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     execute {
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "brv", true,
                 "CONFIG_VALUE_BRIEF_VOICE_GUIDANCE_MODE_ENABLED",
                 "CONFIG_VALUE_BRIEF_VOICE_GUIDANCE_MODE_FEATURE_ENABLED",
-            ),
-        )
+            )
     }
 }

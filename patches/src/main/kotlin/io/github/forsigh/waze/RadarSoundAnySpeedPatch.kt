@@ -13,12 +13,9 @@ val radarSoundAnySpeedPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     execute {
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "rsd", true,
                 "CONFIG_VALUE_ALERTS_PLAY_SPEED_CAMERA_SOUND_BELOW_SPEED_LIMIT",
-            ),
-        )
+            )
     }
 }

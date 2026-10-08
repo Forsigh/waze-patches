@@ -13,19 +13,13 @@ val speedLimitDecreaseAlertPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     execute {
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "dec", true,
                 "CONFIG_VALUE_NOTIFICATIONS_ON_ROUTE_SPEED_LIMIT_DECREASE",
-            ),
-        )
-        LongConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceLong(
+            )
+        recordLong(
                 "dec",
                 "CONFIG_VALUE_ALERTS_SPEED_LIMIT_DECREASE_ALERT_DISTANCE_METERS" to 1000L,
-            ),
-        )
+            )
     }
 }

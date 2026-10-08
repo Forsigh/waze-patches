@@ -13,13 +13,10 @@ val laneGuidancePatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     execute {
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "lan", true,
                 "CONFIG_VALUE_LANE_GUIDANCE_ENABLED",
                 "CONFIG_VALUE_LANE_GUIDANCE_CONTINUE_STRAIGHT_ENABLED",
-            ),
-        )
+            )
     }
 }

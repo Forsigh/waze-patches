@@ -14,16 +14,13 @@ val policeAlertDistancePatch = bytecodePatch(
 
     execute {
         // All Long (com/waze/config/c) keys, so must hook the Long getter.
-        LongConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceLong(
+        recordLong(
                 "dst",
                 "CONFIG_VALUE_ALERTS_ENFORCEMENT_ALERTS_DISTANCE_STREETS" to 700L,
                 "CONFIG_VALUE_ALERTS_ENFORCEMENT_ALERTS_DISTANCE_HIGHWAY" to 900L,
                 "CONFIG_VALUE_ALERTS_ENFORCEMENT_ALERTS_DISTANCE_FREEWAY" to 1200L,
                 "CONFIG_VALUE_ALERTS_ACCIDENT_ALERT_DISTANCE_METERS" to 2000L,
                 "CONFIG_VALUE_ALERTS_HEAVY_TRAFFIC_ALERT_DISTANCE_METERS" to 3000L,
-            ),
-        )
+            )
     }
 }

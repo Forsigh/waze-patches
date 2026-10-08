@@ -13,13 +13,10 @@ val averageSpeedCameraPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     execute {
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "avg", true,
                 "CONFIG_VALUE_AVERAGE_SPEED_CAMERA_FEATURE_ENABLED",
                 "CONFIG_VALUE_AVERAGE_SPEED_CAMERA_RECOMMENDED_SPEED_ENABLED",
-            ),
-        )
+            )
     }
 }

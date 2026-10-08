@@ -32,9 +32,6 @@ val autoZoomPatch = bytecodePatch(
     )
 
     execute {
-        StringConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceString("azm", "CONFIG_VALUE_ROUTING_AUTO_ZOOM" to (mode ?: "speed")),
-        )
+        recordString("azm", "CONFIG_VALUE_ROUTING_AUTO_ZOOM" to (mode ?: "speed"))
     }
 }

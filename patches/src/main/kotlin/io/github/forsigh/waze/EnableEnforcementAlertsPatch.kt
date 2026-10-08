@@ -13,12 +13,9 @@ val enableEnforcementAlertsPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     execute {
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "enf", true,
                 "CONFIG_VALUE_ALERTS_ENABLE_ENFORCEMENT_ALERTS",
-            ),
-        )
+            )
     }
 }

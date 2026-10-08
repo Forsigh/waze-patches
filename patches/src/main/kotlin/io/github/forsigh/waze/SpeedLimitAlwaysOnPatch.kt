@@ -13,13 +13,10 @@ val speedLimitAlwaysOnPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     execute {
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "sls", true,
                 "CONFIG_VALUE_MAP_SPEEDOMETER_SPEED_LIMIT_ENABLED",
                 "CONFIG_VALUE_MAP_SPEEDOMETER_SPEED_LIMIT_OVERRIDE_ENABLED",
-            ),
-        )
+            )
     }
 }

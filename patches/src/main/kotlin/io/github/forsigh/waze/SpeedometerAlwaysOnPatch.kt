@@ -14,20 +14,14 @@ val speedometerAlwaysOnPatch = bytecodePatch(
 
     execute {
         // Show the speedometer at all (Boolean) ...
-        BooleanConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceBoolean(
+        recordBoolean(
                 "spd", true,
                 "CONFIG_VALUE_MAP_SHOW_SPEEDOMETER",
-            ),
-        )
+            )
         // ... and drop the minimum speed gate to zero (Long).
-        LongConfigGetterFingerprint.method.addInstructions(
-            0,
-            forceLong(
+        recordLong(
                 "spd",
                 "CONFIG_VALUE_MAP_SPEEDOMETER_MIN_SPEED_KPH" to 0L,
-            ),
-        )
+            )
     }
 }
