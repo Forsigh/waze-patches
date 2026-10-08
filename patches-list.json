@@ -221,40 +221,6 @@
       "options": []
     },
     {
-      "name": "Forsigh Settings",
-      "description": "Merges the Forsigh Settings extension and gives it a Context at startup, so the other patches can be controlled by a runtime setting instead of only at patch time.",
-      "default": true,
-      "category": null,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "com.waze",
-          "name": "Waze",
-          "description": null,
-          "apkFileType": "APKM",
-          "appIconColor": "#33CCFF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "5.24.90.901",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": true,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Lane guidance",
       "description": "Enables lane guidance, including continue-straight hints.",
       "default": true,

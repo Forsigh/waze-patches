@@ -3,7 +3,7 @@ group = "io.github.forsigh.waze"
 patches {
     about {
         name = "Forsigh Waze Patches"
-        description = "Unofficial Morphe patches for Waze. Personal use."
+        description = "Unofficial Morphe patches for Waze (com.waze)."
         source = "https://github.com/Forsigh/waze-patches.git"
         author = "Forsigh"
         contact = "na"

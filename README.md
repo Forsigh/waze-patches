@@ -1,6 +1,6 @@
 # 🧩 Forsigh Waze Patches
 
-Unofficial [Morphe](https://morphe.software) patches for **Waze** (`com.waze`). Personal use.
+Unofficial [Morphe](https://morphe.software) patches for **Waze** (`com.waze`).
 
 These patches were derived by reverse-engineering a "Magical Unicorn" Waze MOD build against the
 matching stock APK, then re-expressing the changes as Morphe patches that hook Waze's numeric
@@ -80,7 +80,6 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Config overrides](#config-overrides) | Applies the configuration changes requested by the other patches. Applied automatically; there is nothing to configure. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on Waze's police/enforcement alert system. |  |
 | [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Increases the pre-alert distances for police enforcement, accidents and heavy traffic. |  |
-| [Forsigh Settings](#forsigh-settings) | Merges the Forsigh Settings extension and gives it a Context at startup, so the other patches can be controlled by a runtime setting instead of only at patch time. |  |
 | [Lane guidance](#lane-guidance) | Enables lane guidance, including continue-straight hints. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays speed-camera sound alerts even when not above the limit. |  |
 | [Remove ads](#remove-ads) | Forces Waze's advertising config values off. |  |
