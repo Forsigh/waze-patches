@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-08T16:09:52",
-  "description": "## [1.5.0](https://github.com/Forsigh/waze-patches/compare/v1.4.0...v1.5.0) (2026-10-08)\n\n### 🐛 Bug Fixes\n\n* apply config overrides as one block per getter ([40a39f5](https://github.com/Forsigh/waze-patches/commit/40a39f536c6c0b63d3f60e4660643c1331623e64))\n\n### ✨ New Features\n\n* add the Forsigh Settings row to Waze's settings list ([2250284](https://github.com/Forsigh/waze-patches/commit/2250284f9403c1c14a731d33adc0e63ddfbada7d))\n* restart-to-apply prompt in the extension ([d32019e](https://github.com/Forsigh/waze-patches/commit/d32019ead450149f711c468dbb030ca937fa8eee))",
-  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.5.0/patches-1.5.0.mpp",
+  "created_at": "2026-10-08T20:42:28",
+  "description": "## [1.6.0](https://github.com/Forsigh/waze-patches/compare/v1.5.0...v1.6.0) (2026-10-08)\n\n### ✨ New Features\n\n* support Waze 5.25.0.1 alongside 5.24.90.901 ([fbb41a2](https://github.com/Forsigh/waze-patches/commit/fbb41a28e1005ec7d1ddd569981c828157060688))",
+  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.6.0/patches-1.6.0.mpp",
   "signature_download_url": "",
-  "version": "1.5.0"
+  "version": "1.6.0"
 }

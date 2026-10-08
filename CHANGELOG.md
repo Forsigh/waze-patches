@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/Forsigh/waze-patches/compare/v1.5.0...v1.6.0) (2026-10-08)
+
+### ✨ New Features
+
+* support Waze 5.25.0.1 alongside 5.24.90.901 ([fbb41a2](https://github.com/Forsigh/waze-patches/commit/fbb41a28e1005ec7d1ddd569981c828157060688))
+
 ## [1.5.0](https://github.com/Forsigh/waze-patches/compare/v1.4.0...v1.5.0) (2026-10-08)
 
 ### 🐛 Bug Fixes
