@@ -1,3 +1,14 @@
+## [1.5.0](https://github.com/Forsigh/waze-patches/compare/v1.4.0...v1.5.0) (2026-10-08)
+
+### 🐛 Bug Fixes
+
+* apply config overrides as one block per getter ([40a39f5](https://github.com/Forsigh/waze-patches/commit/40a39f536c6c0b63d3f60e4660643c1331623e64))
+
+### ✨ New Features
+
+* add the Forsigh Settings row to Waze's settings list ([2250284](https://github.com/Forsigh/waze-patches/commit/2250284f9403c1c14a731d33adc0e63ddfbada7d))
+* restart-to-apply prompt in the extension ([d32019e](https://github.com/Forsigh/waze-patches/commit/d32019ead450149f711c468dbb030ca937fa8eee))
+
 ## [1.4.0](https://github.com/Forsigh/waze-patches/compare/v1.3.0...v1.4.0) (2026-10-07)
 
 ### ✨ New Features

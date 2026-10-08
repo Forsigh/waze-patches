@@ -62,9 +62,9 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.4.0](https://github.com/Forsigh/waze-patches/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;13 patches total
+> **[v1.5.0](https://github.com/Forsigh/waze-patches/releases/tag/v1.5.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;14 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;13 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;14 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -77,6 +77,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Auto zoom](#auto-zoom) | Pins Waze's own auto-zoom setting (no / yes / speed) and keeps it across server config sync. Waze ships the row itself; this makes the choice stick. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Enables average-speed camera alerts and recommended-speed guidance. |  |
 | [Brief voice guidance](#brief-voice-guidance) | Enables Waze's brief voice-guidance mode. |  |
+| [Config overrides](#config-overrides) | Applies the configuration changes requested by the other patches. Applied automatically; there is nothing to configure. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on Waze's police/enforcement alert system. |  |
 | [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Increases the pre-alert distances for police enforcement, accidents and heavy traffic. |  |
 | [Forsigh Settings](#forsigh-settings) | Merges the Forsigh Settings extension and gives it a Context at startup, so the other patches can be controlled by a runtime setting instead of only at patch time. |  |
