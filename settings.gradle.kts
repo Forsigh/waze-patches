@@ -20,16 +20,7 @@ plugins {
     id("app.morphe.patches") version "1.3.4"
 }
 
-settings {
-    extensions {
-        defaultNamespace = "io.github.forsigh.waze.extension"
-
-        // Must resolve to an absolute path, otherwise extensions in subfolders
-        // fail to find the proguard config.
-        proguardFiles(rootProject.projectDir.resolve("extensions/proguard-rules.pro").toString())
-    }
-}
-
-// Compile-time stubs of the Waze classes the extension calls into. Never packaged - the real
-// classes are already in the APK, and shipping these would duplicate com.waze.* in the merged dex.
-include(":stubs")
+// No extension module: the in-app "Forsigh Settings" menu was removed before release, so the bundle
+// ships patches only. Its sources, plus the Waze stubs they needed, are kept in ../parked/ - outside
+// the build, so they are neither compiled nor packaged. If a runtime-toggle screen is ever built, the
+// right surface is Waze's own boolean-config toggle section, not a custom row.
