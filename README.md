@@ -62,9 +62,9 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.6.0](https://github.com/Forsigh/waze-patches/releases/tag/v1.6.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;13 patches total
+> **[v1.6.0](https://github.com/Forsigh/waze-patches/releases/tag/v1.6.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;14 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;13 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;14 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -87,6 +87,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Forces the speed-limit sign on and enables the manual overrides. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Enables warnings when the speed limit drops, with an extended pre-alert distance. |  |
 | [Speedometer always on](#speedometer-always-on) | Keeps the speedometer visible at any speed, including while stopped. |  |
+| [Wire patched YouTube Music into Waze](#wire-patched-youtube-music-into-waze) | Makes Waze's audio player look for your patched YouTube Music instead of the official package, so the patched build is detected and launched. | • Official YouTube Music package<br>• Your patched YouTube Music package |
 
 </details>
 

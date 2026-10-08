@@ -548,6 +548,66 @@
         }
       ],
       "options": []
+    },
+    {
+      "name": "Wire patched YouTube Music into Waze",
+      "description": "Makes Waze's audio player look for your patched YouTube Music instead of the official package, so the patched build is detected and launched.",
+      "default": false,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.waze",
+          "name": "Waze",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#33CCFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.24.90.901",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.0.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "officialPackage",
+          "title": "Official YouTube Music package",
+          "description": "The package Waze asks for. Requests matching this prefix are rewritten.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "com.google.android.apps.youtube.music",
+          "values": null
+        },
+        {
+          "key": "targetPackage",
+          "title": "Your patched YouTube Music package",
+          "description": "The package your patched YouTube Music is actually installed as. Morphe Manager shows it on the app's patch screen.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "app.morphe.android.apps.youtube.music",
+          "values": null
+        }
+      ]
     }
   ]
 }

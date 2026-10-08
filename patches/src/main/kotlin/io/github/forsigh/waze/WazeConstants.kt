@@ -36,4 +36,12 @@ object WazeConstants {
             AppTarget(version = null, isExperimental = true),
         ),
     )
+
+    /**
+     * Audio-partner remap. Waze resolves an audio partner by asking PackageManager for the roster's
+     * package; Morphe's patched YouTube Music is installed under its own package name, so Waze never
+     * sees it. These are the two ends of that rewrite (the target is configurable at patch time).
+     */
+    const val OFFICIAL_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
+    const val MORPHE_YOUTUBE_MUSIC = "app.morphe.android.apps.youtube.music"
 }
