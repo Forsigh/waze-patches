@@ -27,6 +27,11 @@ object WazeConstants {
             // builds - not a different release. Declaring the beta name made Morphe skip
             // every patch on the production APK, so the production name is the confirmed one.
             AppTarget(version = "5.24.90.901"),
+            // Second confirmed target (versionCode 1030736). Verified the same way as the first: the
+            // bundle applies WITHOUT -f, every hooked getter comes out structurally identical
+            // (57/33/7 instructions, no invalid branches), and all 30 forced CONFIG_VALUE_* keys
+            // still exist in its dex. Without this entry Morphe skips all 13 patches silently there.
+            AppTarget(version = "5.25.0.1"),
             // Experimental: attempt on any version / any architecture.
             AppTarget(version = null, isExperimental = true),
         ),

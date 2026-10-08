@@ -69,8 +69,8 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 
 **🎯 Supported versions:**
 
-| 5.24.90.901 |
-| :---: |
+| 5.24.90.901 | 5.25.0.1 |
+| :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
