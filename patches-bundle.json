@@ -1,7 +1,7 @@
 {
   "created_at": "2026-10-09T07:16:26",
-  "description": "## [1.7.0](https://github.com/Forsigh/waze-patches/compare/v1.6.0...v1.7.0) (2026-10-09)\n\n### ✨ New Features\n\n* wire a patched YouTube Music into Waze's audio player ([126cc2e](https://github.com/Forsigh/waze-patches/commit/126cc2e0b82171bed7770c880ad45910df5ab3ee))",
+  "description": "## [1.7.0](https://github.com/Forsigh/waze-patches/compare/v1.6.0...v1.7.0) (2026-10-09)\n\n### \u2728 New Features\n\n* wire a patched YouTube Music into Waze's audio player ([126cc2e](https://github.com/Forsigh/waze-patches/commit/126cc2e0b82171bed7770c880ad45910df5ab3ee))",
   "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v1.7.0/patches-1.7.0.mpp",
   "signature_download_url": "",
-  "version": "1.7.0"
+  "version": "0.20.0"
 }
