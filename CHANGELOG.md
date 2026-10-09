@@ -1,3 +1,9 @@
+## [0.20.2](https://github.com/Forsigh/waze-patches/compare/v0.20.1...v0.20.2) (2026-10-09)
+
+### 🐛 Bug Fixes
+
+* call the audio partner Morphe YouTube Music, not "patched" ([f53d457](https://github.com/Forsigh/waze-patches/commit/f53d457b0de36e61e065cae8a923da335c56a270))
+
 ## [0.20.1](https://github.com/Forsigh/waze-patches/compare/v0.20.0...v0.20.1) (2026-10-09)
 
 ### 🐛 Bug Fixes
