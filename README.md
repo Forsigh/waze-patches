@@ -6,6 +6,24 @@ These patches were derived by reverse-engineering a "Magical Unicorn" Waze MOD b
 matching stock APK, then re-expressing the changes as Morphe patches that hook Waze's numeric
 config getter (`com.waze.config.ConfigValues`).
 
+## ➕ Add to Morphe
+
+**One tap** (open on the phone that runs Morphe Manager):
+[**Add to Morphe**](https://morphe.software/add-source?github=Forsigh/waze-patches)
+
+**Manually:** Morphe Manager → patch sources **+** → **Remote** → paste
+`https://github.com/Forsigh/waze-patches`
+
+Then select Waze in the patcher, enable the patches you want, and patch the stock APK. These are dex-only
+patches: no root, no PC, no custom keystore. The patched build is re-signed, so uninstall any existing
+Waze (or install it as a separate copy) before installing.
+
+> Unofficial community bundle, GPLv3, not affiliated with Waze or Morphe. Targets the Waze versions in
+> the patch list below — a build outside them is skipped rather than half-patched, so check
+> `Applying N patches` in the log. "Wire patched YouTube Music into Waze" is **experimental and off by
+> default**: it rewrites the package Waze asks for so a renamed Morphe build of YouTube Music is seen as
+> the audio partner, and that handshake has not yet been confirmed on a device.
+
 ### Implemented patches
 
 Every patch hooks Waze's typed config getters (`com.waze.config.ConfigValues`): Boolean keys use the
