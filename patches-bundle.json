@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-09T07:16:26",
-  "description": "Unofficial Morphe patches for Waze (com.waze): ad removal, auto-zoom, always-on speedometer, speed-limit and alert tweaks, plus optional YouTube Music audio-partner wiring. Targets Waze 5.24.90.901 and 5.25.0.1.",
-  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v0.20.0/patches-0.20.0.mpp",
+  "created_at": "2026-10-09T07:40:24",
+  "description": "## [0.20.1](https://github.com/Forsigh/waze-patches/compare/v0.20.0...v0.20.1) (2026-10-09)\n\n### 🐛 Bug Fixes\n\n* pin the remote-source file to the 0.20.0 asset ([2af1447](https://github.com/Forsigh/waze-patches/commit/2af144717c330ac0651a3ff3d2bb757711b66562))",
+  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v0.20.1/patches-0.20.1.mpp",
   "signature_download_url": "",
-  "version": "0.20.0"
+  "version": "0.20.1"
 }

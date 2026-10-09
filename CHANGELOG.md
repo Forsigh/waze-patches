@@ -1,3 +1,9 @@
+## [0.20.1](https://github.com/Forsigh/waze-patches/compare/v0.20.0...v0.20.1) (2026-10-09)
+
+### 🐛 Bug Fixes
+
+* pin the remote-source file to the 0.20.0 asset ([2af1447](https://github.com/Forsigh/waze-patches/commit/2af144717c330ac0651a3ff3d2bb757711b66562))
+
 ## [1.7.0](https://github.com/Forsigh/waze-patches/compare/v1.6.0...v1.7.0) (2026-10-09)
 
 ### ✨ New Features
