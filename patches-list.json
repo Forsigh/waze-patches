@@ -550,8 +550,8 @@
       "options": []
     },
     {
-      "name": "Wire patched YouTube Music into Waze",
-      "description": "Makes Waze's audio player look for your patched YouTube Music instead of the official package, so the patched build is detected and launched.",
+      "name": "Wire Morphe YouTube Music into Waze",
+      "description": "Makes Waze's audio player look for your Morphe YouTube Music instead of the official package, so the Morphe build is detected and launched.",
       "default": false,
       "category": null,
       "dependencies": [],
@@ -600,8 +600,8 @@
         },
         {
           "key": "targetPackage",
-          "title": "Your patched YouTube Music package",
-          "description": "The package your patched YouTube Music is actually installed as. Morphe Manager shows it on the app's patch screen.",
+          "title": "Your Morphe YouTube Music package",
+          "description": "The package your Morphe YouTube Music is installed as. Morphe Manager shows it on the app's patch screen.",
           "required": false,
           "type": "kotlin.String",
           "default": "app.morphe.android.apps.youtube.music",

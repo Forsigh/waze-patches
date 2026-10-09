@@ -11,12 +11,12 @@ import io.github.forsigh.waze.WazeConstants.MORPHE_YOUTUBE_MUSIC
 import io.github.forsigh.waze.WazeConstants.OFFICIAL_YOUTUBE_MUSIC
 
 /**
- * Wire a patched YouTube Music into Waze's in-app audio player.
+ * Wire Morphe YouTube Music into Waze's in-app audio player.
  *
  * Waze drives audio partners through its "Audiokit"/NavConnect integration. It ships no YouTube
  * Music package string of its own: the partner roster (app id, title, icon, launch package) is
  * delivered as protobuf by Waze's servers, and the only audio packages hardcoded in the app are
- * Spotify's (`com/b/a/a/b/j`). A patched YouTube Music therefore has to be installed as one of the
+ * A Morphe YouTube Music build therefore has to be installed as one of the
  * packages Waze will look for - Waze asks `PackageManager` for a launch intent by package name, and
  * a package it does not know is treated as "partner not installed".
  *
@@ -38,9 +38,9 @@ import io.github.forsigh.waze.WazeConstants.OFFICIAL_YOUTUBE_MUSIC
  */
 @Suppress("unused")
 val audioPartnerRemapPatch = bytecodePatch(
-    name = "Wire patched YouTube Music into Waze",
-    description = "Makes Waze's audio player look for your patched YouTube Music instead of the " +
-        "official package, so the patched build is detected and launched.",
+    name = "Wire Morphe YouTube Music into Waze",
+    description = "Makes Waze's audio player look for your Morphe YouTube Music instead of the " +
+        "official package, so the Morphe build is detected and launched.",
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
@@ -53,8 +53,8 @@ val audioPartnerRemapPatch = bytecodePatch(
 
     val targetPackage by stringOption(
         "targetPackage", MORPHE_YOUTUBE_MUSIC,
-        title = "Your patched YouTube Music package",
-        description = "The package your patched YouTube Music is actually installed as. " +
+        title = "Your Morphe YouTube Music package",
+        description = "The package your Morphe YouTube Music is installed as. " +
             "Morphe Manager shows it on the app's patch screen.",
     )
 

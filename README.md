@@ -20,7 +20,7 @@ Waze (or install it as a separate copy) before installing.
 
 > Unofficial community bundle, GPLv3, not affiliated with Waze or Morphe. Targets the Waze versions in
 > the patch list below — a build outside them is skipped rather than half-patched, so check
-> `Applying N patches` in the log. "Wire patched YouTube Music into Waze" is **experimental and off by
+> `Applying N patches` in the log. "Wire Morphe YouTube Music into Waze" is **experimental and off by
 > default**: it rewrites the package Waze asks for so a renamed Morphe build of YouTube Music is seen as
 > the audio partner, and that handshake has not yet been confirmed on a device.
 
@@ -105,7 +105,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Forces the speed-limit sign on and enables the manual overrides. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Enables warnings when the speed limit drops, with an extended pre-alert distance. |  |
 | [Speedometer always on](#speedometer-always-on) | Keeps the speedometer visible at any speed, including while stopped. |  |
-| [Wire patched YouTube Music into Waze](#wire-patched-youtube-music-into-waze) | Makes Waze's audio player look for your patched YouTube Music instead of the official package, so the patched build is detected and launched. | • Official YouTube Music package<br>• Your patched YouTube Music package |
+| [Wire Morphe YouTube Music into Waze](#wire-morphe-youtube-music-into-waze) | Makes Waze's audio player look for your Morphe YouTube Music instead of the official package, so the Morphe build is detected and launched. | • Official YouTube Music package<br>• Your Morphe YouTube Music package |
 
 </details>
 
