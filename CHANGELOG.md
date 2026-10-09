@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/Forsigh/waze-patches/compare/v1.6.0...v1.7.0) (2026-10-09)
+
+### ✨ New Features
+
+* wire a patched YouTube Music into Waze's audio player ([126cc2e](https://github.com/Forsigh/waze-patches/commit/126cc2e0b82171bed7770c880ad45910df5ab3ee))
+
 ## [1.6.0](https://github.com/Forsigh/waze-patches/compare/v1.5.0...v1.6.0) (2026-10-08)
 
 ### ✨ New Features
