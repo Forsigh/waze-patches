@@ -3,6 +3,57 @@
   "version": "0.20.2",
   "patches": [
     {
+      "name": "Allow high refresh rate",
+      "description": "Waze rejects any display mode above 60 Hz when it picks the mode for its surface, so a 120 Hz screen is served 60 Hz. This raises that ceiling to the requested rate (120 Hz by default). Costs battery and heat - off by default.",
+      "default": false,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.waze",
+          "name": "Waze",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#33CCFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.24.90.901",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.0.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "targetRefreshRate",
+          "title": "Target refresh rate (Hz)",
+          "description": "The ceiling Waze accepts when choosing a display mode. 120 suits most modern panels; 90 or 60 to back off if the phone throttles.",
+          "required": false,
+          "type": "kotlin.Int",
+          "default": 120,
+          "values": null
+        }
+      ]
+    },
+    {
       "name": "Auto zoom",
       "description": "Pins Waze's own auto-zoom setting (no / yes / speed) and keeps it across server config sync. Waze ships the row itself; this makes the choice stick.",
       "default": true,
@@ -551,7 +602,7 @@
     },
     {
       "name": "Wire Morphe YouTube Music into Waze",
-      "description": "Makes Waze's audio player look for your Morphe YouTube Music instead of the official package, so the Morphe build is detected and launched.",
+      "description": "Replaces the official YouTube Music entry with your Morphe YouTube Music: the package Waze launches and the row label, at the single point every audio-partner list entry is built from - plus both launch paths as a fallback.",
       "default": false,
       "category": null,
       "dependencies": [],
@@ -605,6 +656,15 @@
           "required": false,
           "type": "kotlin.String",
           "default": "app.morphe.android.apps.youtube.music",
+          "values": null
+        },
+        {
+          "key": "rowTitle",
+          "title": "Row label in Waze's list",
+          "description": "What the list entry reads once it points at your build. Set it back to \"YouTube Music\" to leave the label as Waze ships it.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "Morphe YouTube Music",
           "values": null
         }
       ]

@@ -80,9 +80,9 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.20.2](https://github.com/Forsigh/waze-patches/releases/tag/v0.20.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;14 patches total
+> **[v0.20.2](https://github.com/Forsigh/waze-patches/releases/tag/v0.20.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;15 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;14 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;15 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -92,6 +92,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Allow high refresh rate](#allow-high-refresh-rate) | Lifts Waze's own 60 Hz ceiling so a high-refresh panel actually runs Waze at its rate (Waze rejects any display mode above 60 Hz and logs "Refresh rate is too high"). Costs battery and heat — off by default. | • Target refresh rate (Hz) |
 | [Auto zoom](#auto-zoom) | Pins Waze's own auto-zoom setting (no / yes / speed) and keeps it across server config sync. Waze ships the row itself; this makes the choice stick. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Enables average-speed camera alerts and recommended-speed guidance. |  |
 | [Brief voice guidance](#brief-voice-guidance) | Enables Waze's brief voice-guidance mode. |  |
@@ -105,7 +106,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Forces the speed-limit sign on and enables the manual overrides. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Enables warnings when the speed limit drops, with an extended pre-alert distance. |  |
 | [Speedometer always on](#speedometer-always-on) | Keeps the speedometer visible at any speed, including while stopped. |  |
-| [Wire Morphe YouTube Music into Waze](#wire-morphe-youtube-music-into-waze) | Makes Waze's audio player look for your Morphe YouTube Music instead of the official package, so the Morphe build is detected and launched. | • Official YouTube Music package<br>• Your Morphe YouTube Music package |
+| [Wire Morphe YouTube Music into Waze](#wire-morphe-youtube-music-into-waze) | Replaces the official YouTube Music entry with your Morphe YouTube Music — the package Waze launches and the row label — at the single point every audio-partner list entry is built from, plus both launch paths as a fallback. | • Official YouTube Music package<br>• Your Morphe YouTube Music package<br>• Row label in Waze's list |
 
 </details>
 
