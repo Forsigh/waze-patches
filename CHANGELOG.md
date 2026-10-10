@@ -1,3 +1,9 @@
+## [0.21.0](https://github.com/Forsigh/waze-patches/compare/v0.20.2...v0.21.0) (2026-10-10)
+
+### ✨ New Features
+
+* replace Waze's YouTube Music entry at the source, add high refresh rate ([f5c4bda](https://github.com/Forsigh/waze-patches/commit/f5c4bda47fad5e9cdd24c0c50bb70b2f7b45be9a))
+
 ## [0.20.2](https://github.com/Forsigh/waze-patches/compare/v0.20.1...v0.20.2) (2026-10-09)
 
 ### 🐛 Bug Fixes
