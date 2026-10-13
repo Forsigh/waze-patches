@@ -19,8 +19,8 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val autoZoomPatch = bytecodePatch(
     name = "Auto zoom",
-    description = "Pins Waze's own auto-zoom setting (no / yes / speed) and keeps it across server " +
-        "config sync. Waze ships the row itself; this makes the choice stick.",
+    description = "Keeps the auto-zoom mode you pick (no / yes / speed) from being overwritten when " +
+        "Waze syncs its server config. The setting comes from Waze itself; this makes it stick.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

@@ -7,7 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val averageSpeedCameraPatch = bytecodePatch(
     name = "Average-speed camera alerts",
-    description = "Enables average-speed camera alerts and recommended-speed guidance.",
+    description = "Turns on average-speed camera alerts and the recommended speed for the zone.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

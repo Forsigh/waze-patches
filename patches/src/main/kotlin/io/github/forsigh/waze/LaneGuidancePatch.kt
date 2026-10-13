@@ -7,7 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val laneGuidancePatch = bytecodePatch(
     name = "Lane guidance",
-    description = "Enables lane guidance, including continue-straight hints.",
+    description = "Turns on lane guidance, including the continue-straight hints.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

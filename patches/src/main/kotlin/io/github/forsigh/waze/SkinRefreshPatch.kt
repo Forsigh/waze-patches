@@ -13,16 +13,21 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * increases. This patch is that increment.
  *
  * WHY IT IS A SEPARATE, UNNAMED PATCH: it is a `resourcePatch` (the manifest is edited through the decoded
- * DOM, the same way the media-visibility patch declares `<queries>`), while the skin rewrite next to it is a
- * `rawResourcePatch` working on APK files. A patch is typed to exactly one context, so this half cannot live
- * inside that one. It has no name, so it is not a row: `Map theme` declares it as a dependency, and it is
- * applied whenever that row is ticked. Nothing else depends on it, so a selection without `Map theme` never
- * bumps the version.
+ * DOM, the same way the Morphe Music declaration adds its `<queries>` entry), so it cannot live inside any
+ * single raw- or bytecode feature patch. It has no name, so it is not a row: `Unlock driver moods` declares
+ * it as a dependency - mood artwork ships with the skin assets - so the refresh rides along with that
+ * default-on row.
  *
  * THE NUMBER: a fixed target above every build we support, advanced in steps - not "current + 1". That way
- * the bump is idempotent across selections and re-patching *without* `Map theme` also lands higher than the
- * previously patched build, so Waze re-extracts and the stock skins come back: a theme can be removed.
- * The build's own number is never lowered.
+ * the bump is idempotent across selections, and a re-patch that no longer edits the extracted resources
+ * also lands higher than the previously patched build, so Waze re-extracts and the stock resources come
+ * back: an edit can be undone. The build's own number is never lowered.
+ *
+ * COMPOSITION WITH THE PLAY-LOCK: when `Disable Play Store updates` is selected, its `finalize` block
+ * writes the versionCode last (after this patch's execute), so the lock always wins regardless of
+ * selection order. The guard below keeps a re-patch of an already-locked build from stepping the lock
+ * value: the lock's own value advances on every re-patch anyway, which is what keeps the re-extraction
+ * working there.
  *
  * Ported from aaayd/waze-custom-patches (GPLv3, `ManifestResources.kt`) - see `upstream-port/CREDITS.txt`.
  * Upstream wrote the bytes of the binary manifest directly, which only works while that file is staged and
@@ -49,10 +54,19 @@ val skinRefreshPatch = resourcePatch(
                     "skinRefreshPatch: Waze's manifest carries no numeric android:versionCode, so its " +
                         "extracted skins cannot be refreshed and a theme would never appear"
                 )
-            val next = maxOf(REFRESHED_VERSION_CODE, current + REFRESHED_STEP)
-            manifest.setAttribute("android:versionCode", next.toString())
-            bumped = next - current
+            if (current >= PLAY_LOCK_BASE) {
+                println(
+                    "skinRefreshPatch: a Play-lock value is already in place ($current); " +
+                        "skins re-extract from the lock's own value change - no bump needed"
+                )
+            } else {
+                val next = maxOf(REFRESHED_VERSION_CODE, current + REFRESHED_STEP)
+                manifest.setAttribute("android:versionCode", next.toString())
+                bumped = next - current
+            }
         }
-        println("skinRefreshPatch: versionCode advanced by $bumped so Waze re-extracts its skins")
+        if (bumped > 0) {
+            println("skinRefreshPatch: versionCode advanced by $bumped so Waze re-extracts its skins")
+        }
     }
 }

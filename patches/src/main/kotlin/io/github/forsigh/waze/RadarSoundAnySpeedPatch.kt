@@ -7,7 +7,8 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val radarSoundAnySpeedPatch = bytecodePatch(
     name = "Radar sound at any speed",
-    description = "Plays speed-camera sound alerts even when not above the limit.",
+    description = "Plays the speed-camera alert sound even when you are not over the limit. Waze " +
+        "normally only sounds it when you are.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

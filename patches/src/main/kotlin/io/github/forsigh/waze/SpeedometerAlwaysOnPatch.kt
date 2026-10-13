@@ -7,7 +7,8 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val speedometerAlwaysOnPatch = bytecodePatch(
     name = "Speedometer always on",
-    description = "Keeps the speedometer visible at any speed, including while stopped.",
+    description = "The speedometer stays on screen at any speed, including when stopped. " +
+        "Waze hides it below its own minimum speed otherwise.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

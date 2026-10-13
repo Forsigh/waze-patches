@@ -7,7 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val briefVoiceGuidancePatch = bytecodePatch(
     name = "Brief voice guidance",
-    description = "Enables Waze's brief voice-guidance mode.",
+    description = "Enables Waze's brief voice-guidance mode, which trims the spoken directions down.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

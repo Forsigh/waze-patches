@@ -20,13 +20,13 @@ Waze (or install it as a separate copy) before installing.
 
 > Unofficial community bundle, GPLv3, not affiliated with Waze or Morphe. Targets the Waze versions in
 > the patch list below — a build outside them is skipped rather than half-patched, so check
-> `Applying N patches` in the log. Four patches are **off by default**: *Allow high refresh rate*, which
-> costs battery and heat; *Map theme* and *OLED dark mode*, which are visual choices; and *Add your own
-> media apps as Waze audio partners*, whose handshake has not yet been confirmed on a device.
+> `Applying N patches` in the log. Three patches are **off by default**: *Allow high refresh rate* (costs
+> battery and heat), *AMOLED dark mode* (changes how the stock night map looks) and *Disable Play Store
+> updates* (locks the store out of updating Waze).
 
 ### Implemented patches
 
-Each patch below is selected on its own, the usual Morphe way. They all hook Waze's typed config
+Each patch below is selected on its own, the usual Morphe way. Most of them hook Waze's typed config
 getters (`com.waze.config.ConfigValues`): Boolean keys use the Boolean getter (`com/waze/config/b`), Long
 keys the Long getter (`com/waze/config/c`), String keys the String getter (`com/waze/config/d`). Hooking
 the read path means an override survives Waze re-syncing config from the server.
@@ -35,8 +35,8 @@ Every one of them records what it wants forced and lets the config writer apply 
 per getter, because two blocks in one method leave the first block's branch targets pointing at the wrong
 instruction and the runtime verifier then rejects the class. The writer is not a row of its own: it has no
 name, is applied automatically, and every patch that records a key declares it as a dependency, so ticking
-one patch alone still applies it and a key can never be collected and never written. The media patch works
-the same way with the manifest fix, which is why the media feature is one row rather than three.
+one patch alone still applies it and a key can never be collected and never written. The Morphe Music
+patch works the same way with its manifest half, which is why that feature is one row rather than two.
 
 - **Speedometer** — visible at any speed, including while stopped (minimum speed → 0).
 - **Speed limit sign** — forces the sign on and enables its manual overrides.
@@ -50,6 +50,8 @@ the same way with the manifest fix, which is why the media feature is one row ra
 - **Lane guidance** — enables lane guidance, including continue-straight hints.
 - **Auto zoom** — pins Waze's own auto-zoom setting (no / yes / speed) across server config sync.
 - **Remove ads** — forces Waze's advertising config values off.
+- **AMOLED dark mode** — the stock night map becomes an AMOLED map: true-black canvas and slightly lighter roads (off by default).
+- **Disable Play Store updates** — the Play Store always sees your installed copy as newer, so it never offers or applies an update; the lock value advances on every re-patch and Waze's own version accessor still reports the pre-lock code (off by default).
 
 ### Installing, and Android Auto visibility
 
@@ -99,7 +101,7 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.27.0](https://github.com/Forsigh/waze-patches/releases/tag/v0.27.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;17 patches total
+> **[v0.22.4](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.4)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;17 patches total
 <details open>
 <summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;17 patches</summary>
 <br>
@@ -111,22 +113,22 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Add your own media apps as Waze audio partners](#add-your-own-media-apps-as-waze-audio-partners) | Waze's audio-partner list is a table compiled into the app - it contains Spotify and an internal demo, and Waze never scans installed apps (getInstalledPackages has zero references in the APK). One patch for the whole media feature: it adds your own entries to that table at the point where Waze persists each partner's scope, and declares the media browser service in Waze's manifest, without which Android hides your players from Waze entirely. Waze's own availability check is opened as well: any installed app qualifies as a partner, and Waze reaches it through the generic media-browser client instead of requiring Waze's own SDK. | • Extra packages to make visible (one per line)<br>• Service action to declare<br>• Let Waze see every installed app<br>• Partners to add (package=Label)<br>• Turn Waze's audio-partner feature on |
+| [AMOLED dark mode](#amoled-dark-mode) | Replaces Waze's stock night map with an AMOLED one: the map canvas becomes true black (#000000) and the nine road families are lifted 15% toward white so they keep their contrast against it. Only the night skins change - day mode, labels, traffic and route colours stay as Waze ships them. Applied at patch time: no runtime switch, nothing injected. |  |
 | [Allow high refresh rate](#allow-high-refresh-rate) | Waze rejects any display mode above 60 Hz when it picks the mode for its surface, so a 120 Hz screen is served 60 Hz. This raises that ceiling to the requested rate (120 Hz by default). Costs battery and heat - off by default. | • Target refresh rate (Hz) |
-| [Auto zoom](#auto-zoom) | Pins Waze's own auto-zoom setting (no / yes / speed) and keeps it across server config sync. Waze ships the row itself; this makes the choice stick. | • Auto-zoom mode |
-| [Average-speed camera alerts](#average-speed-camera-alerts) | Enables average-speed camera alerts and recommended-speed guidance. |  |
-| [Brief voice guidance](#brief-voice-guidance) | Enables Waze's brief voice-guidance mode. |  |
-| [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on Waze's police/enforcement alert system. |  |
-| [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Increases the pre-alert distances for police enforcement, accidents and heavy traffic. |  |
-| [Lane guidance](#lane-guidance) | Enables lane guidance, including continue-straight hints. |  |
-| [Map theme](#map-theme) | Recolours Waze's own map skin (Google Maps-like light/dark, or OLED black) by rewriting the compiled skin descriptions in the APK, and raises the app's versionCode so Waze re-extracts its skins instead of serving the cached stock ones. Applied at patch time: change the theme by re-patching. No injected code, nothing to render at runtime. | • Theme |
-| [OLED dark mode](#oled-dark-mode) | Makes the night map truly dark for OLED screens: the map background becomes pure black (#000000) and the road colours are lifted slightly (one Waze lighten step) so they stay readable against it. Only the background and the road palette change - day mode, labels, traffic and routes are left as Waze ships them. Applied at patch time: no runtime switch and nothing injected into the app. Steps aside if Map theme is also selected. |  |
-| [Radar sound at any speed](#radar-sound-at-any-speed) | Plays speed-camera sound alerts even when not above the limit. |  |
-| [Remove ads](#remove-ads) | Forces Waze's advertising config values off. |  |
-| [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows speed cameras, red-light cameras and speed bumps on the map and enables their notifications. |  |
-| [Speed limit sign always shown](#speed-limit-sign-always-shown) | Forces the speed-limit sign on and enables the manual overrides. |  |
-| [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Enables warnings when the speed limit drops, with an extended pre-alert distance. |  |
-| [Speedometer always on](#speedometer-always-on) | Keeps the speedometer visible at any speed, including while stopped. |  |
+| [Auto zoom](#auto-zoom) | Keeps the auto-zoom mode you pick (no / yes / speed) from being overwritten when Waze syncs its server config. The setting comes from Waze itself; this makes it stick. | • Auto-zoom mode |
+| [Average-speed camera alerts](#average-speed-camera-alerts) | Turns on average-speed camera alerts and the recommended speed for the zone. |  |
+| [Brief voice guidance](#brief-voice-guidance) | Enables Waze's brief voice-guidance mode, which trims the spoken directions down. |  |
+| [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from offering or applying updates to Waze: the manifest version code is locked above Play's maximum (2,100,000,000 + minutes), so the store always sees the installed copy as newer than its listing. The value advances on every re-patch, so Waze still refreshes its extracted resources, and Waze's own package-version accessor keeps reporting the pre-lock code. Ported from Morphe's universal "Disable Play Store updates" (GPLv3). |  |
+| [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on Waze's police and enforcement alerts. |  |
+| [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Alerts for police, accidents and heavy traffic fire earlier, with their pre-alert distances extended. |  |
+| [Lane guidance](#lane-guidance) | Turns on lane guidance, including the continue-straight hints. |  |
+| [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Makes Morphe YouTube Music (app.morphe.android.apps.youtube.music) usable as Waze's audio partner: the package is declared in Waze's manifest so Android's package visibility lets Waze see it, and it is added to the audio-partner table (SdkConfiguration.appConfigs) whenever Waze rebuilds that roster. Ported from Loupric/morphe-waze-music-patch (GPLv3). |  |
+| [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera alert sound even when you are not over the limit. Waze normally only sounds it when you are. |  |
+| [Remove ads](#remove-ads) | Forces Waze's advertising settings off, so the ad slots that respect those values stay empty. |  |
+| [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Draws speed cameras, red-light cameras and speed bumps on the map, with their on-route notifications enabled. |  |
+| [Speed limit sign always shown](#speed-limit-sign-always-shown) | The speed-limit sign stays on the map, and its manual overrides become available. |  |
+| [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Warns when the posted speed limit drops, with a longer pre-alert distance than stock. |  |
+| [Speedometer always on](#speedometer-always-on) | The speedometer stays on screen at any speed, including when stopped. Waze hides it below its own minimum speed otherwise. |  |
 | [Unlock driver moods](#unlock-driver-moods) | Waze's mood picker is gated three ways: an eligibility check that accepts only one mood name (and reads the beta-moods flag), a baby-account gate that hides moods, and a filtered native catalogue call. This opens all three, so moods already in the local catalogue - including special and hidden entries - become selectable. Artwork Waze has never downloaded is not invented. |  |
 
 </details>
@@ -148,17 +150,23 @@ Forsigh Waze Patches are licensed under the [GNU General Public License v3.0](LI
 
 ## 🙏 Credits
 
-* **Map theme** and its palette data are ported from [aaayd/waze-custom-patches](https://github.com/aaayd/waze-custom-patches)
-  (release `waze-5.25.0.1-1030736-patches-1.15`, GPLv3): the palette substitution over Waze's compiled skin
-  descriptions, the renderer colour overrides, the versionCode refresh that makes Waze re-extract its skins,
-  and the `.properties` palettes themselves (sampled from Google Maps captures by their generator script),
-  which ship byte-for-byte.
-* The audio-partner technique (injecting into `SdkConfiguration.updateAppList` ahead of the scope save) was
-  reverse-engineered from [Loupric/morphe-waze-music-patch](https://github.com/Loupric/morphe-waze-music-patch) (GPLv3).
-* **Unlock driver moods** is ported from aaayd/waze-custom-patches (GPLv3, `DriverIconsPatch.kt`), re-anchored
-  against this build: their finder matched a `(Context, String) -> Z` method by three mood-name strings, which
-  does not exist here - the same method compares against a string resource instead - so the anchors are pinned
-  by class, name and signature.
+* **Morphe YouTube Music as a Waze audio partner** is ported from
+  [Loupric/morphe-waze-music-patch](https://github.com/Loupric/morphe-waze-music-patch) (GPLv3, release
+  v1.0.2): the manifest `<queries>` declaration, the injection into `SdkConfiguration.updateAppList`, the
+  five-argument `au` constructor and the feature bits are their work, credited again in the source.
+* **Unlock driver moods** and the resource-refresh half (a raised versionCode so Waze re-extracts its
+  bundled assets) are ported from [aaayd/waze-custom-patches](https://github.com/aaayd/waze-custom-patches)
+  (GPLv3): moods from `DriverIconsPatch.kt`, re-anchored against this build - their finder matched a
+  `(Context, String) -> Z` method by three mood-name strings, which does not exist here, where the same
+  method compares against a string resource instead - so the anchors are pinned by class, name and
+  signature. The refresh is re-expressed as a manifest-DOM edit so it composes with the other manifest
+  patches.
+* **Disable Play Store updates** is adapted from
+  [MorpheApp/morphe-patches](https://github.com/MorpheApp/morphe-patches) (GPLv3, PR #2470): the
+  versionCode lock and the execute/finalize write split are their work, under their preserved notice.
+  The Waze adaptation changes the locked value (it advances on every re-patch instead of sitting at the
+  maximum, so the skin re-extraction keeps working) and narrows the read preservation to Waze's own
+  version accessor.
 
 ## Support
 

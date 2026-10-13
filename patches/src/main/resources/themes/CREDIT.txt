@@ -1,6 +1,0 @@
-Palette data in this directory is ported from aaayd/waze-custom-patches
-(release waze-5.25.0.1-1030736-patches-1.15, commit b6811e5), GPLv3.
-Porting notes and full attribution: ../../../../../../upstream-port/CREDITS.txt
-Their generator script (scripts/build_sampled_themes.py) produces the .properties
-files; the RGB values are sampled from Google Maps reference captures.
-Kept byte-for-byte so the palettes stay reproducible from their source.

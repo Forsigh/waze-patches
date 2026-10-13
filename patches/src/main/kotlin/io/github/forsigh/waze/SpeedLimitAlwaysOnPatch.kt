@@ -7,7 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val speedLimitAlwaysOnPatch = bytecodePatch(
     name = "Speed limit sign always shown",
-    description = "Forces the speed-limit sign on and enables the manual overrides.",
+    description = "The speed-limit sign stays on the map, and its manual overrides become available.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

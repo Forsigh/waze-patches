@@ -1,3 +1,46 @@
+## [0.22.4](https://github.com/Forsigh/waze-patches/compare/v0.22.2...v0.22.4) (2026-10-13)
+
+### 🗑️ Removed
+
+* **Map theme** and **OLED dark mode** are removed. Both rewrote Waze's map skin inside the APK; on-device
+  testing showed the app breaking with them - the OLED black swallowed the map contents and the theme
+  selector broke the map - so the full skin-rewrite approach is retired with them. The skin files ship
+  stock again, and the versionCode refresh now waits for the mood artwork *and* the AMOLED row below -
+  a minimal, night-only rebuild of the same idea, informed by the first attempt's post-mortem
+
+### ✨ New patch
+
+* **Morphe YouTube Music as a Waze audio partner** replaces "Add your own media apps as Waze audio
+  partners": a direct port of Loupric/morphe-waze-music-patch (GPLv3, release v1.0.2, credited in the
+  README and the source). The package is declared in Waze's manifest `<queries>` - without it Android's
+  package visibility hides it from Waze entirely - and inserted into `SdkConfiguration.appConfigs` when
+  `updateAppList` rebuilds the roster: upstream's `containsKey`-guarded block right after the scope save,
+  built with the five-argument `au` constructor and feature bits `0x200001`
+* the custom machinery is retired rather than kept alongside: the `partners` / `alsoAllowPackage` /
+  `mediaBrowserAction` / `allowAllPackages` options, the `au.g` availability override and the audio-SDK
+  config forcing are all gone. On-device testing under the previous build did not produce a working
+  partner, and upstream's exact pair is what its own users run
+* the row is on by default, exactly as upstream lists it
+* **AMOLED dark mode** (opt-in, off by default) - the second, informed attempt at the AMOLED night map:
+  night skin files only, the canvas becomes true black (`#000000`) and the nine road families are lifted
+  15% toward white (the first attempt used 10%) so they keep their contrast against it. Day mode, labels,
+  traffic and route colours stay stock, and the day files are asserted byte-identical. Two measured facts
+  from the first attempt's post-mortem shape it: `map_background` is also the render tree's "eraser"
+  colour (referenced ~20 times as feature strokes), so the black cascades by design to match the canvas,
+  and the higher lift compensates the dark-on-dark night palette. Applied at patch time; nothing injected
+* **Disable Play Store updates** (opt-in, off by default) - a port of Morphe's universal patch of the same
+  name (`MorpheApp/morphe-patches`, GPLv3, credited): the manifest version code is locked above Play's
+  2,100,000,000 ceiling, so the store always sees the installed copy as newer and never offers or applies
+  an update. Two deliberate Waze adaptations: the locked value is `2,100,000,000 + minutes since 2026`
+  rather than a frozen maximum, because Waze re-extracts its skins only when the versionCode *changes* -
+  frozen, it would silently freeze every future skin edit; and instead of upstream's rewrite-everything
+  preserve, only Waze's own package-version accessor (`com.waze.utils.n.a`, the push module's source) is
+  made to report the pre-lock code, while the two extraction gates keep seeing the change. The manifest
+  write runs in the resource half's `finalize`, so the lock is the last word on the number regardless of
+  selection order
+* the descriptions Morphe and the README show for every patch got a plain-language pass, and the credits
+  section now lists only sources whose work actually ships in the bundle
+
 ## [0.27.0](https://github.com/Forsigh/waze-patches/compare/v0.26.0...v0.27.0) (2026-10-13)
 
 ### ✨ New Features
