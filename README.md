@@ -99,18 +99,19 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.26.0](https://github.com/Forsigh/waze-patches/releases/tag/v0.26.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;17 patches total
+> **[v0.27.0](https://github.com/Forsigh/waze-patches/releases/tag/v0.27.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;17 patches total
 <details open>
 <summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;17 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 5.24.90.901 | 5.25.0.1 |
-| :---: | :---: |
+| 5.24.90.901 | 5.25.0.1 | 5.25.4.900 |
+| :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Add your own media apps as Waze audio partners](#add-your-own-media-apps-as-waze-audio-partners) | Waze's audio-partner list is a table compiled into the app - it contains Spotify and an internal demo, and Waze never scans installed apps (getInstalledPackages has zero references in the APK). One patch for the whole media feature: it adds your own entries to that table at the point where Waze persists each partner's scope, and declares the media browser service in Waze's manifest, without which Android hides your players from Waze entirely. Waze's own availability check is opened as well: any installed app qualifies as a partner, and Waze reaches it through the generic media-browser client instead of requiring Waze's own SDK. | • Extra packages to make visible (one per line)<br>• Service action to declare<br>• Let Waze see every installed app<br>• Partners to add (package=Label)<br>• Turn Waze's audio-partner feature on |
 | [Allow high refresh rate](#allow-high-refresh-rate) | Waze rejects any display mode above 60 Hz when it picks the mode for its surface, so a 120 Hz screen is served 60 Hz. This raises that ceiling to the requested rate (120 Hz by default). Costs battery and heat - off by default. | • Target refresh rate (Hz) |
 | [Auto zoom](#auto-zoom) | Pins Waze's own auto-zoom setting (no / yes / speed) and keeps it across server config sync. Waze ships the row itself; this makes the choice stick. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Enables average-speed camera alerts and recommended-speed guidance. |  |
@@ -118,16 +119,15 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on Waze's police/enforcement alert system. |  |
 | [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Increases the pre-alert distances for police enforcement, accidents and heavy traffic. |  |
 | [Lane guidance](#lane-guidance) | Enables lane guidance, including continue-straight hints. |  |
-| [Map theme](#map-theme) | Recolours Waze's own map skin - light and dark palettes sampled from Google Maps, or an OLED-black palette for both modes - by rewriting the compiled skin descriptions in the APK and raising the app's versionCode so Waze re-extracts its skins instead of drawing the cached originals. Applied at patch time: change the theme by re-patching. No injected code. Off by default. | • Theme |
+| [Map theme](#map-theme) | Recolours Waze's own map skin (Google Maps-like light/dark, or OLED black) by rewriting the compiled skin descriptions in the APK, and raises the app's versionCode so Waze re-extracts its skins instead of serving the cached stock ones. Applied at patch time: change the theme by re-patching. No injected code, nothing to render at runtime. | • Theme |
+| [OLED dark mode](#oled-dark-mode) | Makes the night map truly dark for OLED screens: the map background becomes pure black (#000000) and the road colours are lifted slightly (one Waze lighten step) so they stay readable against it. Only the background and the road palette change - day mode, labels, traffic and routes are left as Waze ships them. Applied at patch time: no runtime switch and nothing injected into the app. Steps aside if Map theme is also selected. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays speed-camera sound alerts even when not above the limit. |  |
 | [Remove ads](#remove-ads) | Forces Waze's advertising config values off. |  |
 | [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows speed cameras, red-light cameras and speed bumps on the map and enables their notifications. |  |
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Forces the speed-limit sign on and enables the manual overrides. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Enables warnings when the speed limit drops, with an extended pre-alert distance. |  |
 | [Speedometer always on](#speedometer-always-on) | Keeps the speedometer visible at any speed, including while stopped. |  |
-| [Unlock driver moods](#unlock-driver-moods) | Waze's mood picker is gated three ways: an eligibility check that accepts only one mood name (and reads the beta-moods flag), a baby-account gate that hides moods, and a filtered native catalogue call. This opens all three, so moods already in the local catalogue become selectable, special and hidden entries included. Artwork Waze has never downloaded is not invented. |  |
-| [Add your own media apps as Waze audio partners](#add-your-own-media-apps-as-waze-audio-partners) | Waze's audio-partner list is a table compiled into the app - it contains Spotify and an internal demo, and Waze never scans installed apps. This adds your own entries to that table, and declares the media browser service in Waze's manifest, because Android hides other apps from Waze until it asks. One patch for the whole media feature: the manifest half and the config writer are applied with it and are not listed separately. Waze's own availability check is opened as well: any installed app now qualifies as a partner, not only apps that implement Waze's SDK. Waze then connects to the app through its media-browser service, the same generic client Spotify's integration extends. | • Partners to add (package=Label)<br>• Turn Waze's audio-partner feature on<br>• Extra packages to make visible (one per line)<br>• Service action to declare<br>• Let Waze see every installed app |
-| [OLED dark mode](#oled-dark-mode) | Turns the dark map into an OLED map: the night background becomes pure black (#000000) and the road colours are lifted one Waze lighten step so they stay readable against it. Day mode, labels, traffic and routes are untouched. Off by default; if Map theme is also selected, this one steps aside for it. |  |
+| [Unlock driver moods](#unlock-driver-moods) | Waze's mood picker is gated three ways: an eligibility check that accepts only one mood name (and reads the beta-moods flag), a baby-account gate that hides moods, and a filtered native catalogue call. This opens all three, so moods already in the local catalogue - including special and hidden entries - become selectable. Artwork Waze has never downloaded is not invented. |  |
 
 </details>
 
