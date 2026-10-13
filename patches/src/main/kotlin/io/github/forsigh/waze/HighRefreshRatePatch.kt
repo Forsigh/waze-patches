@@ -63,7 +63,10 @@ val highRefreshRatePatch = bytecodePatch(
         val rate = targetRefreshRate ?: 120
         val replacement = java.lang.Double.doubleToRawLongBits(rate.toDouble())
         val implementation = method.implementation
-            ?: return@execute
+            ?: error(
+                "highRefreshRatePatch: the display-mode method was found but has no implementation; " +
+                    "refusing to report success for a patch that would change nothing",
+            )
 
         val instructions = implementation.instructions.toList()
         // The ceiling shows up as a const-wide/high16 sixty feeding a double comparison. Match on the
@@ -77,6 +80,15 @@ val highRefreshRatePatch = bytecodePatch(
                 instructions.subList(index + 1, minOf(index + 5, instructions.size)).any {
                     it.opcode == Opcode.CMPL_DOUBLE || it.opcode == Opcode.CMPG_DOUBLE
                 }
+        }
+
+        // A fingerprint that matches a method which no longer holds the 60 Hz ceiling would otherwise
+        // produce "at 0 site(s)" and a patch that silently does nothing while Morphe reports success.
+        if (sites.isEmpty()) {
+            error(
+                "highRefreshRatePatch: no 60 Hz display-mode ceiling found in " +
+                    "com/waze/utils/o - Waze may have changed; refusing to no-op silently",
+            )
         }
 
         sites.asReversed().forEach { index ->

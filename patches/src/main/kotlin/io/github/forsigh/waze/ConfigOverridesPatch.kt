@@ -13,7 +13,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  */
 @Suppress("unused")
 val configOverridesPatch = bytecodePatch(
-    name = "Config overrides",
+    name = null,
     description = "Applies the configuration changes requested by the other patches. Applied " +
         "automatically; there is nothing to configure.",
     default = true,

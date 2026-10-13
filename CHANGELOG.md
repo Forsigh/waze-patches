@@ -1,3 +1,117 @@
+## [0.26.0](https://github.com/Forsigh/waze-patches/compare/v0.25.0...v0.26.0) (2026-10-13)
+
+### ✨ New patch
+
+* **OLED dark mode** (opt-in): the night map's background becomes true black (#000000) for OLED screens and
+  the road palette is lifted one Waze lighten step (+10% toward white per channel, matching the
+  `color.lighten(0.1, ...)` calls Waze itself uses inside the same file), so the roads stay readable
+  against it. Day mode, labels, traffic and route colours are untouched
+* measured on 5.25.0.1: the night map is described by `assets/res/skins/default/skin_values.night.lua` (with
+  `editor.` and `experiment/` siblings). The canvas colour is `Palette.map_background`, and each road type
+  is a `Palette` entry the renderer reads back through `color.lighten`/`color.darken`
+* applied at patch time with no injected code and no runtime switch. `SkinRefreshPatch` (the versionCode
+  refresh) is pulled in as a dependency, because an already-run Waze would otherwise keep drawing its
+  extracted skins
+* if **Map theme** is also selected, this patch steps aside for it: the theme rewrites the same entries, so
+  the OLED patch detects the theme's marker and leaves those files alone
+* verified by applying the patch alone to the stock base and reading the skin Lua back: all four night files
+  carry `map_background = rgb(0x000000)` and the nine road entries are lifted (e.g. `street`
+  `0x3F5871 -> 0x52697F`); every day file stays byte-for-byte stock. The versionCode rises 1030736 -> 1030756
+
+## [0.25.0](https://github.com/Forsigh/waze-patches/compare/v0.24.0...v0.25.0) (2026-10-12)
+
+### ✨ Media partners without the Waze SDK
+
+* **Add your own media apps as Waze audio partners** now opens Waze's availability check, which was the
+  gate keeping ordinary players out. Measured on 5.25.0.1: `com/waze/sdk/au;->g(Context)` accepts two kinds
+  of partner - Spotify (an install check) and everyone else (a broadcast receiver for
+  `com.waze.sdk.audio.ACTION_INIT` must resolve). An ordinary player like Smart Audiobook Player has no such
+  receiver, so it was listed but never available. One instruction now sends every partner down the
+  install-check path; the branch itself is untouched, and an uninstalled package still reads as unavailable
+* Waze already ships the door such apps need: `com/waze/sdk/a/j` resolves a package's
+  `android.media.browse.MediaBrowserService` and builds `com/waze/sdk/a/i`, the generic media-browser client
+  (`MediaMetadataCompat`, playback state, queue, session tokens) that the Spotify client `a/k` itself
+  extends. Nothing else had to be invented
+* verified by applying the media row alone to the stock base and reading `au.g` back from the emitted
+  smali: the Spotify comparison is followed by `const/4 v1, 0x1` instead of `move-result v1`, the `if-eqz`
+  branch and the instruction count are unchanged
+* runtime is unverified until a patched build runs on a device: this patch removes Waze's refusal, it cannot
+  make a player answer the media-browser handshake
+
+## [0.24.0](https://github.com/Forsigh/waze-patches/compare/v0.23.0...v0.24.0) (2026-10-11)
+
+### ✨ New patch
+
+* **Unlock driver moods** opens the three gates Waze puts in front of its mood picker, all measured on
+  5.25.0.1 in `com/waze/MoodManager`: `canSetMood(Context, String)` - which accepts a single mood name and
+  reads `CONFIG_VALUE_MOODS_BETA_ENABLED` *inside itself* - now returns true, `isBaby()` returns false so the
+  mood screen stops hiding moods from new-driver accounts, and both native catalogue calls in
+  `refreshMoodsList()` now ask for the unfiltered list (`v1 = 1`), matching upstream's reading that the first
+  flag includes special/hidden entries and the second controls sorting
+* it unlocks what is already in the app and nothing more: no editor permissions, no campaign downloads, and no
+  invented artwork - a mood whose images Waze has never fetched renders blank. Depends on the versionCode
+  refresh (`SkinRefreshPatch`), because mood images ship with the skin assets and an already-run Waze would
+  otherwise keep drawing its extracted copies
+* ported from aaayd/waze-custom-patches (GPLv3, `DriverIconsPatch.kt`), re-anchored: their finder keyed on
+  three mood-name strings that this build does not carry in that method
+* verified by applying it alone to the stock base and reading the emitted smali: `canSetMood` begins
+  `const/4 v0, 0x1 / return v0`, `isBaby` begins `const/4 p0, 0x0 / return p0`, and both `…MoodListNTV(ZZ)`
+  calls are preceded by `const/4 v1, 0x1`
+
+## [0.23.0](https://github.com/Forsigh/waze-patches/compare/v0.22.2...v0.23.0) (2026-10-11)
+
+### ✨ New patch
+
+* **Map theme** (off by default) recolours Waze's own map skin with palettes sampled from Google Maps, or an
+  OLED-black palette applied to both modes. It rewrites the compiled skin descriptions shipped in the APK and
+  raises the app's versionCode, because Waze draws skins it has already extracted and only re-extracts them
+  when versionCode increases - without that bump the theme is invisible on any device that has run Waze.
+  Applied at patch time: no injected code, nothing rendered at runtime, and changing the theme is a re-patch
+* reverse-engineered from `aaayd/waze-custom-patches` (GPLv3, credited in the README and in the source): a
+  theme is a substitution over the skin's `Palette` table plus explicit `Colors.<Group>.<key>` overrides read
+  by the renderer afterwards. Their versionCode refresh is kept as-is - fixed target `1030752`, advanced in
+  steps of 20, never lowering the build's own number - so re-patching *without* the patch also lands above the
+  previous build and Waze restores the stock skin
+* verified on the stock 5.25.0.1 base: all 8 skin descriptions rewritten (day, night, both editor schemas and
+  each `experiment/` copy), palette entries replaced (`map_background` `rgb(0xFAFCFA)` to `rgb(0x1C2A40)`,
+  `sea` `rgb(0x9EE4FF)` to `rgb(0x00102E)`), 194 renderer overrides appended, versionCode `1030736` to
+  `1030756`, bundle still dex + assets with no extension module
+* unknown entries in a future Waze skin are reported and skipped rather than silently half-themed; the four
+  palette entries a map cannot do without (`map_background`, `labels`, `sea`, `parks`) and the versionCode
+  itself fail the patch run instead
+
+## [0.22.2](https://github.com/Forsigh/waze-patches/compare/v0.22.1...v0.22.2) (2026-10-11)
+
+### ♻️ Changed
+
+* the media feature is **one patch** instead of three. *Make Waze see all media apps* and *Config overrides* no longer appear in the list: they have no name, are pulled in as dependencies of *Add your own media apps as Waze audio partners*, and its three manifest options moved onto that row, keys unchanged. A patch cannot do both a manifest edit and bytecode injection - the patcher's `bytecodePatch`, `resourcePatch` and `rawResourcePatch` builders each carry one context - so they stay separate patches behind one visible row
+* the config writer keeps working for every patch that records a key: verified that all thirteen recorders declare it as a dependency, and a single ticked feature patch still forces its keys
+
+## [0.22.1](https://github.com/Forsigh/waze-patches/compare/v0.22.0...v0.22.1) (2026-10-11)
+
+### 🐛 Bug Fixes
+
+* **Add your own media apps as Waze audio partners** now injects into `SdkConfiguration.updateAppList`, immediately *before* the scope save, instead of at `getPartnerAudioApps`. `updateAppList` replaces `appConfigs` wholesale from the native-supplied roster, so an entry added anywhere else was wiped on the next refresh, and a package absent from the map when the scope is persisted had no scope for the SDK service to accept
+* verified against the stock 5.25.0.1 smali rather than assumed: `updateAppList` rebuilds the map from `PackageNames`/`AppNames`/`Scopes`/`InstallationUrls`, and `savePackageScopesToSharedPref` writes `au.c` per package into `com.waze.sdk.scopes`, which `getCachedPackageScope` reads back
+* the patch now fails the run if `updateAppList` no longer carries the scope-save call, instead of injecting into nothing
+
+### 🙏 Credits
+
+* technique informed by [Loupric/morphe-waze-music-patch](https://github.com/Loupric/morphe-waze-music-patch) (GPLv3). See `upstream-port/CREDITS.txt`
+
+## [0.22.0](https://github.com/Forsigh/waze-patches/compare/v0.21.0...v0.22.0) (2026-10-11)
+
+### 🐛 Bug Fixes
+
+* **Config overrides** is now a dependency of every patch that records a config key, so a ticked patch can no longer collect a key that nothing writes. Unticking the writer used to make all of them silently do nothing
+* **Add your own media apps as Waze audio partners** depends on the manifest fix and the writer, so selecting it alone produces a build where its entries are reachable
+* **Allow high refresh rate** now fails the patch run when it cannot find its target, instead of logging zero sites and reporting success
+
+### ✨ New Features
+
+* audio-partner patch: add your own media apps as Waze audio partners (opt-in)
+* manifest fix: make Waze see all media apps (opt-in)
+
 ## [0.21.0](https://github.com/Forsigh/waze-patches/compare/v0.20.2...v0.21.0) (2026-10-10)
 
 ### ✨ New Features
