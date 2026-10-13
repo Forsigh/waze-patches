@@ -20,9 +20,8 @@ Waze (or install it as a separate copy) before installing.
 
 > Unofficial community bundle, GPLv3, not affiliated with Waze or Morphe. Targets the Waze versions in
 > the patch list below — a build outside them is skipped rather than half-patched, so check
-> `Applying N patches` in the log. Three patches are **off by default**: *Allow high refresh rate* (costs
-> battery and heat), *AMOLED dark mode* (changes how the stock night map looks) and *Disable Play Store
-> updates* (locks the store out of updating Waze).
+> `Applying N patches` in the log. Two patches are **off by default**: *Allow high refresh rate* (costs
+> battery and heat) and *Disable Play Store updates* (locks the store out of updating Waze).
 
 ### Implemented patches
 
@@ -50,7 +49,6 @@ patch works the same way with its manifest half, which is why that feature is on
 - **Lane guidance** — enables lane guidance, including continue-straight hints.
 - **Auto zoom** — pins Waze's own auto-zoom setting (no / yes / speed) across server config sync.
 - **Remove ads** — forces Waze's advertising config values off.
-- **AMOLED dark mode** — the stock night map becomes an AMOLED map: true-black canvas and slightly lighter roads (off by default).
 - **Disable Play Store updates** — the Play Store always sees your installed copy as newer, so it never offers or applies an update; the lock value advances on every re-patch and Waze's own version accessor still reports the pre-lock code (off by default).
 
 ### Installing, and Android Auto visibility
@@ -101,9 +99,9 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.4](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.4)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;17 patches total
+> **[v0.22.5](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.5)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;16 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;17 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;16 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -113,7 +111,6 @@ local source: https://morphe.software/add-source?github=Forsigh/waze-patches
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [AMOLED dark mode](#amoled-dark-mode) | Replaces Waze's stock night map with an AMOLED one: the map canvas becomes true black (#000000) and the nine road families are lifted 15% toward white so they keep their contrast against it. Only the night skins change - day mode, labels, traffic and route colours stay as Waze ships them. Applied at patch time: no runtime switch, nothing injected. |  |
 | [Allow high refresh rate](#allow-high-refresh-rate) | Waze rejects any display mode above 60 Hz when it picks the mode for its surface, so a 120 Hz screen is served 60 Hz. This raises that ceiling to the requested rate (120 Hz by default). Costs battery and heat - off by default. | • Target refresh rate (Hz) |
 | [Auto zoom](#auto-zoom) | Keeps the auto-zoom mode you pick (no / yes / speed) from being overwritten when Waze syncs its server config. The setting comes from Waze itself; this makes it stick. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Turns on average-speed camera alerts and the recommended speed for the zone. |  |

@@ -1,57 +1,7 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.22.4",
+  "version": "0.22.5",
   "patches": [
-    {
-      "name": "AMOLED dark mode",
-      "description": "Replaces Waze's stock night map with an AMOLED one: the map canvas becomes true black (#000000) and the nine road families are lifted 15% toward white so they keep their contrast against it. Only the night skins change - day mode, labels, traffic and route colours stay as Waze ships them. Applied at patch time: no runtime switch, nothing injected.",
-      "default": false,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "com.waze",
-          "name": "Waze",
-          "description": null,
-          "apkFileType": "APKM",
-          "appIconColor": "#33CCFF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "5.24.90.901",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "5.25.0.1",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "5.25.4.900",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": true,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
     {
       "name": "Allow high refresh rate",
       "description": "Waze rejects any display mode above 60 Hz when it picks the mode for its surface, so a 120 Hz screen is served 60 Hz. This raises that ceiling to the requested rate (120 Hz by default). Costs battery and heat - off by default.",

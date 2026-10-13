@@ -1,3 +1,12 @@
+## [0.22.5](https://github.com/Forsigh/waze-patches/compare/v0.22.4...v0.22.5) (2026-10-13)
+
+### 🗑️ Removed
+
+* **AMOLED dark mode** is removed. On-device testing once more showed the app failing at startup
+  with the row ticked - a loading screen, then an error, then exit - so the skin-value rewrite is
+  retired for good: the night skins ship exactly as Waze builds them, and nothing overrides them at
+  patch time
+
 ## [0.22.4](https://github.com/Forsigh/waze-patches/compare/v0.22.2...v0.22.4) (2026-10-13)
 
 ### 🗑️ Removed
