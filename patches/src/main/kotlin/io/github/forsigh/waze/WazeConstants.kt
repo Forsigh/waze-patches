@@ -30,8 +30,14 @@ object WazeConstants {
             // Second confirmed target (versionCode 1030736). Verified the same way as the first: the
             // bundle applies WITHOUT -f, every hooked getter comes out structurally identical
             // (57/33/7 instructions, no invalid branches), and all 30 forced CONFIG_VALUE_* keys
-            // still exist in its dex. Without this entry Morphe skips all 13 patches silently there.
+            // still exist in its dex. Without this entry Morphe skips all 17 patches silently there.
             AppTarget(version = "5.25.0.1"),
+            // Third confirmed target (versionCode 1030737, released 2026-10-11). Verified the same way
+            // as the second: the bundle applies WITHOUT -f ("Applying 17 patches", zero skips), every
+            // anchored method is instruction-identical to 5.25.0.1 (getters 57/33/7, no invalid
+            // branches), all 34 referenced CONFIG_VALUE_* keys exist in its dex, and the full .apkm
+            // patches end to end into one signed merged APK.
+            AppTarget(version = "5.25.4.900"),
             // Experimental: attempt on any version / any architecture.
             AppTarget(version = null, isExperimental = true),
         ),
