@@ -39,7 +39,7 @@ KingInstaller as a fallback).
 | [Brief voice guidance](#brief-voice-guidance) | Shorter spoken directions. |  |
 | [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from updating Waze. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on police and enforcement alerts. |  |
-| [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Pick the alert distance level: Stock (default), Moderate or Maximum. | • Alert distance level |
+| [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Pick how early police and hazard alerts fire. | • Alert distance level |
 | [Lane guidance](#lane-guidance) | Lane guidance, including continue-straight hints. |  |
 | [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Lets Morphe YouTube Music work as Waze's audio partner. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera sound even below the limit. |  |
@@ -49,8 +49,8 @@ KingInstaller as a fallback).
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Always shows the speed limit sign. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Warns when the speed limit drops. |  |
 | [Speedometer always on](#speedometer-always-on) | Visible at any speed. |  |
-| [Theme](#theme) | Pick any theme from the menu for day and for night - the two are independent. | • Day theme<br>• Night theme |
-| [UI AMOLED dark mode](#ui-amoled-dark-mode) | Dark-mode app backgrounds to pure #000000 (bottom sheet, menus, dialogs). Light mode and map colours untouched. |  |
+| [Theme](#theme) | Pick any theme for the map - day and night. | • Day theme<br>• Night theme |
+| [UI AMOLED dark mode](#ui-amoled-dark-mode) | Dark-mode backgrounds go pure black. |  |
 | [Unlock driver moods](#unlock-driver-moods) | Unlocks all moods already on the device. |  |
 
 </details>

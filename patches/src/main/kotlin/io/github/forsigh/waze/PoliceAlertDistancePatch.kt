@@ -17,7 +17,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val policeAlertDistancePatch = bytecodePatch(
     name = "Extended police & hazard alert distances",
-    description = "Pick the alert distance level: Stock (default), Moderate or Maximum.",
+    description = "Pick how early police and hazard alerts fire.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
@@ -35,9 +35,7 @@ val policeAlertDistancePatch = bytecodePatch(
             "Maximum" to "Maximum",
         ),
         title = "Alert distance level",
-        description = "Stock: Waze's own distances (default). " +
-            "Moderate: accident & heavy traffic at 2x - 1200 m; roads 700/900/1200. " +
-            "Maximum: the community table - accident 2000 m, heavy traffic 3000 m.",
+        description = "Stock is Waze's own; the others warn earlier.",
     )
 
     execute {

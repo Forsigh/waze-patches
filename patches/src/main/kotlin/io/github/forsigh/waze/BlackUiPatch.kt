@@ -42,7 +42,7 @@ private val BLACK_UI_COLORS = mapOf(
 @Suppress("unused")
 val blackUiPatch = resourcePatch(
     name = "UI AMOLED dark mode",
-    description = "Dark-mode app backgrounds to pure #000000 (bottom sheet, menus, dialogs). Light mode and map colours untouched.",
+    description = "Dark-mode backgrounds go pure black.",
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

@@ -91,7 +91,7 @@ internal val ExtractCopyFingerprint = Fingerprint(
 @Suppress("unused")
 val themePatch = bytecodePatch(
     name = "Theme",
-    description = "Pick any theme from the menu for day and for night - the two are independent.",
+    description = "Pick any theme for the map - day and night.",
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
@@ -103,14 +103,14 @@ val themePatch = bytecodePatch(
         "dayTheme", "Stock",
         THEME_CHOICES,
         title = "Day theme",
-        description = "Themes the daytime map. Any theme from the menu - dark ones work here too. Stock leaves Waze's day colours untouched.",
+        description = "The day map's theme. Stock leaves it untouched.",
     )
 
     val nightTheme by stringOption(
         "nightTheme", "AMOLED",
         THEME_CHOICES,
         title = "Night theme",
-        description = "Themes the night map. Any theme from the menu. Stock leaves Waze's night colours untouched.",
+        description = "The night map's theme. Stock leaves it untouched.",
     )
 
     execute {
