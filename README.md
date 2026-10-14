@@ -15,14 +15,15 @@ For Android Auto visibility, install with Morphe Manager's **Install as Play Sto
 KingInstaller as a fallback).
 
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
-> Two rows are **off by default**: *Allow high refresh rate* and *Disable Play Store updates*.
+> Five rows are **off by default**: *Allow high refresh rate*, *Disable Play Store updates*,
+> *Skip sign-in*, *Theme* and *UI AMOLED dark mode*.
 
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.5](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.5)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;16 patches total
+> **[v0.22.6](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.6)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;19 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;16 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;19 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -38,15 +39,18 @@ KingInstaller as a fallback).
 | [Brief voice guidance](#brief-voice-guidance) | Shorter spoken directions. |  |
 | [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from updating Waze. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on police and enforcement alerts. |  |
-| [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Police, accident and heavy-traffic alerts fire earlier. |  |
+| [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Pick the alert distance level: Stock (default), Moderate or Maximum. | • Alert distance level |
 | [Lane guidance](#lane-guidance) | Lane guidance, including continue-straight hints. |  |
 | [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Lets Morphe YouTube Music work as Waze's audio partner. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera sound even below the limit. |  |
 | [Remove ads](#remove-ads) | Removes ads from Waze. |  |
 | [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows cameras and road hazards on the map, with alerts. |  |
+| [Skip sign-in](#skip-sign-in) | Boots straight into the map as a guest. |  |
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Always shows the speed limit sign. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Warns when the speed limit drops. |  |
 | [Speedometer always on](#speedometer-always-on) | Visible at any speed. |  |
+| [Theme](#theme) | Pick any theme from the menu for day and for night - the two are independent. | • Day theme<br>• Night theme |
+| [UI AMOLED dark mode](#ui-amoled-dark-mode) | Dark-mode app backgrounds to pure #000000 (bottom sheet, menus, dialogs). Light mode and map colours untouched. |  |
 | [Unlock driver moods](#unlock-driver-moods) | Unlocks all moods already on the device. |  |
 
 </details>

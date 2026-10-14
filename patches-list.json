@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.22.5",
+  "version": "0.22.6",
   "patches": [
     {
       "name": "Allow high refresh rate",
@@ -326,7 +326,7 @@
     },
     {
       "name": "Extended police & hazard alert distances",
-      "description": "Police, accident and heavy-traffic alerts fire earlier.",
+      "description": "Pick the alert distance level: Stock (default), Moderate or Maximum.",
       "default": true,
       "category": null,
       "dependencies": [
@@ -372,7 +372,21 @@
           ]
         }
       ],
-      "options": []
+      "options": [
+        {
+          "key": "level",
+          "title": "Alert distance level",
+          "description": "Stock: Waze's own distances (default). Moderate: accident & heavy traffic at 2x - 1200 m; roads 700/900/1200. Maximum: the community table - accident 2000 m, heavy traffic 3000 m.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "Stock",
+          "values": {
+            "Stock (default)": "Stock",
+            "Moderate": "Moderate",
+            "Maximum": "Maximum"
+          }
+        }
+      ]
     },
     {
       "name": "Lane guidance",
@@ -625,6 +639,54 @@
       "options": []
     },
     {
+      "name": "Skip sign-in",
+      "description": "Boots straight into the map as a guest.",
+      "default": false,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.waze",
+          "name": "Waze",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#33CCFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.24.90.901",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.0.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.4.900",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Speed limit sign always shown",
       "description": "Always shows the speed limit sign.",
       "default": true,
@@ -732,6 +794,157 @@
       "dependencies": [
         "BytecodePatch"
       ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.waze",
+          "name": "Waze",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#33CCFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.24.90.901",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.0.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.4.900",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Theme",
+      "description": "Pick any theme from the menu for day and for night - the two are independent.",
+      "default": false,
+      "category": null,
+      "dependencies": [
+        "ResourcePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.waze",
+          "name": "Waze",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#33CCFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.24.90.901",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.0.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.4.900",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "dayTheme",
+          "title": "Day theme",
+          "description": "Themes the daytime map. Any theme from the menu - dark ones work here too. Stock leaves Waze's day colours untouched.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "Stock",
+          "values": {
+            "Stock": "Stock",
+            "AMOLED": "AMOLED",
+            "AMOLED Pop": "AMOLED Pop",
+            "AMOLED Carbon": "AMOLED Carbon",
+            "AMOLED Purple": "AMOLED Purple",
+            "AMOLED Emerald": "AMOLED Emerald",
+            "AMOLED Blue": "AMOLED Blue",
+            "AMOLED Amber": "AMOLED Amber",
+            "Dark Purple": "Dark Purple",
+            "Dark Emerald": "Dark Emerald",
+            "Dark Blue": "Dark Blue",
+            "Dark Amber": "Dark Amber",
+            "Paper": "Paper",
+            "Lavender": "Lavender",
+            "Mint": "Mint",
+            "Coastal": "Coastal"
+          }
+        },
+        {
+          "key": "nightTheme",
+          "title": "Night theme",
+          "description": "Themes the night map. Any theme from the menu. Stock leaves Waze's night colours untouched.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "AMOLED",
+          "values": {
+            "Stock": "Stock",
+            "AMOLED": "AMOLED",
+            "AMOLED Pop": "AMOLED Pop",
+            "AMOLED Carbon": "AMOLED Carbon",
+            "AMOLED Purple": "AMOLED Purple",
+            "AMOLED Emerald": "AMOLED Emerald",
+            "AMOLED Blue": "AMOLED Blue",
+            "AMOLED Amber": "AMOLED Amber",
+            "Dark Purple": "Dark Purple",
+            "Dark Emerald": "Dark Emerald",
+            "Dark Blue": "Dark Blue",
+            "Dark Amber": "Dark Amber",
+            "Paper": "Paper",
+            "Lavender": "Lavender",
+            "Mint": "Mint",
+            "Coastal": "Coastal"
+          }
+        }
+      ]
+    },
+    {
+      "name": "UI AMOLED dark mode",
+      "description": "Dark-mode app backgrounds to pure #000000 (bottom sheet, menus, dialogs). Light mode and map colours untouched.",
+      "default": false,
+      "category": null,
+      "dependencies": [],
       "compatiblePackages": [
         {
           "packageName": "com.waze",

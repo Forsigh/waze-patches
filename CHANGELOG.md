@@ -1,3 +1,16 @@
+## [0.22.6](https://github.com/Forsigh/waze-patches/compare/v0.22.5...v0.22.6) (2026-10-14)
+
+### ✨ New patches
+
+* **Skip sign-in** boots straight into the map as a guest
+* **UI AMOLED dark mode** turns dark-mode app backgrounds true black - bottom sheets, menus and
+  dialogs; light mode stays as it is
+* **Theme** picks any look for the day map and the night map from one menu - the AMOLED family
+  (AMOLED Pop has brighter roads), the Dark family and the light themes; map text follows the
+  theme so it stays readable
+* **Extended police & hazard alert distances** now has a level picker: Stock (default), Moderate
+  or Maximum
+
 ## [0.22.5](https://github.com/Forsigh/waze-patches/compare/v0.22.4...v0.22.5) (2026-10-13)
 
 ### 🗑️ Removed
