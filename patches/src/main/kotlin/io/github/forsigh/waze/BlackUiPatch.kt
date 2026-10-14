@@ -8,7 +8,9 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * Black UI background - repaints Waze's dark app chrome to pure #000000.
  *
  * The app's screens (bottom sheet, menus, dialogs, bars) take their dark surfaces from a small
- * set of named colours in `res/values/colors.xml`. On the live app the dominant one measures
+ * set of named colours in `res/values/colors.xml` plus the Material 3
+ * `m3_sys_color_dark_surface_container_*` family (the neutral 4/10/12/17/22 ramp that paints
+ * recent sheets, search fields and full-screen panels). On the live app the dominant one measures
  * #202124 - exactly `Grey900`, which is the leaf behind Waze's own `background_default`
  * (night), `background_default_negative`, `always_dark_background_default` and the night ETA
  * bar drawable; the rest are the AppCompat / Material `background`/`surface` sets that paint
@@ -37,6 +39,15 @@ private val BLACK_UI_COLORS = mapOf(
     "design_dark_default_color_surface" to "#000000",
     // Material 3 dark background/surface/dim - one shared leaf.
     "m3_ref_palette_neutral6" to "#000000",
+    // Material 3 surface containers - the one extra layer over the base surface that paints
+    // bottom sheets, search fields, pills and full-screen panels. The light-theme twins live
+    // under different names, and the palette ramps they reference stay untouched, so light
+    // mode and light-mode text keep their stock colours.
+    "m3_sys_color_dark_surface_container_lowest" to "#000000",
+    "m3_sys_color_dark_surface_container_low" to "#000000",
+    "m3_sys_color_dark_surface_container" to "#000000",
+    "m3_sys_color_dark_surface_container_high" to "#000000",
+    "m3_sys_color_dark_surface_container_highest" to "#000000",
 )
 
 @Suppress("unused")
