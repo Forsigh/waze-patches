@@ -7,8 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val removeAdsPatch = bytecodePatch(
     name = "Remove ads",
-    description = "Forces Waze's advertising settings off, so the ad slots that respect those values " +
-        "stay empty.",
+    description = "Removes ads from Waze.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

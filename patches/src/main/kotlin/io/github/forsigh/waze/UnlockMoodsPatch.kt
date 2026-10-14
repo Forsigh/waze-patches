@@ -65,10 +65,7 @@ internal val MoodCatalogueFingerprint = Fingerprint(
 @Suppress("unused")
 val unlockMoodsPatch = bytecodePatch(
     name = "Unlock driver moods",
-    description = "Waze's mood picker is gated three ways: an eligibility check that accepts only one " +
-        "mood name (and reads the beta-moods flag), a baby-account gate that hides moods, and a filtered " +
-        "native catalogue call. This opens all three, so moods already in the local catalogue - including " +
-        "special and hidden entries - become selectable. Artwork Waze has never downloaded is not invented.",
+    description = "Unlocks all moods already on the device.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

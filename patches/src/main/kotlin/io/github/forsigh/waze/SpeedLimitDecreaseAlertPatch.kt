@@ -7,7 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val speedLimitDecreaseAlertPatch = bytecodePatch(
     name = "Speed-limit decrease warnings",
-    description = "Warns when the posted speed limit drops, with a longer pre-alert distance than stock.",
+    description = "Warns when the speed limit drops.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

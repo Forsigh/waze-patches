@@ -44,9 +44,7 @@ private val DisplayModeCeilingFingerprint = Fingerprint(
 @Suppress("unused")
 val highRefreshRatePatch = bytecodePatch(
     name = "Allow high refresh rate",
-    description = "Waze rejects any display mode above 60 Hz when it picks the mode for its surface, " +
-        "so a 120 Hz screen is served 60 Hz. This raises that ceiling to the requested rate (120 Hz by " +
-        "default). Costs battery and heat - off by default.",
+    description = "Runs Waze above 60 Hz, up to your screen's refresh rate.",
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
@@ -54,8 +52,7 @@ val highRefreshRatePatch = bytecodePatch(
     val targetRefreshRate by intOption(
         "targetRefreshRate", 120,
         title = "Target refresh rate (Hz)",
-        description = "The ceiling Waze accepts when choosing a display mode. 120 suits most modern " +
-            "panels; 90 or 60 to back off if the phone throttles.",
+        description = "Refresh rate ceiling. 120 suits most phones; lower it if the phone gets hot.",
     )
 
     execute {

@@ -7,8 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val policeAlertDistancePatch = bytecodePatch(
     name = "Extended police & hazard alert distances",
-    description = "Alerts for police, accidents and heavy traffic fire earlier, with their pre-alert " +
-        "distances extended.",
+    description = "Police, accident and heavy-traffic alerts fire earlier.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

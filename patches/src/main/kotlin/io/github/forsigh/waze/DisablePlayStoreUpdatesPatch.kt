@@ -139,11 +139,7 @@ private val disablePlayStoreUpdatesResourcePatch = resourcePatch {
 @Suppress("unused")
 val disablePlayStoreUpdatesPatch = bytecodePatch(
     name = "Disable Play Store updates",
-    description = "Stops the Play Store from offering or applying updates to Waze: the manifest " +
-        "version code is locked above Play's maximum (2,100,000,000 + minutes), so the store always " +
-        "sees the installed copy as newer than its listing. The value advances on every re-patch, so " +
-        "Waze still refreshes its extracted resources, and Waze's own package-version accessor keeps " +
-        "reporting the pre-lock code. Ported from Morphe's universal \"Disable Play Store updates\" (GPLv3).",
+    description = "Stops the Play Store from updating Waze.",
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

@@ -105,10 +105,7 @@ val morpheMusicSupportPatch = resourcePatch(
 @Suppress("unused")
 val morpheMusicPartnerPatch = bytecodePatch(
     name = "Morphe YouTube Music as a Waze audio partner",
-    description = "Makes Morphe YouTube Music (app.morphe.android.apps.youtube.music) usable as Waze's " +
-        "audio partner: the package is declared in Waze's manifest so Android's package visibility " +
-        "lets Waze see it, and it is added to the audio-partner table (SdkConfiguration.appConfigs) " +
-        "whenever Waze rebuilds that roster. Ported from Loupric/morphe-waze-music-patch (GPLv3).",
+    description = "Lets Morphe YouTube Music work as Waze's audio partner.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)

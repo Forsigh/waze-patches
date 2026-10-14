@@ -7,8 +7,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 @Suppress("unused")
 val showAllCamerasPatch = bytecodePatch(
     name = "Show all cameras & road hazards",
-    description = "Draws speed cameras, red-light cameras and speed bumps on the map, with their " +
-        "on-route notifications enabled.",
+    description = "Shows cameras and road hazards on the map, with alerts.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
