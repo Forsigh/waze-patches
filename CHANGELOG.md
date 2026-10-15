@@ -1,10 +1,3 @@
-## [0.28.0](https://github.com/Forsigh/waze-patches/compare/v0.27.0...v0.28.0) (2026-10-15)
-
-### ✨ New Features
-
-* UI AMOLED row kills the elevation lift and covers Grey800 + M3 containers ([0490d5c](https://github.com/Forsigh/waze-patches/commit/0490d5c4b7efbe071a9830ce40309f72e0f96895))
-* UI AMOLED row repaints the M3 dark surface-container chain (pending phone test) ([ef50944](https://github.com/Forsigh/waze-patches/commit/ef50944d87ca9f5d9ff9828bc51f51b698e6b974))
-
 ## [0.22.7](https://github.com/Forsigh/waze-patches/compare/v0.22.6...v0.22.7) (2026-10-15)
 
 ### ♻️ Changed
