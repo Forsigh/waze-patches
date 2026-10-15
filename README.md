@@ -22,7 +22,7 @@ KingInstaller as a fallback).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.8](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;28 patches total
+> **[v0.22.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;28 patches total
 <details open>
 <summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;28 patches</summary>
 <br>
@@ -34,9 +34,9 @@ KingInstaller as a fallback).
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [AMOLED Dark Mode For UI](#amoled-dark-mode-for-ui) | Dark-mode backgrounds go pure black. |  |
-| [Alert distances](#alert-distances) | Choose how early alerts fire: Standard, Moderate, Heavier or Custom. | • Alert distance level<br>• Police<br>• Hazards<br>• Crashes<br>• Traffic jams<br>• Speed cams - streets<br>• Speed cams - highways<br>• Speed cams - freeways<br>• Blocked lanes<br>• Gap between alerts |
+| [Alert distances](#alert-distances) | Choose how early alerts fire: Standard, Moderate, Heavier or Custom. | • Alert distance level<br>• 9 custom distances |
 | [Allow high refresh rate](#allow-high-refresh-rate) | Runs Waze above 60 Hz, up to your screen's refresh rate. | • Target refresh rate (Hz) |
+| [AMOLED Dark Mode For UI](#amoled-dark-mode-for-ui) | Dark-mode backgrounds go pure black. |  |
 | [Auto zoom](#auto-zoom) | Keeps your chosen auto-zoom mode from being reset. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Average-speed camera alerts, with the zone's recommended speed. |  |
 | [Brief voice guidance](#brief-voice-guidance) | Shorter spoken directions. |  |
@@ -49,9 +49,9 @@ KingInstaller as a fallback).
 | [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Lets Morphe YouTube Music work as Waze's audio partner. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera sound even below the limit. |  |
 | [Remove ads](#remove-ads) | Removes ads from Waze. |  |
+| [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows cameras and road hazards on the map, with alerts. |  |
 | [Report speed limit](#report-speed-limit) | Turns on fixing the speed limit from the speedometer. |  |
 | [Show FPS counter](#show-fps-counter) | Shows Waze's frames-per-second counter on the map. |  |
-| [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows cameras and road hazards on the map, with alerts. |  |
 | [Skip sign-in](#skip-sign-in) | Boots straight into the map as a guest. |  |
 | [Smoother Android Auto map](#smoother-android-auto-map) | Smoothes the car map's movement and heading on Android Auto. |  |
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Always shows the speed limit sign. |  |
