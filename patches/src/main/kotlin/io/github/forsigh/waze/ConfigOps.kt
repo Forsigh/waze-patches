@@ -43,8 +43,17 @@ internal fun forceLong(prefix: String, entries: Map<String, Long>): String {
         }
         append("goto :${prefix}_le\n")
         keys.forEachIndexed { i, key ->
+            val value = entries.getValue(key)
+            // const-wide/16 carries a signed 16-bit literal, /32 a signed 32-bit one; anything
+            // beyond needs the full form. Emitting the wrong width is invalid smali and aborts
+            // the whole patch with a classDef-null crash, so pick by value.
+            val load = when {
+                value in Short.MIN_VALUE.toLong()..Short.MAX_VALUE.toLong() -> "const-wide/16 v0, $value"
+                value in Int.MIN_VALUE.toLong()..Int.MAX_VALUE.toLong() -> "const-wide/32 v0, $value"
+                else -> "const-wide v0, ${value}L"
+            }
             append(":${prefix}_l$i\n")
-            append("const-wide/16 v0, ${entries.getValue(key)}\n")
+            append("$load\n")
             append("invoke-static {v0, v1}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;\n")
             append("move-result-object v0\n")
             append("return-object v0\n")

@@ -26,6 +26,21 @@ val removeAdsPatch = bytecodePatch(
                 "CONFIG_VALUE_ADS_INVENTORY_PREDICTION_ENABLED",
                 "CONFIG_VALUE_ADS_ALLOW_PROFILE_TARGETING",
                 "CONFIG_VALUE_ADS_ALLOW_PROFILE_TARGETING_DEFAULT",
+                "CONFIG_VALUE_GOOGLE_ADS_FEATURE_ENABLED",
+                "CONFIG_VALUE_GOOGLE_ADS_IN_CAR_ENABLED",
+                "CONFIG_VALUE_GOOGLE_ADS_DISCOVERY_PINS_ENABLED",
             )
+        // Long keys: pin limits to zero, the "takeover" ad timer to about once a lifetime,
+        // partner pins ("external POIs") off.
+        recordLong(
+                "ads",
+                "CONFIG_VALUE_GOOGLE_ADS_MAX_CONCURRENT_PINS" to 0L,
+                "CONFIG_VALUE_GOOGLE_ADS_IN_CAR_MAX_CONCURRENT_PINS" to 0L,
+                "CONFIG_VALUE_ZSPEED_MIN_TAKEOVER_REQUEST_INTERVAL_SEC" to 2_000_000_000L,
+                "CONFIG_VALUE_EXTERNALPOI_MAX_POIS_DISPLAY" to 0L,
+            )
+        // The promotional splash screens Waze's server can switch on at start.
+        recordString("ads", "CONFIG_VALUE_APP_LAUNCH_DYNAMIC_SPLASH_SCREEN_SHOW_FREQUENCY" to "OFF")
+        println("removeAdsPatch: map, in-car and takeover ads forced off")
     }
 }

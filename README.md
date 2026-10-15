@@ -15,15 +15,16 @@ For Android Auto visibility, install with Morphe Manager's **Install as Play Sto
 KingInstaller as a fallback).
 
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
-> Twelve rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
-> *Skip sign-in*, *Theme*, *UI AMOLED dark mode*, and all seven **Android Auto** rows.
+> Eighteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
+> *Skip sign-in*, *Theme*, *UI AMOLED dark mode*, the nine **Android Auto** rows, and *No AI reporting*,
+> *No Google Assistant*, *Report speed limit* and *Speed-limit sign style*.
 
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;26 patches total
+> **[v0.22.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;32 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;26 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;32 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -33,7 +34,9 @@ KingInstaller as a fallback).
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Alert distances](#alert-distances) | Choose how early alerts fire: Standard, Moderate, Heavier or Custom. | • Alert distance level<br>• 9 custom distances |
 | [Allow high refresh rate](#allow-high-refresh-rate) | Runs Waze above 60 Hz, up to your screen's refresh rate. | • Target refresh rate (Hz) |
+| [Android Auto heads-up distances](#android-auto-heads-up-distances) | How early the car screen warns and when the traffic bar shows a jam. | • Heads-up, normal roads (m)<br>• Heads-up, freeways (m)<br>• Traffic bar: time in traffic (s) |
 | [Auto zoom](#auto-zoom) | Keeps your chosen auto-zoom mode from being reset. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Average-speed camera alerts, with the zone's recommended speed. |  |
 | [Brief voice guidance](#brief-voice-guidance) | Shorter spoken directions. |  |
@@ -41,20 +44,24 @@ KingInstaller as a fallback).
 | [Car screen follows the phone theme](#car-screen-follows-the-phone-theme) | Uses the phone's day and night look on the car screen. |  |
 | [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from updating Waze. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on police and enforcement alerts. |  |
-| [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Pick how early police and hazard alerts fire. | • Alert distance level |
 | [Instrument cluster support](#instrument-cluster-support) | Shows the map, alerts and ETA on the car's digital cluster, where it has one. |  |
 | [Keep Waze alive on car](#keep-waze-alive-on-car) | Keeps Waze connected through car service restarts. |  |
 | [Lane guidance](#lane-guidance) | Lane guidance, including continue-straight hints. |  |
 | [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Lets Morphe YouTube Music work as Waze's audio partner. |  |
+| [No AI reporting](#no-ai-reporting) | Turns off Gemini voice reporting, prompts and tips. |  |
+| [No Google Assistant](#no-google-assistant) | Keeps Google Assistant out of Waze. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera sound even below the limit. |  |
 | [Remove ads](#remove-ads) | Removes ads from Waze. |  |
 | [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows cameras and road hazards on the map, with alerts. |  |
+| [Report speed limit](#report-speed-limit) | Turns on fixing the speed limit from the speedometer. |  |
 | [Show FPS counter](#show-fps-counter) | Shows Waze's frames-per-second counter on the map. |  |
 | [Skip sign-in](#skip-sign-in) | Boots straight into the map as a guest. |  |
 | [Smoother Android Auto map](#smoother-android-auto-map) | Smoothes the car map's movement and heading on Android Auto. |  |
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Always shows the speed limit sign. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Warns when the speed limit drops. |  |
+| [Speed-limit sign style](#speed-limit-sign-style) | Picks the sign beside the speedometer: US or World. | • Sign style |
 | [Speedometer always on](#speedometer-always-on) | Visible at any speed. |  |
+| [Stay awake in the background](#stay-awake-in-the-background) | Keeps Waze running in the background without a route. | • Minutes in the background |
 | [Theme](#theme) | Pick any theme for the map - day and night. | • Day theme<br>• Night theme |
 | [Traffic meter](#traffic-meter) | Shows the traffic meter on the car screen. |  |
 | [UI AMOLED dark mode](#ui-amoled-dark-mode) | Dark-mode backgrounds go pure black. |  |

@@ -22,5 +22,8 @@ val enableEnforcementAlertsPatch = bytecodePatch(
                 "enf", true,
                 "CONFIG_VALUE_ALERTS_ENABLE_ENFORCEMENT_ALERTS",
             )
+        // The police flag is a String (com/waze/config/d) key: "yes" switches police alerts on.
+        recordString("enf", "CONFIG_VALUE_ALERTS_ENABLE_ENFORCEMENT_POLICE" to "yes")
+        println("enableEnforcementAlertsPatch: police and enforcement alerts forced on")
     }
 }
