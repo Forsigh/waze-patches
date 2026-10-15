@@ -1,3 +1,9 @@
+## [0.22.7](https://github.com/Forsigh/waze-patches/compare/v0.22.6...v0.22.7) (2026-10-15)
+
+### ♻️ Changed
+
+* **UI AMOLED dark mode** now really blacks out Waze's built-in panels, and the "Where to?" search bar goes pure black with white icons and text
+
 ## [0.22.6](https://github.com/Forsigh/waze-patches/compare/v0.22.5...v0.22.6) (2026-10-14)
 
 ### ✨ New patches
