@@ -27,6 +27,7 @@ val aaSmootherMapPatch = bytecodePatch(
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
+    category("Android Auto")
 
     // The emitter patch is what actually writes the keys recorded below; ticking this row alone
     // must still produce a build carrying the overrides.

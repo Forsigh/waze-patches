@@ -15,8 +15,8 @@ For Android Auto visibility, install with Morphe Manager's **Install as Play Sto
 KingInstaller as a fallback).
 
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
-> Five rows are **off by default**: *Allow high refresh rate*, *Disable Play Store updates*,
-> *Skip sign-in*, *Theme* and *UI AMOLED dark mode*.
+> Twelve rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
+> *Skip sign-in*, *Theme*, *UI AMOLED dark mode*, and all seven **Android Auto** rows.
 
 ## 🩹 Patches
 
@@ -37,19 +37,26 @@ KingInstaller as a fallback).
 | [Auto zoom](#auto-zoom) | Keeps your chosen auto-zoom mode from being reset. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Average-speed camera alerts, with the zone's recommended speed. |  |
 | [Brief voice guidance](#brief-voice-guidance) | Shorter spoken directions. |  |
+| [Car alerts as notifications](#car-alerts-as-notifications) | Delivers police and hazard alerts as car notifications. |  |
+| [Car screen follows the phone theme](#car-screen-follows-the-phone-theme) | Uses the phone's day and night look on the car screen. |  |
 | [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from updating Waze. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on police and enforcement alerts. |  |
 | [Extended police & hazard alert distances](#extended-police-hazard-alert-distances) | Pick how early police and hazard alerts fire. | • Alert distance level |
+| [Instrument cluster support](#instrument-cluster-support) | Shows the map, alerts and ETA on the car's digital cluster, where it has one. |  |
+| [Keep Waze alive on car](#keep-waze-alive-on-car) | Keeps Waze connected through car service restarts. |  |
 | [Lane guidance](#lane-guidance) | Lane guidance, including continue-straight hints. |  |
 | [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Lets Morphe YouTube Music work as Waze's audio partner. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera sound even below the limit. |  |
 | [Remove ads](#remove-ads) | Removes ads from Waze. |  |
 | [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows cameras and road hazards on the map, with alerts. |  |
+| [Show FPS counter](#show-fps-counter) | Shows Waze's frames-per-second counter on the map. |  |
 | [Skip sign-in](#skip-sign-in) | Boots straight into the map as a guest. |  |
+| [Smoother Android Auto map](#smoother-android-auto-map) | Smoothes the car map's movement and heading on Android Auto. |  |
 | [Speed limit sign always shown](#speed-limit-sign-always-shown) | Always shows the speed limit sign. |  |
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Warns when the speed limit drops. |  |
 | [Speedometer always on](#speedometer-always-on) | Visible at any speed. |  |
 | [Theme](#theme) | Pick any theme for the map - day and night. | • Day theme<br>• Night theme |
+| [Traffic meter](#traffic-meter) | Shows the traffic meter on the car screen. |  |
 | [UI AMOLED dark mode](#ui-amoled-dark-mode) | Dark-mode backgrounds go pure black. |  |
 | [Unlock driver moods](#unlock-driver-moods) | Unlocks all moods already on the device. |  |
 
