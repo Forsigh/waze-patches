@@ -3,6 +3,7 @@ package io.github.forsigh.waze
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.resourcePatch
 import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
+import org.w3c.dom.Element
 
 /**
  * Black UI background - repaints Waze's dark app chrome to pure #000000.
@@ -10,7 +11,9 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * The app's screens (bottom sheet, menus, dialogs, bars) take their dark surfaces from a small
  * set of named colours in `res/values/colors.xml` plus the Material 3
  * `m3_sys_color_dark_surface_container_*` family (the neutral 4/10/12/17/22 ramp that paints
- * recent sheets, search fields and full-screen panels). On the live app the dominant one measures
+ * recent sheets, search fields and full-screen panels), and turns off the theme's elevation
+ * overlay in `res/values/styles.xml` - the colorPrimary-tinted wash Waze enables on its dark
+ * themes that lifts black surfaces back up to grey. On the live app the dominant one measures
  * #202124 - exactly `Grey900`, which is the leaf behind Waze's own `background_default`
  * (night), `background_default_negative`, `always_dark_background_default` and the night ETA
  * bar drawable; the rest are the AppCompat / Material `background`/`surface` sets that paint
@@ -28,8 +31,10 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * this one's.
  */
 private val BLACK_UI_COLORS = mapOf(
-    // Waze's own dark surface family (the measured #202124 sheet + ETA bar + dark defaults).
+    // Waze's own dark surface family (the measured #202124 sheet + ETA bar + dark defaults),
+    // plus the mid grey behind the "See profile" pill and the takeover panels.
     "Grey900" to "#000000",
+    "Grey800" to "#000000",
     // AppCompat dark themes: window background and floating windows (dialogs/popups).
     "material_grey_850" to "#000000",
     "material_grey_800" to "#000000",
@@ -48,6 +53,14 @@ private val BLACK_UI_COLORS = mapOf(
     "m3_sys_color_dark_surface_container" to "#000000",
     "m3_sys_color_dark_surface_container_high" to "#000000",
     "m3_sys_color_dark_surface_container_highest" to "#000000",
+)
+
+/** Dark bases and DayNight bridges whose elevation-tint wash must go. Light bases stay as built. */
+private val LIFT_OFF_STYLES = setOf(
+    "Base.V14.Theme.Material3.Dark",
+    "Base.V14.Theme.Material3.Dark.Dialog",
+    "Base.V14.Theme.MaterialComponents.Bridge",
+    "Base.V14.Theme.MaterialComponents.Dialog.Bridge",
 )
 
 @Suppress("unused")
@@ -83,11 +96,42 @@ val blackUiPatch = resourcePatch(
                 }
             }
         }
-        if (edited == 0) {
+        // Second pass: kill the elevation tint on the dark themes so surfaces that sit at an
+        // elevation stay #000000 instead of lifting back to a grey wash.
+        var lifts = 0
+        for (path in listOf("res/values/styles.xml", "res/values-night/styles.xml")) {
+            val doc = try {
+                document(path)
+            } catch (e: Exception) {
+                println("blackUiPatch: $path not present in this build - skipping")
+                continue
+            }
+            doc.use { d ->
+                val styles = d.getElementsByTagName("style")
+                for (i in 0 until styles.length) {
+                    val style = styles.item(i) as? Element ?: continue
+                    val styleName = style.attributes?.getNamedItem("name")?.nodeValue ?: continue
+                    if (styleName !in LIFT_OFF_STYLES) continue
+                    val items = style.getElementsByTagName("item")
+                    for (j in 0 until items.length) {
+                        val item = items.item(j) ?: continue
+                        if (item.attributes?.getNamedItem("name")?.nodeValue == "elevationOverlayEnabled" &&
+                            item.textContent.trim() == "true"
+                        ) {
+                            item.textContent = "false"
+                            println("blackUiPatch: $path: elevationOverlayEnabled -> false in $styleName")
+                            lifts++
+                        }
+                    }
+                }
+            }
+        }
+        if (edited == 0 && lifts == 0) {
             throw PatchException(
-                "blackUiPatch: none of the expected UI background colours were found in $checked decoded file(s) - refusing to install an edit that would do nothing",
+                "blackUiPatch: neither the expected UI background colours nor any elevation overlay flags were found in the decoded resources - refusing to install an edit that would do nothing",
             )
         }
         println("blackUiPatch: $edited colour value(s) repainted to #000000")
+        println("blackUiPatch: $lifts elevation overlay lift(s) disabled")
     }
 }
