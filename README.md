@@ -17,15 +17,14 @@ KingInstaller as a fallback).
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
 > Eighteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
 > *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, the four **Android Auto** rows, the five
-> **Experimental** rows, and *No AI reporting*, *No Google Assistant*, *Report speed limit* and
-> *Speed-limit sign style*.
+> **Experimental** rows, and *Report speed limit* and *Speed-limit sign style*.
 
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;32 patches total
+> **[v0.22.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;30 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;32 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;30 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -50,8 +49,6 @@ KingInstaller as a fallback).
 | [Keep Waze alive on car](#keep-waze-alive-on-car) | Keeps Waze connected through car service restarts. |  |
 | [Lane guidance](#lane-guidance) | Lane guidance, including continue-straight hints. |  |
 | [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Lets Morphe YouTube Music work as Waze's audio partner. |  |
-| [No AI reporting](#no-ai-reporting) | Turns off Gemini voice reporting, prompts and tips. |  |
-| [No Google Assistant](#no-google-assistant) | Keeps Google Assistant out of Waze. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera sound even below the limit. |  |
 | [Remove ads](#remove-ads) | Removes ads from Waze. |  |
 | [Show all cameras & road hazards](#show-all-cameras-road-hazards) | Shows cameras and road hazards on the map, with alerts. |  |
