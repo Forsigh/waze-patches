@@ -15,7 +15,7 @@ import org.w3c.dom.Element
 /**
  * Black UI background - repaints Waze's dark app chrome to pure #000000.
  *
- * Two halves, one user-visible row ("UI AMOLED dark mode" lives on [blackUiDexPatch]; the
+ * Two halves, one user-visible row ("AMOLED Dark Mode For UI" lives on [blackUiDexPatch]; the
  * resource half [blackUiPatch] is hidden and runs as its dependency):
  *
  * 1. Resource half. The app's screens (bottom sheet, menus, dialogs, bars) take their dark
@@ -112,7 +112,7 @@ private const val NIGHT_MIC_OVERRIDE_NAME = "Grey200"
 private const val NIGHT_MIC_OVERRIDE_VALUE = "#ffffff"
 
 /**
- * Hidden resource half of the "UI AMOLED dark mode" row ([blackUiDexPatch] depends on it).
+ * Hidden resource half of the "AMOLED Dark Mode For UI" row ([blackUiDexPatch] depends on it).
  * Not listed and not selectable on its own; its edits run whenever the row is ticked.
  */
 @Suppress("unused")
@@ -262,12 +262,12 @@ val blackUiPatch = resourcePatch(
 }
 
 /**
- * The visible "UI AMOLED dark mode" row: repaints the two hardcoded Compose palette greys the
+ * The visible "AMOLED Dark Mode For UI" row: repaints the two hardcoded Compose palette greys the
  * resource table cannot reach, and pulls in the resource half above for the named colours.
  */
 @Suppress("unused")
 val blackUiDexPatch = bytecodePatch(
-    name = "UI AMOLED dark mode",
+    name = "AMOLED Dark Mode For UI",
     description = "Dark-mode backgrounds go pure black.",
     default = false,
 ) {

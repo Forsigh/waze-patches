@@ -16,8 +16,9 @@ KingInstaller as a fallback).
 
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
 > Eighteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
-> *Skip sign-in*, *Theme*, *UI AMOLED dark mode*, the nine **Android Auto** rows, and *No AI reporting*,
-> *No Google Assistant*, *Report speed limit* and *Speed-limit sign style*.
+> *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, the four **Android Auto** rows, the five
+> **Experimental** rows, and *No AI reporting*, *No Google Assistant*, *Report speed limit* and
+> *Speed-limit sign style*.
 
 ## 🩹 Patches
 
@@ -36,6 +37,7 @@ KingInstaller as a fallback).
 |----------|----------------|-----------|
 | [Alert distances](#alert-distances) | Choose how early alerts fire: Standard, Moderate, Heavier or Custom. | • Alert distance level<br>• 9 custom distances |
 | [Allow high refresh rate](#allow-high-refresh-rate) | Runs Waze above 60 Hz, up to your screen's refresh rate. | • Target refresh rate (Hz) |
+| [AMOLED Dark Mode For UI](#amoled-dark-mode-for-ui) | Dark-mode backgrounds go pure black. |  |
 | [Android Auto heads-up distances](#android-auto-heads-up-distances) | How early the car screen warns and when the traffic bar shows a jam. | • Heads-up, normal roads (m)<br>• Heads-up, freeways (m)<br>• Traffic bar: time in traffic (s) |
 | [Auto zoom](#auto-zoom) | Keeps your chosen auto-zoom mode from being reset. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Average-speed camera alerts, with the zone's recommended speed. |  |
@@ -64,7 +66,6 @@ KingInstaller as a fallback).
 | [Stay awake in the background](#stay-awake-in-the-background) | Keeps Waze running in the background without a route. | • Minutes in the background |
 | [Theme](#theme) | Pick any theme for the map - day and night. | • Day theme<br>• Night theme |
 | [Traffic meter](#traffic-meter) | Shows the traffic meter on the car screen. |  |
-| [UI AMOLED dark mode](#ui-amoled-dark-mode) | Dark-mode backgrounds go pure black. |  |
 | [Unlock driver moods](#unlock-driver-moods) | Unlocks all moods already on the device. |  |
 
 </details>
