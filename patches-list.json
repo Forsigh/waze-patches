@@ -224,7 +224,7 @@
       "name": "Android Auto heads-up distances",
       "description": "How early the car screen warns and when the traffic bar shows a jam.",
       "default": false,
-      "category": "Android Auto",
+      "category": "Experimental",
       "dependencies": [
         "BytecodePatch"
       ],
@@ -722,7 +722,7 @@
       "name": "Instrument cluster support",
       "description": "Shows the map, alerts and ETA on the car's digital cluster, where it has one.",
       "default": false,
-      "category": "Android Auto",
+      "category": "Experimental",
       "dependencies": [
         "BytecodePatch"
       ],
@@ -779,7 +779,7 @@
       "name": "Keep Waze alive on car",
       "description": "Keeps Waze connected through car service restarts.",
       "default": false,
-      "category": "Android Auto",
+      "category": "Experimental",
       "dependencies": [
         "BytecodePatch"
       ],
@@ -1235,7 +1235,7 @@
       "name": "Show FPS counter",
       "description": "Shows Waze's frames-per-second counter on the map.",
       "default": false,
-      "category": "Android Auto",
+      "category": "Experimental",
       "dependencies": [
         "BytecodePatch"
       ],
@@ -1702,7 +1702,7 @@
       "name": "Stay awake in the background",
       "description": "Keeps Waze running in the background without a route.",
       "default": false,
-      "category": "Android Auto",
+      "category": "Experimental",
       "dependencies": [
         "BytecodePatch"
       ],

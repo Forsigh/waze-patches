@@ -18,7 +18,7 @@ val keepAlivePatch = bytecodePatch(
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
-    category("Android Auto")
+    category("Experimental")
 
     dependsOn(configOverridesPatch)
 
