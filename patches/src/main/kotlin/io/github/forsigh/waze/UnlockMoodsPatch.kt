@@ -5,6 +5,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
@@ -25,6 +26,12 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  *         invoke-direct {p0, v1, v1}, getCustomMoodListNTV(ZZ)
  *     Upstream's reading, kept here: the first flag of each call selects whether special/hidden entries
  *     are included, the second controls sorting. Forcing v1 = 1 asks for the unfiltered list.
+ *
+ * 5.25.90.900 renamed all three levers inside the same class: canSetMood -> t(), refreshMoodsList ->
+ * r(), and the Java isBaby() is gone - the native value is read inline in p() and handed to the sync
+ * payload (Lcom/waze/fu) as its boolean constructor argument, so the flag is overwritten right after
+ * the isBabyNTV() move-result instead. Resolution goes through [resolveAnchor] with the older shape
+ * first (AnchorOps.kt carries the ordering rule).
  *
  * This patch unlocks what is *already in the app*: moods in the local catalogue, including the ones the
  * picker hides. It does not invent artwork - a mood whose images Waze has never downloaded renders blank -
@@ -48,6 +55,14 @@ internal val MoodEligibilityFingerprint = Fingerprint(
     returnType = "Z",
 )
 
+/** 5.25.90.900: canSetMood re-lettered to t() (same signature, reads the same config key). */
+internal val MoodEligibilityV2Fingerprint = Fingerprint(
+    definingClass = MOOD_MANAGER,
+    name = "t",
+    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;"),
+    returnType = "Z",
+)
+
 internal val BabyGateFingerprint = Fingerprint(
     definingClass = MOOD_MANAGER,
     name = "isBaby",
@@ -55,9 +70,25 @@ internal val BabyGateFingerprint = Fingerprint(
     returnType = "Z",
 )
 
+/** 5.25.90.900: the Java isBaby() is gone; p() reads the native flag for the sync payload. */
+internal val MoodSyncV2Fingerprint = Fingerprint(
+    definingClass = MOOD_MANAGER,
+    name = "p",
+    parameters = listOf(),
+    returnType = "V",
+)
+
 internal val MoodCatalogueFingerprint = Fingerprint(
     definingClass = MOOD_MANAGER,
     name = "refreshMoodsList",
+    parameters = listOf(),
+    returnType = "V",
+)
+
+/** 5.25.90.900: refreshMoodsList re-lettered to r() (same native-catalogue call pattern). */
+internal val MoodCatalogueV2Fingerprint = Fingerprint(
+    definingClass = MOOD_MANAGER,
+    name = "r",
     parameters = listOf(),
     returnType = "V",
 )
@@ -71,13 +102,41 @@ val unlockMoodsPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
     dependsOn(skinRefreshPatch)
     execute {
-        val canSet = MoodEligibilityFingerprint.method
+        val canSet = resolveAnchor(
+            "mood eligibility", MoodEligibilityFingerprint, MoodEligibilityV2Fingerprint,
+        )
         canSet.addInstructions(0, "const/4 v0, 0x1\n\nreturn v0\n")
 
-        val baby = BabyGateFingerprint.method
-        baby.addInstructions(0, "const/4 p0, 0x0\n\nreturn p0\n")
+        val babyGate = boundMethodOrNull(BabyGateFingerprint)
+        if (babyGate != null) {
+            babyGate.addInstructions(0, "const/4 p0, 0x0\n\nreturn p0\n")
+            println("unlockMoodsPatch: baby gate (isBaby) forced off")
+        } else {
+            // 5.25.90.900: no Java gate to force. p() reads isBabyNTV() and passes the result as
+            // the boolean argument of the Lcom/waze/fu sync payload, so overwrite it right after
+            // the move-result - every downstream consumer (m/n/o field writers) sees "not baby".
+            val sync = resolveAnchor("mood sync", MoodSyncV2Fingerprint)
+            val syncInstructions = sync.implementation?.instructions?.toList()
+                ?: throw PatchException("unlockMoodsPatch: p() has no implementation")
+            val callIndex = syncInstructions.withIndex().firstOrNull { (_, instruction) ->
+                instruction.opcode == Opcode.INVOKE_DIRECT &&
+                    instruction is ReferenceInstruction &&
+                    (instruction.reference as? MethodReference)?.let { ref ->
+                        ref.definingClass == MOOD_MANAGER && ref.name == "isBabyNTV"
+                    } == true
+            }?.index
+                ?: throw PatchException("unlockMoodsPatch: p() no longer reads isBabyNTV - refusing to guess")
+            val moved = syncInstructions.getOrNull(callIndex + 1)
+            if (moved == null || moved.opcode != Opcode.MOVE_RESULT || moved !is OneRegisterInstruction) {
+                throw PatchException("unlockMoodsPatch: unexpected shape after isBabyNTV() - refusing to guess")
+            }
+            sync.addInstructions(callIndex + 2, "const/4 v${moved.registerA}, 0x0")
+            println("unlockMoodsPatch: baby flag overwritten at its source (p() -> sync payload)")
+        }
 
-        val refresh = MoodCatalogueFingerprint.method
+        val refresh = resolveAnchor(
+            "mood catalogue", MoodCatalogueFingerprint, MoodCatalogueV2Fingerprint,
+        )
         val instructions = refresh.implementation?.instructions?.toList()
             ?: throw PatchException("unlockMoodsPatch: refreshMoodsList() has no implementation")
         val sites = instructions.withIndex().filter { (_, instruction) ->

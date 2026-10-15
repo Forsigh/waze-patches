@@ -38,6 +38,11 @@ object WazeConstants {
             // branches), all 34 referenced CONFIG_VALUE_* keys exist in its dex, and the full .apkm
             // patches end to end into one signed merged APK.
             AppTarget(version = "5.25.4.900"),
+            // Fourth confirmed target (versionCode 1030741, Forsigh's beta from Play, pulled from his
+            // phone on 2026-10-15). Waze's .90.9xx line is its beta channel; verified the same way as
+            // the others: the bundle applies WITHOUT -f, every anchored method binds, and all
+            // CONFIG_VALUE_* keys exist in its dex (NEWTARGET-VERIFY-5.25.90.900.txt).
+            AppTarget(version = "5.25.90.900"),
             // Experimental: attempt on any version / any architecture.
             AppTarget(version = null, isExperimental = true),
         ),

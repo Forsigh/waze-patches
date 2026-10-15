@@ -4,7 +4,6 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
-import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.stringOption
@@ -13,6 +12,7 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodImplementation
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
@@ -62,19 +62,19 @@ internal val SkinLoadFingerprint = Fingerprint(
     name = "loadSkinJNI",
     parameters = listOf("Ljava/lang/String;"),
     returnType = "[B",
-    filters = listOf(
-        methodCall(
-            definingClass = "Lcom/waze/resources/ResourcesNativeManager;",
-            name = "loadSkin",
-            returnType = "[B",
-        ),
-    ),
+    // No instruction filter on purpose: the delegate call inside the method was renamed between
+    // builds (ResourcesNativeManager.loadSkin -> .f on 5.25.90.900), while class + name + signature
+    // uniquely identify this bridge on every supported version. The delegate's presence is asserted
+    // in execute() instead, so a future shape change still fails loudly.
 )
 
 /**
- * `com/waze/resources/h.h` - the routine that unpacks Waze's bundled `assets/res/...` into the
- * app's data directory. The copy loop streams each entry through one 1 MiB buffer, so the whole
- * skin file is in memory at the write site the extraction hook targets.
+ * The routine that unpacks Waze's bundled `assets/res/...` into the app's data directory
+ * (`com/waze/resources/h.h` on the older builds, `com/waze/resources/g.h` on 5.25.90.900 - the
+ * package letters shift a notch down). The copy loop streams each entry through one 1 MiB buffer,
+ * so the whole skin file is in memory at the write site the extraction hook targets. Resolution
+ * goes through [resolveAnchor] and the helper is added to whichever class actually bound, so the
+ * descriptor is never hardcoded.
  */
 internal val ExtractCopyFingerprint = Fingerprint(
     definingClass = "Lcom/waze/resources/h;",
@@ -84,6 +84,19 @@ internal val ExtractCopyFingerprint = Fingerprint(
         "Ljava/lang/String;",
         "I",
         "[Lcom/waze/resources/f;",
+    ),
+    returnType = "V",
+)
+
+/** 5.25.90.900: the extractor re-lettered h -> g and its entry type f -> e. */
+internal val ExtractCopyV2Fingerprint = Fingerprint(
+    definingClass = "Lcom/waze/resources/g;",
+    name = "h",
+    parameters = listOf(
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "I",
+        "[Lcom/waze/resources/e;",
     ),
     returnType = "V",
 )
@@ -146,9 +159,18 @@ val themePatch = bytecodePatch(
 
         // ---- seam 1: the loadSkinJNI bridge ----
         val method = SkinLoadFingerprint.method
-        if (SkinLoadFingerprint.instructionMatches.isEmpty()) {
+        // The fingerprint intentionally carries no instruction filter (the delegate inside was renamed
+        // between builds), so assert the delegate exists at all before installing a hook that would
+        // otherwise never fire.
+        val delegates = method.implementation?.instructions.orEmpty().count { instruction ->
+            instruction is ReferenceInstruction &&
+                (instruction.reference as? MethodReference)?.let { ref ->
+                    ref.definingClass == "Lcom/waze/resources/ResourcesNativeManager;"
+                } == true
+        }
+        if (delegates == 0) {
             throw PatchException(
-                "themePatch: loadSkinJNI no longer calls loadSkin - refusing to install a hook that never fires",
+                "themePatch: loadSkinJNI no longer delegates to ResourcesNativeManager - refusing to install a hook that never fires",
             )
         }
 
@@ -221,13 +243,18 @@ val themePatch = bytecodePatch(
             "themePatch: loadSkinJNI hook installed - night $nightLabel, day $dayLabel",
         )
 
-        // ---- seam 2: the resource extractor (com/waze/resources/h) ----
+        // ---- seam 2: the resource extractor (com/waze/resources/h, re-lettered to g on 5.25.90.900) ----
         // On first run Waze unpacks assets/res/skins into its data directory and the rendered map
         // reads those copies. The copy loop reads through a 1 MiB buffer (whole file per read),
         // so a helper method on the same class rewrites the buffer right before the loop writes
         // it to disk. The helper gets its own registers because the loop's live registers
         // (v2 = entry list, v3 = directory enumeration, v1 = exception-handler string) cannot be
         // repurposed without failing dex verification, and every other register is in use too.
+        val copier = resolveAnchor(
+            "theme extraction copy loop", ExtractCopyFingerprint, ExtractCopyV2Fingerprint,
+        )
+        val copierClassName = copier.definingClass
+            ?: throw PatchException("themePatch: the matched extractor has no defining class")
         val helperName = "themePaletteHook"
         val helperSmali = buildString {
             if (emitNight) {
@@ -288,12 +315,12 @@ val themePatch = bytecodePatch(
         }
 
         // The helper is a new `private static int themePaletteHook(byte[] buf, int len, String name)`
-        // on `com/waze/resources/h`: it rewrites the palette inside `buf[0..len)` and returns the
-        // (possibly unchanged) length.
-        val hClass = mutableClassDefBy("Lcom/waze/resources/h;")
+        // on the resolved extractor class: it rewrites the palette inside `buf[0..len)` and returns
+        // the (possibly unchanged) length.
+        val hClass = mutableClassDefBy(copierClassName)
         val helper = MutableMethod(
             ImmutableMethod(
-                "Lcom/waze/resources/h;",
+                copierClassName,
                 helperName,
                 listOf(
                     ImmutableMethodParameter("[B", null, null),
@@ -311,7 +338,6 @@ val themePatch = bytecodePatch(
         helper.addInstructions(0, helperSmali.trimEnd())
         hClass.methods.add(helper)
 
-        val copier = ExtractCopyFingerprint.method
         val copierInsns = copier.instructions
         fun invokeTarget(instruction: Instruction): String? =
             (instruction as? ReferenceInstruction)?.reference?.toString()
@@ -331,7 +357,7 @@ val themePatch = bytecodePatch(
         }
         if (copyWriteIndex < 0) {
             throw PatchException(
-                "themePatch: the resource-extraction copy loop was not found in com/waze/resources/h.h - refusing to install a hook that would never fire",
+                "themePatch: the resource-extraction copy loop was not found in the extractor - refusing to install a hook that would never fire",
             )
         }
 
@@ -342,7 +368,7 @@ val themePatch = bytecodePatch(
         val callSmali = buildString {
             appendLine("invoke-virtual {v7}, Ljava/util/zip/ZipEntry;->getName()Ljava/lang/String;")
             appendLine("move-result-object v11")
-            appendLine("invoke-static {v0, v9, v11}, Lcom/waze/resources/h;->$helperName([BILjava/lang/String;)I")
+            appendLine("invoke-static {v0, v9, v11}, $copierClassName->$helperName([BILjava/lang/String;)I")
             appendLine("move-result v9")
             appendLine("const/4 v11, 0x0")
         }
