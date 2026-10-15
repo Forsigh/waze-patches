@@ -15,16 +15,16 @@ For Android Auto visibility, install with Morphe Manager's **Install as Play Sto
 KingInstaller as a fallback).
 
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
-> Eighteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
-> *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, the four **Android Auto** rows, the five
+> Fourteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
+> *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, the three **Android Auto** rows, the four
 > **Experimental** rows, and *Report speed limit* and *Speed-limit sign style*.
 
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;30 patches total
+> **[v0.22.8](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;28 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;30 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;28 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -37,12 +37,10 @@ KingInstaller as a fallback).
 | [Alert distances](#alert-distances) | Choose how early alerts fire: Standard, Moderate, Heavier or Custom. | • Alert distance level<br>• 9 custom distances |
 | [Allow high refresh rate](#allow-high-refresh-rate) | Runs Waze above 60 Hz, up to your screen's refresh rate. | • Target refresh rate (Hz) |
 | [AMOLED Dark Mode For UI](#amoled-dark-mode-for-ui) | Dark-mode backgrounds go pure black. |  |
-| [Android Auto heads-up distances](#android-auto-heads-up-distances) | How early the car screen warns and when the traffic bar shows a jam. | • Heads-up, normal roads (m)<br>• Heads-up, freeways (m)<br>• Traffic bar: time in traffic (s) |
 | [Auto zoom](#auto-zoom) | Keeps your chosen auto-zoom mode from being reset. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Average-speed camera alerts, with the zone's recommended speed. |  |
 | [Brief voice guidance](#brief-voice-guidance) | Shorter spoken directions. |  |
 | [Car alerts as notifications](#car-alerts-as-notifications) | Delivers police and hazard alerts as car notifications. |  |
-| [Car screen follows the phone theme](#car-screen-follows-the-phone-theme) | Uses the phone's day and night look on the car screen. |  |
 | [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from updating Waze. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on police and enforcement alerts. |  |
 | [Instrument cluster support](#instrument-cluster-support) | Shows the map, alerts and ETA on the car's digital cluster, where it has one. |  |
