@@ -4,6 +4,10 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 
+/**
+ * PROVENANCE: extended with the police key ported from bearinmindcat/morphe-patches
+ * (GPLv3, release v2.5.5) - see `CREDITS.md`.
+ */
 @Suppress("unused")
 val enableEnforcementAlertsPatch = bytecodePatch(
     name = "Enable police & enforcement alerts",

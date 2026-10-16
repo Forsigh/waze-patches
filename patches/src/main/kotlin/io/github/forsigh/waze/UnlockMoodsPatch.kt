@@ -41,7 +41,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * depends on [skinRefreshPatch]: without the versionCode refresh, a device that has already run Waze would
  * keep drawing its extracted copies.
  *
- * Ported from aaayd/waze-custom-patches (GPLv3, `DriverIconsPatch.kt`) - see `upstream-port/CREDITS.txt`.
+ * Ported from aaayd/waze-custom-patches (GPLv3, `DriverIconsPatch.kt`) - see `CREDITS.md`.
  * Re-anchored against this build: their finder matched a `(Context, String) -> Z` method by three mood-name
  * strings, which does not exist here (the same method compares against a string *resource* instead), so the
  * anchors are pinned by class, name and signature and the registers were read off this smali.

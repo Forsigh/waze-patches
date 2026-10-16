@@ -7,6 +7,8 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 /**
  * Speed-limit sign style (opt-in, default off).
  *
+ * PROVENANCE: ported from bearinmindcat/morphe-patches (GPLv3, release v2.5.5) - see `CREDITS.md`.
+ *
  * `CONFIG_VALUE_MAP_SPEEDOMETER_STYLE` (read in com.waze.bv.f, com.waze.bv.h and
  * com.waze.settings.gj) decides which sign is drawn beside the speedometer. Waze picks one by
  * country; this forces it: "us" = white rectangle, "world" = red circle.

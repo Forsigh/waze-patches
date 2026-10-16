@@ -65,7 +65,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * runs in the bytecode patch's `finalize` because it needs `originalVersionCode`, which the resource
  * half reads during `execute` - the same read/write split upstream uses.
  *
- * Ported from MorpheApp/morphe-patches (GPLv3) - see `upstream-port/CREDITS.txt` and the header
+ * Ported from MorpheApp/morphe-patches (GPLv3) - see `CREDITS.md` and the header
  * above. The original is a universal patch; everything Waze-specific here was measured on
  * 5.24.90.901 / 5.25.0.1 / 5.25.4.900 (targets fail loudly if an anchor stops binding).
  */

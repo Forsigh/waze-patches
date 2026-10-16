@@ -27,7 +27,7 @@ import org.w3c.dom.Element
  *     refreshes.
  *
  * PROVENANCE: ported from Loupric/morphe-waze-music-patch (GPLv3), release v1.0.2, file
- * `AddMorpheToWaze.kt` - see `upstream-port/CREDITS.txt`. The seam (`updateAppList`, marked by its call
+ * `AddMorpheToWaze.kt` - see `CREDITS.md`. The seam (`updateAppList`, marked by its call
  * to `savePackageScopesToSharedPref`), the five-argument constructor, the feature bits `0x200001` and the
  * insertion point are upstream's; this port pins the fingerprint by class name and signature where theirs
  * matched by method name plus a custom predicate, and wraps the same edits in fail-loudly guards.

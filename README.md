@@ -10,14 +10,14 @@ Morphe patches for **Waze** (`com.waze`).
 **Manually:** Morphe Manager → patch sources **+** → **Remote** → paste
 `https://github.com/Forsigh/waze-patches`
 
-Uninstall the Play Store version of Waze first — the patched build is signed with a different key.
+Uninstall the Play Store version of Waze first. The patched build is signed with a different key.
 For Android Auto visibility, install with Morphe Manager's **Install as Play Store** option (or
 KingInstaller as a fallback).
 
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
-> Fourteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
-> *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, the three **Android Auto** rows, the four
-> **Experimental** rows, and *Report speed limit* and *Speed-limit sign style*.
+> Fifteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
+> *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, the four **Android Auto** rows (incl.
+> *Keep Waze alive on Android Auto*), the four **Experimental** rows, and *Report speed limit* and *Speed-limit sign style*.
 
 ## 🩹 Patches
 
@@ -79,9 +79,12 @@ KingInstaller as a fallback).
 
 ## 🙏 Credits
 
-- **Morphe YouTube Music as a Waze audio partner** — ported from [Loupric/morphe-waze-music-patch](https://github.com/Loupric/morphe-waze-music-patch) (GPLv3).
-- **Unlock driver moods** and the resource refresh — ported from [aaayd/waze-custom-patches](https://github.com/aaayd/waze-custom-patches) (GPLv3).
-- **Disable Play Store updates** — adapted from [MorpheApp/morphe-patches](https://github.com/MorpheApp/morphe-patches) (GPLv3).
+- **Morphe YouTube Music as a Waze audio partner**: ported from [Loupric/morphe-waze-music-patch](https://github.com/Loupric/morphe-waze-music-patch) (GPLv3), extended here to force Waze's audio-extension switches, so the partner does not depend on Waze's server flags.
+- **Unlock driver moods** and the resource refresh: ported from [aaayd/waze-custom-patches](https://github.com/aaayd/waze-custom-patches) (GPLv3).
+- **Disable Play Store updates**: adapted from [MorpheApp/morphe-patches](https://github.com/MorpheApp/morphe-patches) (GPLv3).
+- **Speed-limit sign style**, **Report speed limit**, **Stay awake in the background**, and the extra keys in **Remove ads**, **Enable police & enforcement alerts** and **Alert distances**: ported from [bearinmindcat/morphe-patches](https://github.com/bearinmindcat/morphe-patches) (GPLv3).
+
+More detail in [CREDITS.md](CREDITS.md).
 
 ## Support
 

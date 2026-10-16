@@ -6,6 +6,8 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 /**
  * Report speed limit (opt-in, default off).
  *
+ * PROVENANCE: ported from bearinmindcat/morphe-patches (GPLv3, release v2.5.5) - see `CREDITS.md`.
+ *
  * `CONFIG_VALUE_MAP_SPEEDOMETER_SPEED_LIMIT_OVERRIDE_ENABLED` turns on Waze's own switch for
  * correcting the speed limit from the speedometer. Waze's server keeps it off by default.
  */

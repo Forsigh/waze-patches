@@ -7,6 +7,8 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
 /**
  * Stay awake in the background (opt-in, default off).
  *
+ * PROVENANCE: ported from bearinmindcat/morphe-patches (GPLv3, release v2.5.5) - see `CREDITS.md`.
+ *
  * `CONFIG_VALUE_POWER_BACKGROUND_TIMEOUT_MS` lets Waze keep running in the background without a
  * route for the chosen time, instead of closing itself; Waze's own cap is 10 minutes. Waze still
  * closes itself when you close it.

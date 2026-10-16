@@ -29,7 +29,7 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * value: the lock's own value advances on every re-patch anyway, which is what keeps the re-extraction
  * working there.
  *
- * Ported from aaayd/waze-custom-patches (GPLv3, `ManifestResources.kt`) - see `upstream-port/CREDITS.txt`.
+ * Ported from aaayd/waze-custom-patches (GPLv3, `ManifestResources.kt`) - see `CREDITS.md`.
  * Upstream wrote the bytes of the binary manifest directly, which only works while that file is staged and
  * is not guaranteed once another patch edits the manifest; going through the DOM is the same edit without
  * the ordering dependency.

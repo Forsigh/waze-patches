@@ -12,6 +12,9 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * each distance yourself under Custom. All nine keys are Long (com/waze/config/c), values in
  * meters. Standard writes Waze's own numbers back, i.e. changes nothing; Moderate and Heavier
  * use the enlarged tables.
+ *
+ * PROVENANCE: the finer key set and the Custom table ported from bearinmindcat/morphe-patches
+ * (GPLv3, release v2.5.5) - see `CREDITS.md`.
  */
 @Suppress("unused")
 val policeAlertDistancePatch = bytecodePatch(
