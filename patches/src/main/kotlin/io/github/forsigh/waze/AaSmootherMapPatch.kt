@@ -19,6 +19,10 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * All three are server-controlled; which side of each switch a given device gets is why one
  * head unit can feel smooth and another choppy. This row forces them on (read-path, like every
  * other override) as the one app-side lever for the car-map feel.
+ *
+ * 5.25.90.900 dropped `AAP_USE_NORMAL_CAR_GPS_UPDATE_RATE` from the config set; on builds that
+ * no longer declare it the emitter skips that one key automatically and the other two still
+ * apply - the row never references a key the build lacks.
  */
 @Suppress("unused")
 val aaSmootherMapPatch = bytecodePatch(

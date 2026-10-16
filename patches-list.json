@@ -691,6 +691,73 @@
       "options": []
     },
     {
+      "name": "Keep Waze alive on Android Auto",
+      "description": "Keeps Waze running after you disconnect from Android Auto.",
+      "default": false,
+      "category": "Android Auto",
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.waze",
+          "name": "Waze",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#33CCFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.24.90.901",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.0.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.4.900",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "5.25.90.900",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "minutes",
+          "title": "Minutes alive after disconnect",
+          "description": "Waze shuts down this long after you leave the car.",
+          "required": false,
+          "type": "kotlin.Int",
+          "default": 10,
+          "values": null
+        }
+      ]
+    },
+    {
       "name": "Keep Waze alive on car",
       "description": "Keeps Waze connected through car service restarts.",
       "default": false,
@@ -810,7 +877,8 @@
       "default": true,
       "category": null,
       "dependencies": [
-        "ResourcePatch"
+        "ResourcePatch",
+        "BytecodePatch"
       ],
       "compatiblePackages": [
         {

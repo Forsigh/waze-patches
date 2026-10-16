@@ -110,6 +110,9 @@ val morpheMusicPartnerPatch = bytecodePatch(
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
     dependsOn(morpheMusicSupportPatch)
+    // The flags recorded below need the emitter patch in the build; ticking this row alone must
+    // still produce an APK carrying them (same contract as every other override).
+    dependsOn(configOverridesPatch)
 
     execute {
         val method = AppListRefreshFingerprint.method
@@ -144,5 +147,18 @@ val morpheMusicPartnerPatch = bytecodePatch(
             """.trimIndent(),
         )
         println("morpheMusicPartnerPatch: Morphe Music entry injected after the scope save in updateAppList")
+
+        // The partner list the injected entry feeds is gated at its source: getPartnerAudioApps
+        // iterates appConfigs only when CONFIG_VALUE_AUDIO_EXTENSION_SDK_FEATURE_ENABLED reads true,
+        // and the audio-SDK surface honours CONFIG_VALUE_AUDIO_EXTENSION_SDK_ON. Both are
+        // server-controlled, so on devices whose config has them off the entry (and every stock
+        // partner) never surfaces. Forced here, read-path, so the feature the row promises does not
+        // depend on a server rollout. Devices that already have them on are unaffected.
+        recordBoolean(
+            "morpheMusicPartner",
+            true,
+            "CONFIG_VALUE_AUDIO_EXTENSION_SDK_FEATURE_ENABLED",
+            "CONFIG_VALUE_AUDIO_EXTENSION_SDK_ON",
+        )
     }
 }

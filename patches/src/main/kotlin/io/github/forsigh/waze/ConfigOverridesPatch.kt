@@ -10,6 +10,12 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  * This patch injects nothing itself until [finalize], which runs after all patches have executed -
  * that is what lets it see the complete [Overrides] registry regardless of patch order, and why the
  * individual patches need no dependencies on each other.
+ *
+ * Every key is gated on what the target build actually declares in `ConfigValues`: the injected
+ * `sget-object` resolves at app runtime, so a key the build no longer has is a NoSuchFieldError at
+ * startup, not a patch-time error - that is exactly how the 5.25.90.900 beta crashed
+ * (`AAP_USE_NORMAL_CAR_GPS_UPDATE_RATE` was dropped from that build). Keys absent on the target are
+ * skipped with a log line instead of ever being referenced.
  */
 @Suppress("unused")
 val configOverridesPatch = bytecodePatch(
@@ -21,23 +27,46 @@ val configOverridesPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_WAZE)
 
     finalize {
-        if (Overrides.booleans.isNotEmpty()) {
+        val declared = classDefByOrNull("Lcom/waze/config/ConfigValues;")
+            ?.fields?.mapTo(mutableSetOf()) { it.name to it.type }
+        if (declared == null) {
+            println("configOverridesPatch: WARNING - ConfigValues not found, keys are not gated")
+        }
+
+        val skipped = mutableSetOf<String>()
+        fun <V> Map<String, V>.onlyDeclared(type: String): Map<String, V> {
+            if (declared == null) return this
+            return filterKeys { key ->
+                val ok = (key to type) in declared
+                if (!ok) skipped += key
+                ok
+            }
+        }
+
+        val booleans = Overrides.booleans.onlyDeclared("Lcom/waze/config/b;")
+        val longs = Overrides.longs.onlyDeclared("Lcom/waze/config/c;")
+        val strings = Overrides.strings.onlyDeclared("Lcom/waze/config/d;")
+
+        if (booleans.isNotEmpty()) {
             BooleanConfigGetterFingerprint.method.addInstructions(
                 0,
-                forceBoolean("ovb", Overrides.booleans),
+                forceBoolean("ovb", booleans),
             )
         }
-        if (Overrides.longs.isNotEmpty()) {
+        if (longs.isNotEmpty()) {
             LongConfigGetterFingerprint.method.addInstructions(
                 0,
-                forceLong("ovl", Overrides.longs),
+                forceLong("ovl", longs),
             )
         }
-        if (Overrides.strings.isNotEmpty()) {
+        if (strings.isNotEmpty()) {
             StringConfigGetterFingerprint.method.addInstructions(
                 0,
-                forceString("ovs", Overrides.strings),
+                forceString("ovs", strings),
             )
+        }
+        if (skipped.isNotEmpty()) {
+            println("configOverridesPatch: skipped ${skipped.size} key(s) absent on this build: ${skipped.sorted()}")
         }
     }
 }
