@@ -2,6 +2,12 @@
 
 ### ✨ New Features
 
+* one Keep Waze alive row, Waze 5.26.0.0 support ([0d2c121](https://github.com/Forsigh/waze-patches/commit/0d2c121d2f8ea2b6036a73a1463c223dbda8005b))
+
+## [0.23.0](https://github.com/Forsigh/waze-patches/compare/v0.22.9...v0.23.0) (2026-10-20)
+
+### ✨ New Features
+
 * one **Keep Waze alive** row, Waze 5.26.0.0 support
 
 ## [0.22.9](https://github.com/Forsigh/waze-patches/compare/v0.22.8...v0.22.9) (2026-10-20)
