@@ -43,6 +43,11 @@ object WazeConstants {
             // the others: the bundle applies WITHOUT -f, every anchored method binds, and all
             // CONFIG_VALUE_* keys exist in its dex (NEWTARGET-VERIFY-5.25.90.900.txt).
             AppTarget(version = "5.25.90.900"),
+            // Fifth confirmed target (versionCode 1030742, released 2026-10-20). Verified the same
+            // way as the others: all 28 rows apply, every anchored method binds, and every recorded
+            // CONFIG_VALUE_* exists in its dex except AAP_USE_NORMAL_CAR_GPS_UPDATE_RATE, which
+            // 5.25.90.900 had already renamed to GPS_ALIGN_AAP_AND_DEVICE_UPDATE_RATE (both recorded).
+            AppTarget(version = "5.26.0.0"),
             // Experimental: attempt on any version / any architecture.
             AppTarget(version = null, isExperimental = true),
         ),

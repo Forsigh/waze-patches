@@ -15,16 +15,16 @@ For Android Auto visibility, install with Morphe Manager's **Install as Play Sto
 KingInstaller as a fallback).
 
 > GPLv3 · Not affiliated with Waze. Targets the Waze versions in the patch list below.
-> Fifteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
-> *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, the four **Android Auto** rows (incl.
-> *Keep Waze alive on Android Auto*), the four **Experimental** rows, and *Report speed limit* and *Speed-limit sign style*.
+> Fourteen rows are **off by default** - *Allow high refresh rate*, *Disable Play Store updates*,
+> *Skip sign-in*, *Theme*, *AMOLED Dark Mode For UI*, *Bigger speedometer & limit sign*, the three
+> **Android Auto** rows, the three **Experimental** rows, and *Report speed limit* and *Speed-limit sign style*.
 
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.9](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;30 patches total
+> **[v0.23.0](https://github.com/Forsigh/waze-patches/releases/tag/v0.23.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;28 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;30 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;28 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -45,8 +45,7 @@ KingInstaller as a fallback).
 | [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from updating Waze. |  |
 | [Enable police & enforcement alerts](#enable-police-enforcement-alerts) | Turns on police and enforcement alerts. |  |
 | [Instrument cluster support](#instrument-cluster-support) | Shows the map, alerts and ETA on the car's digital cluster, where it has one. |  |
-| [Keep Waze alive on Android Auto](#keep-waze-alive-on-android-auto) | Keeps Waze running after you disconnect from Android Auto. | • Minutes alive after disconnect |
-| [Keep Waze alive on car](#keep-waze-alive-on-car) | Keeps Waze connected through car service restarts. |  |
+| [Keep Waze alive](#keep-waze-alive) | Stops Waze shutting down after you leave it. | • Where<br>• Minutes alive |
 | [Lane guidance](#lane-guidance) | Lane guidance, including continue-straight hints. |  |
 | [Morphe YouTube Music as a Waze audio partner](#morphe-youtube-music-as-a-waze-audio-partner) | Lets Morphe YouTube Music work as Waze's audio partner. |  |
 | [Radar sound at any speed](#radar-sound-at-any-speed) | Plays the speed-camera sound even below the limit. |  |
@@ -60,7 +59,6 @@ KingInstaller as a fallback).
 | [Speed-limit decrease warnings](#speed-limit-decrease-warnings) | Warns when the speed limit drops. |  |
 | [Speed-limit sign style](#speed-limit-sign-style) | Picks the sign beside the speedometer: US or World. | • Sign style |
 | [Speedometer always on](#speedometer-always-on) | Visible at any speed. |  |
-| [Stay awake in the background](#stay-awake-in-the-background) | Keeps Waze running in the background without a route. | • Minutes in the background |
 | [Theme](#theme) | Pick any theme for the map - day and night. | • Day theme<br>• Night theme |
 | [Traffic meter](#traffic-meter) | Shows the traffic meter on the car screen. |  |
 | [Unlock driver moods](#unlock-driver-moods) | Unlocks all moods already on the device. |  |
@@ -83,7 +81,7 @@ KingInstaller as a fallback).
 - **Morphe YouTube Music as a Waze audio partner**: ported from [Loupric/morphe-waze-music-patch](https://github.com/Loupric/morphe-waze-music-patch) (GPLv3), extended here to force Waze's audio-extension switches, so the partner does not depend on Waze's server flags.
 - **Unlock driver moods** and the resource refresh: ported from [aaayd/waze-custom-patches](https://github.com/aaayd/waze-custom-patches) (GPLv3).
 - **Disable Play Store updates**: adapted from [MorpheApp/morphe-patches](https://github.com/MorpheApp/morphe-patches) (GPLv3).
-- **Speed-limit sign style**, **Report speed limit**, **Stay awake in the background**, and the extra keys in **Remove ads**, **Enable police & enforcement alerts** and **Alert distances**: ported from [bearinmindcat/morphe-patches](https://github.com/bearinmindcat/morphe-patches) (GPLv3).
+- **Speed-limit sign style**, **Report speed limit**, the phone side of **Keep Waze alive**, and the extra keys in **Remove ads**, **Enable police & enforcement alerts** and **Alert distances**: ported from [bearinmindcat/morphe-patches](https://github.com/bearinmindcat/morphe-patches) (GPLv3).
 
 More detail in [CREDITS.md](CREDITS.md).
 

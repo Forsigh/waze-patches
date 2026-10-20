@@ -19,5 +19,5 @@ authors' credits live here and in the per-file headers. Thank you to all of them
 
 ## bearinmindcat: morphe-patches
 - Repository: https://github.com/bearinmindcat/morphe-patches (GPLv3), release v2.5.5, commit de89b20
-- Used by: **Speed-limit sign style**, **Report speed limit**, **Stay awake in the background**, and the extra keys folded into **Remove ads**, **Enable police & enforcement alerts** and **Alert distances**.
+- Used by: **Speed-limit sign style**, **Report speed limit**, the phone side of **Keep Waze alive**, and the extra keys folded into **Remove ads**, **Enable police & enforcement alerts** and **Alert distances**.
 - Changed here: their versions are adjustable in-app; ours apply the same keys through Morphe-side options instead.

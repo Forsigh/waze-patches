@@ -15,14 +15,13 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  *    (AAP) path uses (wired through the `com.waze.modules` chain),
  *  - `CAR_LIB_LISTEN_TO_CAR_COMPASS` makes the car map take heading from the car's compass
  *    (read in `com.waze.car_lib.h.c`).
+ *  - 5.25.90.900 renamed the update-rate switch to `GPS_ALIGN_AAP_AND_DEVICE_UPDATE_RATE`
+ *    (read in `com.waze.location.af`) and 5.26.0.0 keeps the new name; both are recorded, and the
+ *    emitter skips whichever the build does not declare.
  *
- * All three are server-controlled; which side of each switch a given device gets is why one
+ * All of them are server-controlled; which side of each switch a given device gets is why one
  * head unit can feel smooth and another choppy. This row forces them on (read-path, like every
  * other override) as the one app-side lever for the car-map feel.
- *
- * 5.25.90.900 dropped `AAP_USE_NORMAL_CAR_GPS_UPDATE_RATE` from the config set; on builds that
- * no longer declare it the emitter skips that one key automatically and the other two still
- * apply - the row never references a key the build lacks.
  */
 @Suppress("unused")
 val aaSmootherMapPatch = bytecodePatch(
@@ -42,6 +41,7 @@ val aaSmootherMapPatch = bytecodePatch(
             "aas", true,
             "CONFIG_VALUE_CAR_LIB_CAR_GPS_FILTERING_ENABLED",
             "CONFIG_VALUE_AAP_USE_NORMAL_CAR_GPS_UPDATE_RATE",
+            "CONFIG_VALUE_GPS_ALIGN_AAP_AND_DEVICE_UPDATE_RATE",
             "CONFIG_VALUE_CAR_LIB_LISTEN_TO_CAR_COMPASS",
         )
         println("aaSmootherMapPatch: forcing car-GPS filtering, normal car-GPS rate and car compass")
