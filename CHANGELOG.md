@@ -1,3 +1,9 @@
+## [0.22.9](https://github.com/Forsigh/waze-patches/compare/v0.22.8...v0.22.9) (2026-10-20)
+
+### 🐛 Bug Fixes
+
+* speed-limit sign always, speedometer first-session gate, add size row ([1d35276](https://github.com/Forsigh/waze-patches/commit/1d352762253b34c8e474f0e93bf04b0af8d9ac6a))
+
 ## [0.22.8](https://github.com/Forsigh/waze-patches/compare/v0.22.7...v0.22.8) (2026-10-16)
 
 ### 🚀 Updated App Support

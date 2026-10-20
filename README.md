@@ -22,7 +22,7 @@ KingInstaller as a fallback).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.22.8](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;30 patches total
+> **[v0.22.9](https://github.com/Forsigh/waze-patches/releases/tag/v0.22.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;30 patches total
 <details open>
 <summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;30 patches</summary>
 <br>
@@ -39,7 +39,7 @@ KingInstaller as a fallback).
 | [Allow high refresh rate](#allow-high-refresh-rate) | Runs Waze above 60 Hz, up to your screen's refresh rate. | • Target refresh rate (Hz) |
 | [Auto zoom](#auto-zoom) | Keeps your chosen auto-zoom mode from being reset. | • Auto-zoom mode |
 | [Average-speed camera alerts](#average-speed-camera-alerts) | Average-speed camera alerts, with the zone's recommended speed. |  |
-| [Bigger speedometer & limit sign](#bigger-speedometer-limit-sign) | Scales the speedometer and the speed limit sign. | • Speedometer size<br>• Speed limit sign size |
+| [Bigger speedometer & limit sign](#bigger-speedometer-limit-sign) | Scales the speedometer and the speed-limit sign. | • Speedometer size<br>• Speed limit sign size |
 | [Brief voice guidance](#brief-voice-guidance) | Shorter spoken directions. |  |
 | [Car alerts as notifications](#car-alerts-as-notifications) | Delivers police and hazard alerts as car notifications. |  |
 | [Disable Play Store updates](#disable-play-store-updates) | Stops the Play Store from updating Waze. |  |
