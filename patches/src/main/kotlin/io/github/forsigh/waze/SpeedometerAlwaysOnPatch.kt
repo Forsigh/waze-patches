@@ -28,5 +28,12 @@ val speedometerAlwaysOnPatch = bytecodePatch(
                 "spd",
                 "CONFIG_VALUE_MAP_SPEEDOMETER_MIN_SPEED_KPH" to 0L,
             )
+        // com/waze/bw/f hides the speedometer outright while SHOW_SPEEDOMETER_AFTER_NUM_SESSIONS
+        // is below GENERAL_SESSION_NUMBER (it forces min speed to -1, so the zero above is never
+        // reached). A value above any real session count keeps that gate open on a fresh install.
+        recordLong(
+                "spd",
+                "CONFIG_VALUE_MAP_SHOW_SPEEDOMETER_AFTER_NUM_SESSIONS" to 2_147_483_647L,
+            )
     }
 }
