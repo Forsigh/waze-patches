@@ -1,3 +1,9 @@
+## [0.30.4](https://github.com/Forsigh/waze-patches/compare/v0.30.3...v0.30.4) (2026-10-24)
+
+### 🐛 Bug Fixes
+
+* created_at without a timezone, the Manager cannot parse the Z suffix ([27e9533](https://github.com/Forsigh/waze-patches/commit/27e95337f130af0d42ccc4178a44e87fa2d810e3))
+
 ## [0.30.3](https://github.com/Forsigh/waze-patches/compare/v0.23.0...v0.30.3) (2026-10-23)
 
 ### Themes
