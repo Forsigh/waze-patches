@@ -1,3 +1,9 @@
+## [0.30.41](https://github.com/Forsigh/waze-patches/compare/v0.30.4...v0.30.41) (2026-10-25)
+
+### Android Auto
+
+* **No Android Auto telemetry**: stops Waze sending Android Auto screen-switch timings to its analytics
+
 ## [0.30.4](https://github.com/Forsigh/waze-patches/compare/v0.30.3...v0.30.4) (2026-10-24)
 
 ### 🐛 Bug Fixes
