@@ -118,6 +118,16 @@ internal val MoodCatalogueV2Fingerprint = Fingerprint(
     name = "r",
     parameters = listOf(),
     returnType = "V",
+)
+
+/**
+ * 5.26.90.901: the catalogue refresh took the letter t(). Anchored by the native list call rather
+ * than by name, and tried before the name-based shapes, so the two builds cannot be swapped.
+ */
+internal val MoodCatalogueByListCallFingerprint = Fingerprint(
+    definingClass = MOOD_MANAGER,
+    parameters = listOf(),
+    returnType = "V",
     filters = listOf(
         methodCall(
             definingClass = MOOD_MANAGER,
@@ -127,15 +137,15 @@ internal val MoodCatalogueV2Fingerprint = Fingerprint(
     ),
 )
 
-/** 5.26.90.901: the catalogue refresh took the letter t(); same native list calls. */
-internal val MoodCatalogueV3Fingerprint = Fingerprint(
+/** Same anchor for builds whose catalogue only asks for the custom list. */
+internal val MoodCatalogueByCustomListFingerprint = Fingerprint(
     definingClass = MOOD_MANAGER,
     parameters = listOf(),
     returnType = "V",
     filters = listOf(
         methodCall(
             definingClass = MOOD_MANAGER,
-            name = "getDefaultMoodListNTV",
+            name = "getCustomMoodListNTV",
             returnType = "[Lcom/waze/Mood;",
         ),
     ),
@@ -165,7 +175,9 @@ val unlockMoodsPatch = bytecodePatch(
             // 5.25.90.900: no Java gate to force. p() reads isBabyNTV() and passes the result as
             // the boolean argument of the Lcom/waze/fu sync payload, so overwrite it right after
             // the move-result - every downstream consumer (m/n/o field writers) sees "not baby".
-            val sync = resolveAnchor("mood sync", MoodSyncV2Fingerprint, MoodSyncV3Fingerprint)
+            val sync = resolveAnchor(
+                "mood sync", MoodSyncV3Fingerprint, MoodSyncV2Fingerprint,
+            )
             val syncInstructions = sync.implementation?.instructions?.toList()
                 ?: throw PatchException("unlockMoodsPatch: p() has no implementation")
             val callIndex = syncInstructions.withIndex().firstOrNull { (_, instruction) ->
@@ -185,8 +197,8 @@ val unlockMoodsPatch = bytecodePatch(
         }
 
         val refresh = resolveAnchor(
-            "mood catalogue", MoodCatalogueFingerprint, MoodCatalogueV2Fingerprint,
-            MoodCatalogueV3Fingerprint,
+            "mood catalogue", MoodCatalogueByListCallFingerprint, MoodCatalogueByCustomListFingerprint,
+            MoodCatalogueFingerprint, MoodCatalogueV2Fingerprint,
         )
         val instructions = refresh.implementation?.instructions?.toList()
             ?: throw PatchException("unlockMoodsPatch: refreshMoodsList() has no implementation")
