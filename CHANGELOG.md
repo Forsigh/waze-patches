@@ -1,3 +1,13 @@
+## [0.30.45](https://github.com/Forsigh/waze-patches/releases/compare/v0.30.44...v0.30.45) (2026-11-01)
+
+### New
+
+* Waze **5.26.90.901** support: all 33 rows apply to the new beta
+
+### Fixed
+
+* Waze moved four anchors in 5.26.90.901 - **Hide recent destinations**, **Skip sign-in**, **Unlock driver moods** and **Disable Play Store updates** were re-homed and verified again
+
 ## [0.30.44](https://github.com/Forsigh/waze-patches/compare/v0.30.43...v0.30.44) (2026-10-30)
 
 ### New
