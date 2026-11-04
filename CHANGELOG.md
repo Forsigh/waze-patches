@@ -1,3 +1,20 @@
+## [0.30.49](https://github.com/Forsigh/waze-patches/compare/v0.30.48...v0.30.49) (2026-11-04)
+
+### Added
+
+* Waze 5.27.0.1 is a supported target - all 33 rows apply and the anchors still resolve
+
+### Changed
+
+* Waze patches are built against Morphe patcher 2.2.0, so newer Morphe Manager builds stop flagging the bundle as built for an older patcher
+* Change Waze icon reads resources through the patcher's file list instead of walking a directory
+
+## [0.30.48](https://github.com/Forsigh/waze-patches/compare/v0.30.47...v0.30.48) (2026-11-04)
+
+### Changed
+
+* Waze patches are now built against Morphe patcher 2.2.0, so new Morphe Manager builds stop flagging the bundle as built for an older patcher
+
 ## [0.30.47](https://github.com/Forsigh/waze-patches/compare/v0.30.46...v0.30.47) (2026-11-02)
 
 ### Fixed

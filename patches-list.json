@@ -1,6 +1,6 @@
 {
  "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
- "version": "0.30.47",
+ "version": "0.30.49",
  "patches": [
   {
    "name": "AMOLED Dark Mode For UI",
@@ -63,6 +63,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -141,6 +148,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -327,6 +341,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -409,6 +430,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -507,6 +535,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -579,6 +614,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -700,6 +742,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -770,6 +819,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -869,6 +925,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -939,6 +1002,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -1064,6 +1134,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -1142,6 +1219,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -1214,6 +1298,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -1315,6 +1406,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -1387,6 +1485,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -1475,6 +1580,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -1583,6 +1695,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -1653,6 +1772,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -1762,6 +1888,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -1835,6 +1968,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -1917,6 +2057,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -1989,6 +2136,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -2074,6 +2228,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -2146,6 +2307,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -2232,6 +2400,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -2326,6 +2501,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -2396,6 +2578,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -2480,6 +2669,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -2552,6 +2748,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -2677,6 +2880,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -2789,6 +2999,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
@@ -2934,6 +3151,13 @@
        "description": null
       },
       {
+       "version": "5.27.0.1",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
        "version": null,
        "versionCodes": null,
        "isExperimental": true,
@@ -3006,6 +3230,13 @@
       },
       {
        "version": "5.26.90.901",
+       "versionCodes": null,
+       "isExperimental": false,
+       "minSdk": null,
+       "description": null
+      },
+      {
+       "version": "5.27.0.1",
        "versionCodes": null,
        "isExperimental": false,
        "minSdk": null,
