@@ -1,3 +1,8 @@
+## [0.30.63-dev.2](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.2) (2026-11-17)
+
+### Fixed
+* The BitChord test entry is gone. With a third partner in the list Waze stopped connecting any of them, so the row is back to exactly what 0.30.61 shipped.
+
 ## [0.30.63-dev.1](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.1) (2026-11-17)
 
 Experimental build. Turn on prerelease for this source to get it.

@@ -65,17 +65,10 @@ private const val MORPHE_MUSIC_LABEL = "Morphe Music"
 /** Label for the stock package id, which is what Morphe's root build presents as. */
 private const val YOUTUBE_MUSIC_LABEL = "YouTube Music"
 
-/** BitChord, the YouTube Music client used to test a non-SDK player in the partner list. */
-private const val BITCHORD_PACKAGE = "com.music.bitchord"
-private const val BITCHORD_LABEL = "BitChord"
-
 /** Every partner id this row registers, with the label Waze shows for it. */
 private val PARTNER_ENTRIES = listOf(
     MORPHE_MUSIC_PACKAGE to MORPHE_MUSIC_LABEL,
     YOUTUBE_MUSIC_PACKAGE to YOUTUBE_MUSIC_LABEL,
-    // Test entry, dev channel only: BitChord ships a MediaBrowserService but no Waze SDK receiver,
-    // so it is expected to list and then fail to connect until the direct-registration hook lands.
-    BITCHORD_PACKAGE to BITCHORD_LABEL,
 )
 
 /** Plain media apps, added alongside the Morphe entry when their gear is on. */
