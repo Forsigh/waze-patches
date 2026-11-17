@@ -1,6 +1,4 @@
-## [0.30.61-dev.1](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.61-dev.1) (2026-11-15)
-
-Experimental build: same rows as the stable bundle, plus the two repairs below. Turn on prerelease for this source to get it.
+## [0.30.61](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.61) (2026-11-16)
 
 ### Fixed
 * Unlock driver moods works on Waze 5.27.90.900: the catalogue refresh moved to MoodManagerBase and its native calls now return protobuf bytes, so the row reads the flag register off the call instead of assuming v1.
