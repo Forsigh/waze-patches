@@ -1,3 +1,13 @@
+## [0.30.63-dev.1](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.1) (2026-11-17)
+
+Experimental build. Turn on prerelease for this source to get it.
+
+### Added
+* The audio partner row also lists BitChord (`com.music.bitchord`) as a test entry. BitChord has no Waze SDK receiver, so expect it to appear and then fail to connect - that is the point of the test.
+
+### Changed
+* Carries the Android Auto heads-up distance from 0.30.62.
+
 ## [0.30.62](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.62) (2026-11-17)
 
 ### Added
