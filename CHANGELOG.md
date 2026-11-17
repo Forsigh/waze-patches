@@ -1,3 +1,8 @@
+## [0.30.62](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.62) (2026-11-17)
+
+### Added
+* Waze now takes an Android Auto heads-up distance for police and enforcement alerts, 50-10000 m, applied to all three road types. 0 keeps Waze's 1200 m preset. It sits in Alert distances.
+
 ## [0.30.61](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.61) (2026-11-16)
 
 ### Fixed

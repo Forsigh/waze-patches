@@ -23,7 +23,7 @@ KingInstaller as a fallback).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.30.61](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.61)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;35 patches total
+> **[v0.30.62](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.62)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;35 patches total
 <details open>
 <summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;35 patches</summary>
 <br>
@@ -36,7 +36,7 @@ KingInstaller as a fallback).
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | **AMOLED Dark Mode For UI** | Makes the dark UI pure black. |  |
-| **Alert distances** | How early alerts sound, plus a speed-bump switch and per-alert distances. | • Alert distance level<br>• Speed bump (ramp) warnings<br>• Police<br>• Hazards<br>• Crashes<br>• Traffic jams<br>• Speed cams - streets<br>• Speed cams - highways<br>• Speed cams - freeways<br>• Blocked lanes<br>• Gap between alerts |
+| **Alert distances** | How early alerts sound, plus a speed-bump switch and per-alert distances. | • Alert distance level<br>• Speed bump (ramp) warnings<br>• Police<br>• Hazards<br>• Crashes<br>• Traffic jams<br>• Speed cams - streets<br>• Speed cams - highways<br>• Speed cams - freeways<br>• Blocked lanes<br>• Gap between alerts<br>• Android Auto alert distance |
 | **Allow high refresh rate** | Runs above 60 Hz, up to your screen's limit. | • Target refresh rate (Hz) |
 | **Auto zoom** | Keeps your auto-zoom choice from being reset. | • Auto-zoom mode |
 | **Bigger alert pins** | Grows the alert pins on the map, phone and car screen alike. | • Pin size |

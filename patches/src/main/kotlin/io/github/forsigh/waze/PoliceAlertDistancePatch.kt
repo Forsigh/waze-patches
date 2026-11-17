@@ -57,6 +57,14 @@ val policeAlertDistancePatch = bytecodePatch(
     val freeways by intOption(key = "freeways", default = 0, title = "Speed cams - freeways", description = "0 = keep the preset, Standard 2000 m.")
     val blocked by intOption(key = "blocked", default = 0, title = "Blocked lanes", description = "0 = keep the preset, Standard 400 m.")
     val between by intOption(key = "between", default = 0, title = "Gap between alerts", description = "0 = keep the preset, Standard 300 m.")
+    // Car side. These three keys are Long like the rest of the family, but nothing else in the
+    // bundle writes them: without this option the heads-up distance Waze uses on the head unit is
+    // whatever the server preset says and cannot be changed from the phone.
+    val headsUp by intOption(
+        key = "headsUp", default = 0,
+        title = "Android Auto alert distance",
+        description = "Police and enforcement heads-up on the car screen, 50-10000 m, all three road types. 0 = keep the preset (1200 m).",
+    )
 
     execute {
         val keys = listOf(
@@ -88,7 +96,22 @@ val policeAlertDistancePatch = bytecodePatch(
             .map { (it ?: 0).coerceAtLeast(0) }
         val overrides = keys.zip(wanted).filter { (_, m) -> m > 0 }.map { (k, m) -> k to m.toLong() }
         if (overrides.isNotEmpty()) recordLong("dst", *overrides.toTypedArray())
+        val car = headsUp ?: 0
+        if (car > 0) {
+            if (car !in 50..10_000) {
+                throw PatchException("policeAlertDistancePatch: car alert distance $car m is outside 50-10000 m")
+            }
+            recordLong(
+                "dst",
+                "CONFIG_VALUE_ANDROID_AUTO_HEADS_UP_DISTANCE" to car.toLong(),
+                "CONFIG_VALUE_ANDROID_AUTO_HEADS_UP_DISTANCE_NORMAL" to car.toLong(),
+                "CONFIG_VALUE_ANDROID_AUTO_HEADS_UP_DISTANCE_FREEWAY" to car.toLong(),
+            )
+        }
         recordBoolean("dst", bumps ?: false, "CONFIG_VALUE_MAP_SHOW_SPEED_BUMPS_PERMANENT_HAZARD")
-        println("policeAlertDistancePatch: alert distances = $chosen, speed bumps = ${if (bumps == true) "on" else "off"}")
+        println(
+            "policeAlertDistancePatch: alert distances = $chosen, speed bumps = ${if (bumps == true) "on" else "off"}" +
+                ", car heads-up = ${if (car > 0) "$car m" else "preset"}",
+        )
     }
 }
