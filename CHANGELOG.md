@@ -1,22 +1,7 @@
-## [0.30.63-dev.2](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.2) (2026-11-17)
+## [0.30.63-dev.3](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.3) (2026-11-17)
 
 ### Fixed
-* The BitChord test entry is gone. With a third partner in the list Waze stopped connecting any of them, so the row is back to exactly what 0.30.61 shipped.
-
-## [0.30.63-dev.1](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.1) (2026-11-17)
-
-Experimental build. Turn on prerelease for this source to get it.
-
-### Added
-* The audio partner row also lists BitChord (`com.music.bitchord`) as a test entry. BitChord has no Waze SDK receiver, so expect it to appear and then fail to connect - that is the point of the test.
-
-### Changed
-* Carries the Android Auto heads-up distance from 0.30.62.
-
-## [0.30.62](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.62) (2026-11-17)
-
-### Added
-* Waze now takes an Android Auto heads-up distance for police and enforcement alerts, 50-10000 m, applied to all three road types. 0 keeps Waze's 1200 m preset. It sits in Alert distances.
+* Audio partners (YouTube Music, Morphe YouTube Music) stopped connecting after the dev builds. This build is the 0.30.61 source exactly - the Android Auto heads-up distance row is out as well, since its three config keys were never confirmed on 5.27.90.900 and a wrong key can poison the wait for the audio-extension flags.
 
 ## [0.30.61](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.61) (2026-11-16)
 
