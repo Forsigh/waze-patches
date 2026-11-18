@@ -162,8 +162,8 @@ val morpheMusicSupportPatch = resourcePatch(
 
 @Suppress("unused")
 val morpheMusicPartnerPatch = bytecodePatch(
-    name = "Morphe YouTube Music as a Waze audio partner",
-    description = "Lets Morphe YouTube Music play through Waze.",
+    name = "YouTube Music as a Waze audio partner",
+    description = "Lets Morphe YouTube Music and stock YouTube Music play through Waze's audio player.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WAZE)
