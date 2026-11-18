@@ -1,3 +1,8 @@
+## [0.30.63-dev.5](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.5) (2026-11-18)
+
+### Fixed
+* Launch crash in 0.30.63-dev.4. The audio partner entries were appended before Waze had loaded its partner arrays, and those arrays are null at cold start, so the app died on open. The append now happens inside `getPartners()` after Waze's own null checks, and the entries carry their Play Store link instead of an empty string.
+
 ## [0.30.63-dev.4](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.4) (2026-11-18)
 
 ### Changed
