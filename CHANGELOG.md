@@ -1,3 +1,8 @@
+## [0.30.63-dev.10](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.10) (2026-11-18)
+
+### Changed
+* The custom audio app is now written into the map the audio partner list is built from, and again at the top of the list call itself, so the row no longer depends on when Waze refreshes its partner roster.
+
 ## [0.30.63-dev.9](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.9) (2026-11-18)
 
 ### Fixed
