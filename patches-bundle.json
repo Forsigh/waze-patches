@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-11-18T17:50:12",
+  "created_at": "2026-11-18T18:37:01",
   "description": "Morphe patches for Waze: themes, map colours, alerts, speedometer, Android Auto, launcher icon and app name.",
-  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v0.30.63-dev.6/patches-0.30.63-dev.6.mpp",
+  "download_url": "https://github.com/Forsigh/waze-patches/releases/download/v0.30.63-dev.7/patches-0.30.63-dev.7.mpp",
   "signature_download_url": "",
-  "version": "0.30.63-dev.6",
-  "page_url": "https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.6"
+  "version": "0.30.63-dev.7",
+  "page_url": "https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.7"
 }
