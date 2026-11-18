@@ -3,6 +3,14 @@
 ### Fixed
 * Waze crashed as soon as the audio partner switch was turned on with 0.30.63-dev.6 installed. The new custom audio app row is withdrawn from the bundle until it is reworked; everything else is unchanged.
 
+## [0.30.63-dev.8](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.8) (2026-11-18)
+
+### Fixed
+* The custom audio app row crashed Waze because its injected code used registers outside the method frame; Waze rejected the class as soon as the audio partner list was touched. The frame is now read from the untouched original method, and the patch refuses to build if its code would not fit.
+
+### Added
+* The row is back, off by default: **Any audio app as a Waze audio partner** (package and label are options, default BitChord).
+
 ## [0.30.63-dev.6](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.6) (2026-11-18)
 
 ### Added
