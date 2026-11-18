@@ -290,8 +290,15 @@ val customAudioAppPatch = bytecodePatch(
 
         // region 2: answer "installed" for this package without its ACTION_INIT receiver.
 
+        // The mutable copy reports a padded frame; the original method carries the real one, and an
+        // oversized register here is a VerifyError at class load, not a patch error.
+        val installedFrame = IsAudioPartnerInstalledFingerprint.originalMethod.implementation?.registerCount
+            ?: throw PatchException("customAudioAppPatch: installed check has no body")
+        if (installedFrame < 2) throw PatchException(
+            "customAudioAppPatch: installed check has only $installedFrame registers"
+        )
         IsAudioPartnerInstalledFingerprint.method.apply {
-            val registerCount = implementation!!.registerCount
+            val registerCount = installedFrame
             val thisRegister = registerCount - 2
             val packageNameRegister = registerCount - 1
             val freeRegister = if (thisRegister > 0) {
@@ -341,8 +348,10 @@ val customAudioAppPatch = bytecodePatch(
             )
         }
 
+        val connectFrame = ConnectAudioPartnerFingerprint.originalMethod.implementation?.registerCount
+            ?: throw PatchException("customAudioAppPatch: connect has no body")
         ConnectAudioPartnerFingerprint.method.apply {
-            val registerCount = implementation!!.registerCount
+            val registerCount = connectFrame
             val localCount = registerCount - 4
             if (localCount < 2) throw PatchException(
                 "customAudioAppPatch: not enough registers in the connect method"
@@ -355,6 +364,9 @@ val customAudioAppPatch = bytecodePatch(
             val messenger = localCount + 3
             val packageNameParam = localCount + 1
             val tokenParam = localCount + 2
+            if (messenger >= registerCount) throw PatchException(
+                "customAudioAppPatch: connect needs v$messenger but only has $registerCount registers"
+            )
 
             addInstructionsWithLabels(
                 0,
