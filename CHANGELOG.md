@@ -1,3 +1,8 @@
+## [0.30.63-dev.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.7) (2026-11-18)
+
+### Fixed
+* Waze crashed as soon as the audio partner switch was turned on with 0.30.63-dev.6 installed. The new custom audio app row is withdrawn from the bundle until it is reworked; everything else is unchanged.
+
 ## [0.30.63-dev.6](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.6) (2026-11-18)
 
 ### Added
