@@ -1,6 +1,8 @@
 package io.github.forsigh.waze
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -72,6 +74,8 @@ private const val YOUTUBE_MUSIC_LABEL = "YouTube Music"
  * the stock YouTube Music entry when the server lists it; this is the fallback used by the arrays.
  */
 private const val PARTNER_SCOPE = 0x200001
+
+private const val SDK_CONFIGURATION = "Lcom/waze/sdk/SdkConfiguration;"
 
 /** Every partner id this row registers, with the label Waze shows for it. */
 private val PARTNER_ENTRIES = listOf(
@@ -170,38 +174,68 @@ val morpheMusicPartnerPatch = bytecodePatch(
     dependsOn(configOverridesPatch)
 
     execute {
-        val method = AppListRefreshFingerprint.method
-        val instructions = method.implementation?.instructions
-            ?: throw PatchException("morpheMusicPartnerPatch: updateAppList has no body")
-        // The call is `NativeManager->configGetSdkConfigurationNTV()`, and the instance it returns is
-        // what the arrays hang off; instructionMatches only carries the fingerprint's own filters, so
-        // the whole body is scanned.
-        val configIndex = instructions.indexOfFirst { instruction ->
-            (instruction as? ReferenceInstruction)?.reference?.toString()
-                ?.contains("configGetSdkConfigurationNTV") == true
+        // The append runs after Waze's own null checks on the four server arrays: at cold start they
+        // are still null and getPartners()/updateAppList() treat that as "no roster yet". Writing
+        // before those checks is what crashed 0.30.63-dev.4 on launch.
+        val configClass = mutableClassDefBy(SDK_CONFIGURATION)
+        val implementation: MutableMethodImplementation
+        val host: MutableMethod
+        val instance: String
+        val registers: Triple<Int, Int, Int>
+        val insertIndex: Int
+
+        val partnersMethod = configClass.methods.firstOrNull {
+            it.name == "getPartners" && it.parameterTypes.isEmpty() &&
+                it.returnType == "Ljava/util/List;"
         }
-        if (configIndex < 0) throw PatchException(
-            "morpheMusicPartnerPatch: updateAppList no longer fetches the SDK configuration - " +
-                "refusing to inject partner entries into a roster refresh that has moved"
+        if (partnersMethod != null) {
+            // 5.27.9x: the roster is assembled in its own method, on the instance.
+            host = partnersMethod
+            implementation = partnersMethod.implementation
+                ?: throw PatchException("morpheMusicPartnerPatch: getPartners() has no body")
+            instance = "p0"
+            registers = Triple(5, 6, 7)
+            insertIndex = implementation.instructions.indexOfFirst { it.opcode == Opcode.NEW_ARRAY }
+            if (insertIndex < 0) throw PatchException(
+                "morpheMusicPartnerPatch: getPartners() no longer builds an array"
+            )
+        } else {
+            // 5.27.4 and earlier: no helper, updateAppList does everything itself.
+            host = configClass.methods.firstOrNull {
+                it.name == "updateAppList" && it.parameterTypes.isEmpty()
+            } ?: throw PatchException(
+                "morpheMusicPartnerPatch: neither getPartners() nor updateAppList() is present - " +
+                    "refusing to guess where the partner roster is assembled"
+            )
+            implementation = host.implementation
+                ?: throw PatchException("morpheMusicPartnerPatch: updateAppList() has no body")
+            val instructions = implementation.instructions
+            val configIndex = instructions.indexOfFirst { instruction ->
+                (instruction as? ReferenceInstruction)?.reference?.toString()
+                    ?.contains("configGetSdkConfigurationNTV") == true
+            }
+            if (configIndex < 0) throw PatchException(
+                "morpheMusicPartnerPatch: updateAppList() no longer fetches the SDK configuration"
+            )
+            instance = "v" + host.getInstruction<OneRegisterInstruction>(configIndex + 1).registerA
+            registers = Triple(10, 9, 8)
+            val hashMapIndex = instructions.drop(configIndex).indexOfFirst { instruction ->
+                instruction.opcode == Opcode.NEW_INSTANCE &&
+                    (instruction as? ReferenceInstruction)?.reference?.toString()
+                        ?.contains("Ljava/util/HashMap;") == true
+            }
+            if (hashMapIndex < 0) throw PatchException(
+                "morpheMusicPartnerPatch: updateAppList() no longer builds its app config map"
+            )
+            insertIndex = configIndex + hashMapIndex
+        }
+        if (implementation.registerCount <= registers.third) throw PatchException(
+            "morpheMusicPartnerPatch: ${host.name} has only ${implementation.registerCount} registers"
         )
 
-        // Waze builds its partner entries from four parallel server arrays, well before the list is
-        // finalised, and hands the resulting list to its own constructor. Appending to those arrays
-        // keeps every entry Waze-shaped: the scope, the install check and the entry object all come
-        // from Waze, so nothing we add can be rejected for being hand-built.
-        val resultIndex = configIndex + 1
-        val configRegister = method.getInstruction<OneRegisterInstruction>(resultIndex).registerA
-        val registerCount = method.implementation?.registerCount ?: 10
-        val scratch = (0..9).filter { it != configRegister }.takeLast(3).sorted()
-        if (scratch.size < 3 || scratch.last() >= registerCount) {
-            throw PatchException(
-                "morpheMusicPartnerPatch: not enough free registers in updateAppList " +
-                    "(registers=$registerCount, config=v$configRegister)"
-            )
-        }
-        val (rArray, rIndex, rValue) = scratch
+        val (rArray, rIndex, rValue) = registers
         fun stringArray(field: String, values: List<String>): String = buildString {
-            append("iget-object v$rArray, v$configRegister, Lcom/waze/sdk/SdkConfiguration;->$field:[Ljava/lang/String;\n")
+            append("iget-object v$rArray, $instance, Lcom/waze/sdk/SdkConfiguration;->$field:[Ljava/lang/String;\n")
             append("array-length v$rIndex, v$rArray\n")
             append("add-int/lit8 v$rIndex, v$rIndex, ${values.size}\n")
             append("invoke-static {v$rArray, v$rIndex}, Ljava/util/Arrays;->copyOf([Ljava/lang/Object;I)[Ljava/lang/Object;\n")
@@ -214,10 +248,10 @@ val morpheMusicPartnerPatch = bytecodePatch(
                 append("const-string v$rValue, \"$value\"\n")
                 append("aput-object v$rValue, v$rArray, v$rIndex\n")
             }
-            append("iput-object v$rArray, v$configRegister, Lcom/waze/sdk/SdkConfiguration;->$field:[Ljava/lang/String;\n")
+            append("iput-object v$rArray, $instance, Lcom/waze/sdk/SdkConfiguration;->$field:[Ljava/lang/String;\n")
         }
         fun intArray(field: String, values: List<Int>): String = buildString {
-            append("iget-object v$rArray, v$configRegister, Lcom/waze/sdk/SdkConfiguration;->$field:[I\n")
+            append("iget-object v$rArray, $instance, Lcom/waze/sdk/SdkConfiguration;->$field:[I\n")
             append("array-length v$rIndex, v$rArray\n")
             append("add-int/lit8 v$rIndex, v$rIndex, ${values.size}\n")
             append("invoke-static {v$rArray, v$rIndex}, Ljava/util/Arrays;->copyOf([II)[I\n")
@@ -229,26 +263,23 @@ val morpheMusicPartnerPatch = bytecodePatch(
                 append("const v$rValue, 0x${value.toString(16)}\n")
                 append("aput v$rValue, v$rArray, v$rIndex\n")
             }
-            append("iput-object v$rArray, v$configRegister, Lcom/waze/sdk/SdkConfiguration;->$field:[I\n")
+            append("iput-object v$rArray, $instance, Lcom/waze/sdk/SdkConfiguration;->$field:[I\n")
         }
 
         val packages = PARTNER_ENTRIES.map { it.first }
         val labels = PARTNER_ENTRIES.map { it.second }
-        method.addInstructions(
-            resultIndex + 1,
+        host.addInstructions(
+            insertIndex,
             buildString {
-                // A cached partner list would bypass the arrays entirely, so drop the cache first.
-                append("const/4 v$rValue, 0x0\n")
-                append("iput-object v$rValue, v$configRegister, Lcom/waze/sdk/SdkConfiguration;->partners:Ljava/util/List;\n")
                 append(stringArray("PackageNames", packages))
                 append(stringArray("AppNames", labels))
-                append(stringArray("InstallationUrls", packages.map { "" }))
+                append(stringArray("InstallationUrls", packages.map { "https://play.google.com/store/apps/details?id=$it" }))
                 append(intArray("Scopes", packages.map { PARTNER_SCOPE }))
             }.trimIndent(),
         )
         println(
             "morpheMusicPartnerPatch: appended ${packages.size} partner entries to Waze's own " +
-                "server arrays (scope 0x${PARTNER_SCOPE.toString(16)}) - Waze builds the entries itself"
+                "arrays inside ${host.name} (scope 0x${PARTNER_SCOPE.toString(16)})"
         )
 
 
