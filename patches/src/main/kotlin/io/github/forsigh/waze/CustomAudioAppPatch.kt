@@ -165,6 +165,20 @@ private object RegisterAudioPartnerFingerprint : Fingerprint(
     ),
 )
 
+/**
+ * `aw.g(Context)`: whether this partner is installed. `getPartnerAudioApps` drops any entry that
+ * answers false here, so a package without Waze's `ACTION_INIT` receiver never reaches the list even
+ * when the roster arrays contain it.
+ */
+private object PartnerInstalledFingerprint : Fingerprint(
+    definingClass = "Lcom/waze/sdk/aw;",
+    name = "g",
+    isStatic = false,
+    returnType = "Z",
+    parameters = listOf("Landroid/content/Context;"),
+    filters = listOf(string("com.spotify.music")),
+)
+
 private fun MethodReference.toSmali() =
     "$definingClass->$name(${parameterTypes.joinToString("")})$returnType"
 
@@ -207,9 +221,12 @@ val customAudioAppPatch = bytecodePatch(
                 ?: throw PatchException("customAudioAppPatch: getPartners() has no body")
             instance = "p0"
             registers = Triple(5, 6, 7)
-            insertIndex = implementation.instructions.indexOfFirst { it.opcode == Opcode.NEW_ARRAY }
+            // Must land before `array-length`, not before `new-array`: getPartners sizes the au[]
+            // from the length it read off PackageNames, so appending after that read adds an entry
+            // the loop never copies.
+            insertIndex = implementation.instructions.indexOfFirst { it.opcode == Opcode.ARRAY_LENGTH }
             if (insertIndex < 0) throw PatchException(
-                "customAudioAppPatch: getPartners() no longer builds an array"
+                "customAudioAppPatch: getPartners() no longer measures the partner arrays"
             )
         } else {
             host = configClass.methods.firstOrNull { it.name == "updateAppList" }
@@ -329,6 +346,41 @@ val customAudioAppPatch = bytecodePatch(
         println("customAudioAppPatch: $packageName reports as installed")
 
         // endregion
+
+        // region 2b: make the entry survive the list filter.
+
+        // getPartnerAudioApps() drops a partner whose aw.g(Context) is false, and that check looks for
+        // the ACTION_INIT receiver. We bypass it for this one package. The class only exists on 5.27.9x
+        // (5.27.4.900 keeps the check elsewhere), so an absent fingerprint is not an error.
+        try {
+
+            val installedFrameAw = PartnerInstalledFingerprint.originalMethod.implementation?.registerCount
+                ?: throw PatchException("customAudioAppPatch: partner installed check has no body")
+            if (installedFrameAw - 2 < 2) throw PatchException(
+                "customAudioAppPatch: partner installed check has ${installedFrameAw - 2} local registers"
+            )
+            PartnerInstalledFingerprint.method.apply {
+                addInstructionsWithLabels(
+                    0,
+                    """
+                        iget-object v0, p0, Lcom/waze/sdk/aw;->a:Ljava/lang/String;
+                        const-string v1, "$packageName"
+                        invoke-virtual { v1, v0 }, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+                        move-result v0
+                        if-eqz v0, :original
+                        const/4 v0, 0x1
+                        return v0
+                    """.trimIndent(),
+                    ExternalLabel("original", getInstruction(0)),
+                )
+            }
+            println("customAudioAppPatch: $packageName survives the audio partner list filter")
+
+            // endregion
+
+        } catch (e: PatchException) {
+            println("customAudioAppPatch: no aw.g(Context) on this base, relying on the installed check")
+        }
 
         // region 3: register the app on connect instead of waiting for the SDK callback.
 
