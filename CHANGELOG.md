@@ -1,3 +1,8 @@
+## [0.30.63-dev.9](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.9) (2026-11-18)
+
+### Fixed
+* The custom audio app never appeared in Waze's audio player list even though it no longer crashed. The roster append ran after Waze had already measured the partner arrays, so the extra entry was never copied, and the list filter rejected any package without an `ACTION_INIT` receiver. Both are handled now; the filter bypass is limited to the configured package.
+
 ## [0.30.63-dev.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.7) (2026-11-18)
 
 ### Fixed
