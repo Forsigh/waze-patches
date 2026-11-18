@@ -81,34 +81,6 @@ private val PARTNER_ENTRIES = listOf(
 
 /** Plain media apps, added alongside the Morphe entry when their gear is on. */
 
-/**
- * `au.g(Context)` - the per-partner availability check. Stock, it only takes the install-check path
- * for package equal to the Spotify literal; everything else is asked for a
- * `com.waze.sdk.audio.ACTION_INIT` broadcast receiver, which a plain media app never ships, so it reads
- * as unavailable: the settings row goes dead and the car side drops it. BitChord (1.8.1) and Smart
- * AudioBook Player (11.9.0) both ship a MediaBrowserService but no Waze SDK receiver (their manifests
- * were pulled off the device and read), so this is the gate that keeps them out.
- */
-internal val PartnerAvailabilityFingerprint = Fingerprint(
-    definingClass = "Lcom/waze/sdk/au;",
-    name = "g",
-    parameters = listOf("Landroid/content/Context;"),
-    returnType = "Z",
-)
-
-/**
- * `aw.g(Context)` - 5.27.90.900. `au` became a plain server DTO (four fields, no behaviour), and the
- * runtime partner object is `aw`: package, label, scope, url, cached installed flag. The availability
- * decision moved here, and it is the same shape as the old one - compare the package to
- * "com.spotify.music", then branch. Pinned by `g`'s name and signature; the pin below proves the
- * literal is inside it before touching anything.
- */
-internal val PartnerAvailabilityV2Fingerprint = Fingerprint(
-    definingClass = "Lcom/waze/sdk/aw;",
-    name = "g",
-    parameters = listOf("Landroid/content/Context;"),
-    returnType = "Z",
-)
 
 /**
  * `SdkConfiguration.updateAppList()` - the roster refresh that rebuilds `appConfigs` and persists each
