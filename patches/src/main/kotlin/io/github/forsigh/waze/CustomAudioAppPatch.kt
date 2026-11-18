@@ -179,6 +179,15 @@ private object PartnerInstalledFingerprint : Fingerprint(
     filters = listOf(string("com.spotify.music")),
 )
 
+/** `getPartnerAudioApps(Context, boolean)`: the list the audio partner screen renders. */
+private object AudioAppsListFingerprint : Fingerprint(
+    definingClass = SDK_CONFIGURATION,
+    name = "getPartnerAudioApps",
+    isStatic = true,
+    returnType = "Ljava/util/List;",
+    parameters = listOf("Landroid/content/Context;", "Z"),
+)
+
 private fun MethodReference.toSmali() =
     "$definingClass->$name(${parameterTypes.joinToString("")})$returnType"
 
@@ -304,6 +313,84 @@ val customAudioAppPatch = bytecodePatch(
         println("customAudioAppPatch: appended $packageName to Waze's partner arrays inside ${host.name}")
 
         // endregion
+
+        // region 1b: put the entry straight into the map the list is built from.
+
+        // The arrays feed getPartners() on 5.27.9x, but that list is cached and the map is built once;
+        // writing the entry into appConfigs as well removes every dependency on that ordering branch.
+        if (partnersMethod != null) {
+            val updateMethod = configClass.methods.firstOrNull { it.name == "updateAppList" }
+                ?: throw PatchException("customAudioAppPatch: updateAppList() is missing")
+            val updateImpl = updateMethod.implementation
+                ?: throw PatchException("customAudioAppPatch: updateAppList() has no body")
+            val putIndex = updateImpl.instructions.indexOfFirst { instruction ->
+                (instruction as? ReferenceInstruction)?.reference?.toString()
+                    ?.contains("savePackageScopesToSharedPref") == true
+            }
+            if (putIndex < 0) throw PatchException(
+                "customAudioAppPatch: updateAppList() no longer saves the package scopes"
+            )
+            updateMethod.apply {
+                addInstructions(
+                    putIndex,
+                    """
+                        sget-object v3, Lcom/waze/sdk/SdkConfiguration;->appConfigs:Ljava/util/Map;
+                        new-instance v4, Lcom/waze/sdk/aw;
+                        const-string v5, "$packageName"
+                        const-string v6, "$appName"
+                        const v7, 0x200000
+                        const-string v8, "https://play.google.com/store/apps/details?id=$packageName"
+                        const/4 v9, 0x0
+                        invoke-direct/range { v4 .. v9 }, Lcom/waze/sdk/aw;-><init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;[B)V
+                        invoke-interface { v3, v5, v4 }, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+                    """.trimIndent(),
+                )
+            }
+            println("customAudioAppPatch: $packageName inserted into appConfigs directly")
+        }
+
+        // region 1c: guarantee the entry in the list the screen actually renders.
+
+        // getPartnerAudioApps() is the render path. Putting the entry into appConfigs here means the row
+        // shows up even if updateAppList() has not run yet in this process.
+        try {
+            val originalList = AudioAppsListFingerprint.originalMethod.implementation
+                ?: throw PatchException("customAudioAppPatch: getPartnerAudioApps() has no body")
+            if (originalList.registerCount - 2 < 7) throw PatchException(
+                "customAudioAppPatch: getPartnerAudioApps() has only ${originalList.registerCount - 2} local registers"
+            )
+            // Read the shape from the original body: the mutable copy does not always expose the same
+            // opcode list, which is how the monitor-enter lookup came back empty.
+            val monitorIndex = originalList.instructions
+                .indexOfFirst { it.opcode == Opcode.MONITOR_ENTER }
+            if (monitorIndex < 0) throw PatchException(
+                "customAudioAppPatch: getPartnerAudioApps() lost its monitor"
+            )
+            AudioAppsListFingerprint.method.apply {
+                addInstructions(
+                    0,
+                    """
+                        sget-object v0, Lcom/waze/sdk/SdkConfiguration;->appConfigs:Ljava/util/Map;
+                        if-nez v0, :hasMap
+                        new-instance v0, Ljava/util/HashMap;
+                        invoke-direct { v0 }, Ljava/util/HashMap;-><init>()V
+                        sput-object v0, Lcom/waze/sdk/SdkConfiguration;->appConfigs:Ljava/util/Map;
+                        :hasMap
+                        new-instance v1, Lcom/waze/sdk/aw;
+                        const-string v2, "$packageName"
+                        const-string v3, "$appName"
+                        const v4, 0x200000
+                        const-string v5, "https://play.google.com/store/apps/details?id=$packageName"
+                        const/4 v6, 0x0
+                        invoke-direct/range { v1 .. v6 }, Lcom/waze/sdk/aw;-><init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;[B)V
+                        invoke-interface { v0, v2, v1 }, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+                    """.trimIndent(),
+                )
+            }
+            println("customAudioAppPatch: $packageName inserted into the audio partner list itself")
+        } catch (e: PatchException) {
+            println("customAudioAppPatch: getPartnerAudioApps() skipped: ${e.message}")
+        }
 
         // region 2: answer "installed" for this package without its ACTION_INIT receiver.
 
