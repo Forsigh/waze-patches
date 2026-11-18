@@ -1,3 +1,8 @@
+## [0.30.63-dev.4](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.4) (2026-11-18)
+
+### Changed
+* The audio partner row now adds its entries to Waze's own partner arrays instead of building a partner object itself, so Waze builds every entry and runs its own install check. The forced availability result is gone with it.
+
 ## [0.30.63-dev.3](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.3) (2026-11-17)
 
 ### Fixed
