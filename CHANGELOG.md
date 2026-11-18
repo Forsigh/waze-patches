@@ -1,3 +1,11 @@
+## [0.30.63-dev.6](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.6) (2026-11-18)
+
+### Added
+* New row, **Any audio app as a Waze audio partner**: adds a music app of your choice to Waze's audio player even though it has no Waze SDK. It needs a media browser service, the same one Android Auto uses; default is BitChord, and any package name can be typed in the row's options. Tested to apply on 5.27.90.900 and 5.27.4.900.
+
+### Changed
+* The YouTube row is now called **YouTube Music as a Waze audio partner**, and its description names both apps it covers.
+
 ## [0.30.63-dev.5](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.5) (2026-11-18)
 
 ### Fixed
