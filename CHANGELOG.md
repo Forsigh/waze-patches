@@ -1,3 +1,8 @@
+## [0.30.63-dev.11](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.11) (2026-11-19)
+
+### Fixed
+* **Picture-in-picture** crashed Waze on 5.26.90.901 and later: the injected `onResume` called `invoke-super` on a hardcoded `com.waze.bv`, which stopped being the superclass once Waze re-obfuscated the activity. ART rejected the class at load. The superclass is now read from the class being patched (closes #22).
+
 ## [0.30.63-dev.10](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.10) (2026-11-18)
 
 ### Changed
