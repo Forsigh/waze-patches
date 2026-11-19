@@ -1,17 +1,3 @@
-## [0.30.64](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.64) (2026-11-19)
-
-Promotes the experimental line since 0.30.61 to stable.
-
-### Added
-* **Any audio app as a Waze audio partner** - declare any package in `<queries>`, add it to Waze's partner roster, report it as installed, carry it past the `getPartnerAudioApps()` filter, register it without the Waze SDK callback and write it into `appConfigs`. Verified with BitChord: it appears in Waze's audio partner list and is detected as a partner.
-
-### Fixed
-* **Picture-in-picture** crashed Waze on 5.26.90.901 and later (issue #22). The injected `onResume` called `invoke-super` on a hardcoded `com.waze.bv`, which stopped being `FreeMapAppActivity`'s superclass once Waze re-obfuscated it (`bq` on 5.27.9x, `br` on 5.27.4.900), so ART rejected the class at load. The superclass is now read from the class being patched.
-* The audio partner row no longer crashes the settings screen: the injected roster code reads the real register frame (`aq.e` is `.registers 6`, `aq.d` is `.registers 2`) instead of the padded frame the patcher reports.
-
-### Changed
-* Every patch pins an explicit Waze version list instead of a catch-all, so unsupported versions no longer offer a patch that cannot apply.
-
 ## [0.30.63-dev.11](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.11) (2026-11-19)
 
 ### Fixed
