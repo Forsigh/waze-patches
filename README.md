@@ -23,15 +23,15 @@ KingInstaller as a fallback).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.30.63-dev.11](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.11)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;36 patches total
+> **[v0.30.66-dev.4](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.4)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;37 patches total
 <details open>
-<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;36 patches</summary>
+<summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;37 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 5.24.90.901 | 5.25.0.1 | 5.25.4.900 | 5.25.90.900 | 5.26.0.0 | 5.26.5.0 | 5.26.90.901 | 5.27.0.1 | 5.27.4.900 | 5.27.90.900 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 5.28.4.900 |
+| :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
@@ -57,9 +57,10 @@ KingInstaller as a fallback).
 | **Launch screen background colour** | Colour behind the Waze logo while the app starts. #00000000 makes it transparent. | • Background colour<br>• Custom colour |
 | **Live drive sharing** | Adds the hidden share-your-drive link. |  |
 | **New alert icons** | Uses Waze's newer alert icons. |  |
-| **No Android Auto telemetry** | Stops Waze sending Android Auto screen-switch timings to its analytics. |  |
+| **No usage stats** | Stops Waze building, storing and uploading usage statistics, and turns off its background thread-responsiveness monitors. Driving, reports and alerts are unaffected. |  |
 | **Picture-in-picture** | Floats Waze in a 9:16 window every time you leave it. Known issues: touch does not work on the floating window, and the UI does not scale down. |  |
 | **Remove ads** | Removes ads. | • Block beacon popups |
+| **Remove telemetry** | Stops crash reports, usage analytics and performance data leaving the app. Traffic reporting and alerts keep working. |  |
 | **Rename app** | Stock name by default. Type your own to replace what the launcher shows. The package stays com.waze. | • App name |
 | **Resume drive prompt** | Stops Waze asking to resume the last trip. | • When Waze offers to resume the last trip |
 | **Show FPS counter** | Shows the frame-rate counter. |  |
