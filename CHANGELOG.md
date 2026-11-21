@@ -1,3 +1,40 @@
+## [0.30.66-dev.4](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.4) (2026-11-21)
+
+Development build on top of 0.30.65, for Waze **5.28.4.900**. Nothing changes for anyone on 0.30.65.
+
+### Added
+* **Remove telemetry** (Privacy & Updates, off by default) - Crashlytics disabled through its own manifest flag *and* through Waze's runtime re-enable in `com.waze.crash.g.d()`, plus Firebase Performance deactivated. Waze 5.28.4.900 ships no Firebase Analytics SDK, so no Analytics flag is written.
+* **No usage stats** (Privacy & Updates, off by default) - Waze's own stats module switched off, its stats dispatcher returned at entry, the two thread-responsiveness monitors disabled, and the Android Auto screen-push latency report folded in.
+
+### Changed
+* `No Android Auto telemetry` is no longer a row of its own; its key now lives inside **No usage stats**, so the privacy category has two toggles instead of three.
+* The patch-list generator now takes the newest `.mpp` in `build/libs/`; a stale artefact used to win, which silently published a list one release behind the bundle.
+
+## [0.30.65](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.65) (2026-11-21)
+
+Support for Waze **5.28.4.900** (versionCode 1030753), and a rule change in how bundles declare what they fit.
+
+### Changed
+* **One bundle, one Waze version.** Every row now declares exactly the build it was verified against, so the Manager shows `5.28.4.900` instead of a version list or "Any". Patch an APK from a different Waze build and every row is skipped as incompatible instead of applying half-way and crashing - which is what happened to people who ran the PiP row on 5.26.1.0.
+* `0.30.64` is re-issued with the same rule and pins `5.27.90.900` (versionCode 1030751). Use 0.30.64 while your Waze is 5.27.90.900, and 0.30.65 once it is 5.28.4.900.
+
+### Added
+* Waze 5.28.4.900 support: 36/36 rows apply on the apkmirror 2arch/6dpi bundle, 466,083 methods, 0 broken branch targets, 0 out-of-frame registers.
+
+## [0.30.64](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.64) (2026-11-19)
+
+Promotes the experimental line since 0.30.61 to stable.
+
+### Added
+* **Any audio app as a Waze audio partner** - declare any package in `<queries>`, add it to Waze's partner roster, report it as installed, carry it past the `getPartnerAudioApps()` filter, register it without the Waze SDK callback and write it into `appConfigs`. Verified with BitChord: it appears in Waze's audio partner list and is detected as a partner.
+
+### Fixed
+* **Picture-in-picture** crashed Waze on 5.26.90.901 and later (issue #22). The injected `onResume` called `invoke-super` on a hardcoded `com.waze.bv`, which stopped being `FreeMapAppActivity`'s superclass once Waze re-obfuscated it (`bq` on 5.27.9x, `br` on 5.27.4.900), so ART rejected the class at load. The superclass is now read from the class being patched.
+* The audio partner row no longer crashes the settings screen: the injected roster code reads the real register frame (`aq.e` is `.registers 6`, `aq.d` is `.registers 2`) instead of the padded frame the patcher reports.
+
+### Changed
+* Every patch pins an explicit Waze version list instead of a catch-all, so unsupported versions no longer offer a patch that cannot apply.
+
 ## [0.30.63-dev.11](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.63-dev.11) (2026-11-19)
 
 ### Fixed
