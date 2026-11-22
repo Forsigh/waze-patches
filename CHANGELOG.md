@@ -1,3 +1,14 @@
+## [0.30.66-dev.5](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.5) (2026-11-22)
+
+Development build for Waze **5.28.4.900**. Adds UI chrome themes and five map palettes.
+
+### Added
+* **UI Themes** replaces the "AMOLED Dark Mode For UI" row. One row, two pickers: Light theme (Stock, Pure White, Paper, Porcelain, Linen) and Dark theme (Stock, AMOLED Pure Black, AMOLED Ink, AMOLED Slate, Dark Graphite, Dark Navy). AMOLED Pure Black reproduces the old row exactly. Dark themes repaint the night surface family and the five Compose palette literals; light themes retarget the Material 3 light colour roles (`m3_sys_color_light_*`) plus `background_default`. Body text stays at 15:1 or better and muted text at 5:1 or better on every palette.
+* **AMOLED Rose, AMOLED Copper, AMOLED Lime, AMOLED Sand, AMOLED Steel** map themes for the Theme row, day and night slots. Each keeps the three-slot road ramp on a true-black canvas with street contrast at 6.5:1 or better.
+
+### Changed
+* The old row name is gone; anyone who had it ticked needs to pick **AMOLED Pure Black** in the new row's Dark theme picker to keep the same look.
+
 ## [0.30.66-dev.4](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.4) (2026-11-21)
 
 Development build on top of 0.30.65, for Waze **5.28.4.900**. Nothing changes for anyone on 0.30.65.
