@@ -1,3 +1,17 @@
+## [0.30.66-dev.6](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.6) (2026-11-22)
+
+Development build for Waze **5.28.4.900**. Fixes the "Alert distances does nothing" report (issue #24).
+
+### Fixed
+* **Alert distances** now writes the chosen distances into Waze's native config store, not just the Java config getter. The alert engine reads its policy natively, so the previous build could apply cleanly and change nothing - exactly what the report described. Both sync callbacks re-apply the values after a server config sync.
+* The row is **off by default** and its level defaults to **Moderate**. It used to be on by default with level Standard, which writes Waze's own numbers back - a row that looked enabled and did nothing. Standard now writes nothing at all rather than a guessed set of defaults.
+
+### Added
+* **Speed cameras - all types** option (`CONFIG_VALUE_ALERTS_ALERTER_ALERT_DISTANCE`). In most countries Waze uses this single distance for every camera type, so the three enforcement-zone distances alone did not move normal camera alerts.
+
+### Changed
+* `CONFIG_VALUE_ALERTS_MAX_TRIGGER_TIME_ENABLED` is forced **off** for Moderate and Heavier. Waze's server turns it on, and with it on an alert is only announced as far ahead as the car drives in 22 seconds (30 for police, 200 m minimum) - which is why wider distances never showed. Same conclusion as bearinmindcat/morphe-patches, issue #157 there.
+
 ## [0.30.66-dev.5](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.5) (2026-11-22)
 
 Development build for Waze **5.28.4.900**. Adds UI chrome themes and five map palettes.
