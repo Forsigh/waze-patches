@@ -23,7 +23,7 @@ KingInstaller as a fallback).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v0.30.66-dev.5](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.5)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;37 patches total
+> **[v0.30.66-dev.6](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.6)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;37 patches total
 <details open>
 <summary>📦 Waze&nbsp;&nbsp;•&nbsp;&nbsp;37 patches</summary>
 <br>
@@ -35,7 +35,7 @@ KingInstaller as a fallback).
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| **Alert distances** | How early alerts sound, plus a speed-bump switch and per-alert distances. | • Alert distance level<br>• Speed bump (ramp) warnings<br>• Police<br>• Hazards<br>• Crashes<br>• Traffic jams<br>• Speed cams - streets<br>• Speed cams - highways<br>• Speed cams - freeways<br>• Blocked lanes<br>• Gap between alerts |
+| **Alert distances** | How early alerts sound, plus a speed-bump switch and per-alert distances. Pick a level; Standard changes nothing. | • Alert distance level<br>• Speed bump (ramp) warnings<br>• Police<br>• Hazards<br>• Crashes<br>• Traffic jams<br>• Speed cams - streets<br>• Speed cams - highways<br>• Speed cams - freeways<br>• Blocked lanes<br>• Gap between alerts<br>• Speed cameras - all types |
 | **Allow high refresh rate** | Runs above 60 Hz, up to your screen's limit. | • Target refresh rate (Hz) |
 | **Any audio app as a Waze audio partner** | Adds a music app of your choice to Waze's audio player, even though it does not ship Waze's SDK. It only needs a media browser service, like Android Auto. Default: BitChord. | • Audio app package name<br>• Audio app name |
 | **Auto zoom** | Keeps your auto-zoom choice from being reset. | • Auto-zoom mode |
