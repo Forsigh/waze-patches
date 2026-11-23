@@ -1,6 +1,6 @@
-## [0.30.66-dev.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.7) (2026-11-23)
+## [0.30.66](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66) (2026-11-23)
 
-Development build for Waze **5.28.4.900**. Result of a row-by-row audit that treated every patch as
+Stable build for Waze **5.28.4.900**. Result of a row-by-row audit that treated every patch as
 broken until its change could be shown reaching the code that consumes it.
 
 ### Fixed
