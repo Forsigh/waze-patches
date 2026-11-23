@@ -83,17 +83,28 @@ internal fun forceString(prefix: String, entries: Map<String, String>): String {
 
 /** Record that [keys] must read as [value]. */
 internal fun recordBoolean(patchId: String, value: Boolean, vararg keys: String) {
-    keys.forEach { Overrides.booleans[it] = value }
+    // Mirrored into the native store as well: the typed Java getter only covers Java consumers, and
+    // a key whose reader lives in the native layer applied cleanly and changed nothing (issue #24).
+    keys.forEach {
+        Overrides.booleans[it] = value
+        Overrides.nativeBooleans[it] = value
+    }
 }
 
 /** Record that each key must read as its paired Long value. */
 internal fun recordLong(patchId: String, vararg entries: Pair<String, Long>) {
-    entries.forEach { (key, value) -> Overrides.longs[key] = value }
+    entries.forEach { (key, value) ->
+        Overrides.longs[key] = value
+        Overrides.nativeLongs[key] = value
+    }
 }
 
 /** Record that each key must read as its paired String value. */
 internal fun recordString(patchId: String, vararg entries: Pair<String, String>) {
-    entries.forEach { (key, value) -> Overrides.strings[key] = value }
+    entries.forEach { (key, value) ->
+        Overrides.strings[key] = value
+        Overrides.nativeStrings[key] = value
+    }
 }
 
 /**
@@ -159,4 +170,22 @@ internal fun nativeLongSyncBlock(entries: Map<String, Long>): String = buildStri
 internal fun recordNativeLong(prefix: String, vararg entries: Pair<String, Long>) {
     entries.forEach { (key, value) -> Overrides.nativeLongs[key] = value }
     println("${prefix}NativeLong: absolute native writes = ${entries.joinToString { it.first }}")
+}
+
+/** smali block writing String keys into the native config store. v0 = ConfigManager, v1 = key, v2 = value. */
+internal fun nativeStringSyncBlock(entries: Map<String, String>): String = buildString {
+    appendLine("invoke-static {}, Lcom/waze/ConfigManager;->isReady()Z")
+    appendLine("move-result v0")
+    appendLine("if-eqz v0, :nstr_done")
+    appendLine("invoke-static {}, Lcom/waze/ConfigManager;->getInstance()Lcom/waze/ConfigManager;")
+    appendLine("move-result-object v0")
+    appendLine("if-nez v0, :nstr_done")
+    entries.forEach { (key, value) ->
+        appendLine("sget-object v1, Lcom/waze/config/ConfigValues;->$key:Lcom/waze/config/d;")
+        appendLine("if-nez v1, :nstr_done")
+        appendLine("const-string v2, \"${value.replace("\"", "\\\"")}\"")
+        appendLine("invoke-virtual {v0, v1, v2}, Lcom/waze/ConfigManager;->setConfigValueString(Lcom/waze/config/d;Ljava/lang/String;)V")
+    }
+    appendLine(":nstr_done")
+    appendLine("return-void")
 }

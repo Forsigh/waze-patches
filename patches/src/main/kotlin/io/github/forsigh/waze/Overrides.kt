@@ -37,4 +37,7 @@ internal object Overrides {
      * invisible to it - that is why alert distances looked dead on device.
      */
     val nativeLongs = LinkedHashMap<String, Long>()
+
+    /** `CONFIG_VALUE_*` String keys written into the native config store. */
+    val nativeStrings = LinkedHashMap<String, String>()
 }

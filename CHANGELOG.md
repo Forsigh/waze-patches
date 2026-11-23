@@ -1,3 +1,40 @@
+## [0.30.66-dev.7](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.7) (2026-11-23)
+
+Development build for Waze **5.28.4.900**. Result of a row-by-row audit that treated every patch as
+broken until its change could be shown reaching the code that consumes it.
+
+### Fixed
+* **Cameras & hazards**: crosswalks were only switched on in the settings screen. The announcement
+  keys (`NOTIFICATIONS_ON_ROUTE_PERMANENT_HAZARD_*CROSSWALK`) are now set too, so a mapped crosswalk
+  warns instead of only drawing.
+* **Lane guidance**: the consumer ANDs three flags; `LANE_GUIDANCE_USER_ENABLED` was never forced, so
+  the row could do nothing.
+* **Live drive sharing**: the map entry point also requires `SHARE_DRIVE_BUTTON_BACK_ENTRY_POINT_ENABLED`;
+  forcing only the feature flag left the button hidden.
+* **Remove ads**: search results carry their own gates (`SEARCH_ADS_FEATURE_ENABLED`,
+  `SEARCH_ADS_IN_CAR_FEATURE_ENABLED`), now forced.
+* **YouTube Music / Any audio app**: both appended their entries after the roster had already been
+  measured, so the partners never entered the list. The length is now reloaded before the roster is
+  sized.
+* **Hide recent destinations**: the empty protobuf was written into the wrong register and callers
+  received `null`; it now returns a well-formed empty array.
+* **Picture-in-picture**: touches were routed to a hard-coded view id that is a different view on this
+  build; the map is now resolved by name.
+* **Car map zoom**: the native write hung off an unrelated Java setter, unguarded. It goes through the
+  shared guarded helper now, so it lands on every config sync.
+* **Allow high refresh rate**: `const-wide/high16` truncates the double (90 Hz became 88, 165 became
+  160); such rates are refused instead of silently changed.
+* **Instrument cluster**: the "large layout" option was actually Waze's light-commercial-vehicle
+  support and was on by default. Off by default, renamed and described honestly.
+* **Smoother Android Auto map**: dropped `AAP_USE_NORMAL_CAR_GPS_UPDATE_RATE`, which Waze removed in
+  this version.
+
+### Added
+* Every recorded config key is mirrored into Waze's native config store, including strings, and
+  `tools/check-native-coverage.py` fails a build when a forced key is missing from it.
+* Choice options now reject unknown values. A label passed where a value token belongs used to apply
+  cleanly and change nothing; it now aborts with the list of accepted values.
+
 ## [0.30.66-dev.6](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.66-dev.6) (2026-11-22)
 
 Development build for Waze **5.28.4.900**. Fixes the "Alert distances does nothing" report (issue #24).
