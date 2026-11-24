@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.30.66",
+  "version": "0.30.67-dev.1",
   "patches": [
     {
       "name": "Alert distances",
@@ -1581,7 +1581,17 @@
           ]
         }
       ],
-      "options": []
+      "options": [
+        {
+          "key": "keepMood",
+          "title": "Keep my mood after a restart",
+          "description": "Puts the mood you picked back when Waze starts again.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        }
+      ]
     },
     {
       "name": "YouTube Music as a Waze audio partner",
