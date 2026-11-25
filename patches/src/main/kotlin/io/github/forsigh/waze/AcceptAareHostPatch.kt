@@ -27,6 +27,12 @@ import io.github.forsigh.waze.WazeConstants.COMPATIBILITY_WAZE
  *
  * Widen acceptance only: a normal Android Auto session with Google's gearhead still validates the
  * same way, and audio routing is untouched (separate mechanism).
+ *
+ * Testing note (measured on the Xiaomi 17 and AARE 1.6.0, 2026-11-25): with the row applied, AARE
+ * binds `com.waze.car_lib.WazeCarAppService` and negotiates library 1.9.0-alpha03 (API 5..9,
+ * negotiated 8), and the map renders. Do not verify with `pm force-stop com.waze`: that sets
+ * Android's stopped flag and the car side answers "Could not start Waze beta" until Waze is
+ * launched once normally. A plain launch, or `kill -9`, leaves the flag clear.
  */
 @Suppress("unused")
 val acceptAareHostPatch = bytecodePatch(
