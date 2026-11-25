@@ -3,6 +3,35 @@
   "version": "0.30.67-dev.1",
   "patches": [
     {
+      "name": "Accept AARE as car host",
+      "description": "Lets AARE and other non-Google hosts show Waze's car screen.",
+      "default": false,
+      "category": "Android Auto",
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.waze",
+          "name": "Waze",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#33CCFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.28.4.900",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Alert distances",
       "description": "How early alerts sound, plus a speed-bump switch and per-alert distances. Pick a level; Standard changes nothing.",
       "default": false,
