@@ -1,4 +1,7 @@
-## [0.30.67-dev.1](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.67-dev.1) (2026-11-24)
+## [0.30.67](https://github.com/Forsigh/waze-patches/releases/tag/v0.30.67) (2026-11-27)
+
+Stable build for Waze **5.28.4.900**. Both additions are off by default, so an existing setup
+behaves exactly as it did on 0.30.66 until you switch them on.
 
 ### New
 * **Unlock driver moods** gained an option, off by default: *Keep my mood after a restart*. Waze applies the account's mood from its profile every time Waze starts, so a mood the account does not own disappears on the next launch. With the option on, the pick is remembered in Waze's own config store and put back on every mood refresh.
